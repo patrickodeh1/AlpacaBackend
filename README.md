@@ -1,384 +1,387 @@
-# Alpaca API Wrapper
+# Prop Trading Firm Platform
 
-> **🎉 This project uses NX for monorepo management!**
->
-> **Quick Start:**
->
-> ```bash
-> npm install    # Install all dependencies with prerequisite checks
-> npm run dev    # Start development (frontend + backend)
-> ```
+A comprehensive Django-based proprietary trading firm platform with Stripe integration, real-time market data from Alpaca, and automated rule enforcement.
 
-**Alpaca API Wrapper** is a Django-based starter project for building your own stock market analysis tools, backtesting engines, or trading bots. It leverages the Alpaca API for real-time market data and provides a full-stack, Dockerized environment.
+## 🚀 Features
 
-Use it as a foundation for **backtesting, live-trading bots, research notebooks, or data pipelines**—with built-in support for watchlists, historical and real-time data, and a dedicated WebSocket service for streaming market data.
+### Core Functionality
+- **Multiple Account Tiers**: Offer various challenge sizes ($50K, $100K, etc.)
+- **Stripe Payment Integration**: Secure payment processing for account purchases
+- **Automated Account Creation**: Instant account setup after successful payment
+- **Paper Trading**: Risk-free simulated trading with real market data
+- **Real-time Market Data**: Powered by Alpaca API for accurate pricing
+- **Rule Enforcement Engine**: Automatic monitoring and enforcement of trading rules
+- **Multi-Stage Evaluation**: Progress from evaluation to funded accounts
 
-🌐 **Try the live demo:** [https://alpaca.mnaveedk.com/](https://alpaca.mnaveedk.com/)
+### Trading Rules & Limits
+- Daily loss limits
+- Total drawdown limits
+- Position size restrictions
+- Minimum trading days requirements
+- Profit targets for evaluation phases
 
----
+### Account Management
+- Account lifecycle tracking (Pending → Active → Passed/Failed)
+- Real-time balance updates
+- Violation tracking and logging
+- Detailed activity audit logs
+- Account statistics and analytics
 
-## Table of Contents
+### Payout System
+- Automated profit calculations
+- Configurable profit splits
+- Payout request management
+- Integration with Stripe for disbursements
 
-- [Alpaca API Wrapper](#alpaca-api-wrapper)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Tech Stack](#tech-stack)
-  - [Architecture](#architecture)
-    - [Service Breakdown](#service-breakdown)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Application](#running-the-application)
-    - [Quick Start (Recommended)](#quick-start-recommended)
-    - [Individual Services](#individual-services)
-    - [Access Points](#access-points)
-  - [Development Workflow](#development-workflow)
-    - [NX Monorepo Commands](#nx-monorepo-commands)
-    - [Hot Reload](#hot-reload)
-    - [Database Development](#database-development)
-    - [Running Tests](#running-tests)
-  - [Testing \& Monitoring](#testing--monitoring)
-    - [Follow Celery logs](#follow-celery-logs)
-    - [Multitail (optional)](#multitail-optional)
-    - [Flower dashboard](#flower-dashboard)
-  - [Contributing](#contributing)
-    - [Development Guidelines](#development-guidelines)
-    - [Issues](#issues)
-  - [License](#license)
-    - [MIT License Summary](#mit-license-summary)
-  - [Acknowledgements](#acknowledgements)
-    - [Core Technologies](#core-technologies)
-    - [Infrastructure \& DevOps](#infrastructure--devops)
-    - [Development Tools](#development-tools)
-    - [Special Thanks](#special-thanks)
-  - [Contact](#contact)
-  - [to run with observibility](#to-run-with-observibility)
+## 📋 Prerequisites
 
----
+- Python 3.10+
+- SQLite (development) / PostgreSQL (production)
+- Redis (optional, for Celery tasks)
+- Stripe Account
+- Alpaca API Account (paper trading)
 
-## Features
+## 🛠️ Installation
 
-| Category                 | What you get                                                                 |
-| ------------------------ | ---------------------------------------------------------------------------- |
-| **Watchlists**           | Create watchlists, add assets, and manage your market focus                  |
-| **Historical Data**      | Assets in watchlists fetch and cache historical OHLCV data automatically     |
-| **Real-Time Data**       | Assets in watchlists are subscribed to real-time Alpaca market feeds         |
-| **WebSocket Service**    | Dedicated Django management command runs in its own container, handling      |
-|                          | real-time tick processing and candle aggregation (1m and higher timeframes)  |
-| **Interactive Analysis** | Access and experiment with real-time and historical data for your watchlists |
-| **Session management**   | Secure session generation with your API key & secret                         |
-| **Task orchestration**   | Celery + Redis for async jobs & scheduling                                   |
-| **Dockerised stack**     | `docker compose up` and you're done                                          |
-
----
-
-## Tech Stack
-
-| Layer                 | Tech                                                                                    |
-| --------------------- | --------------------------------------------------------------------------------------- |
-| **Monorepo**          | NX · npm workspaces                                                                     |
-| **Backend**           | Django · Django REST Framework                                                          |
-| **Async / broker**    | Celery · Redis                                                                          |
-| **Realtime**          | Django Channels (WebSockets)                                                            |
-| **Frontend**          | React · Vite                                                                            |
-| **Database**          | PostgreSQL                                                                              |
-| **Container / infra** | Docker · Docker Compose                                                                 |
-| **Dev tooling**       | `uv` (deps) · `black` (format) · `ruff` (lint) · `pytest` (tests) · `vitest` (FE tests) · **Smart setup scripts** |
-
----
-
-## Architecture
-
-![Architecture Diagram](docs/architecture_diagram.svg)
-
-### Service Breakdown
-
-| Service            | Purpose                 | Port | Environment | Notes                                 |
-| ------------------ | ----------------------- | ---- | ----------- | ------------------------------------- |
-| **NX**             | Monorepo orchestration  | N/A  | Local       | Task runner, caching, parallelization |
-| **Frontend**       | React SPA (Vite)        | 5173 | Local       | Hot module replacement enabled        |
-| **Backend**        | Django API + WebSockets | 8000 | Docker      | ASGI server with Channels             |
-| **PostgreSQL**     | Primary database        | 5432 | Docker      | Persistent data storage               |
-| **Redis**          | Cache + Message broker  | 6379 | Docker      | Celery task queue                     |
-| **Celery Workers** | Background tasks        | N/A  | Docker      | Async job processing                  |
-| **Celery Beat**    | Task scheduler          | N/A  | Docker      | Periodic task execution               |
-| **WebSocket**      | Real-time data stream   | N/A  | Docker      | Market data WebSocket service         |
-| **Flower**         | Task monitoring         | 5555 | Docker      | Celery dashboard                      |
-
-> **Infrastructure services** (backend, db, cache, broker, workers, beat, websocket, flower) are in **`docker-compose.yml`**.  
-> **Frontend runs locally** via NX for fast hot reload. **NX orchestrates** all tasks across the monorepo with **smart prerequisite checking**.
-
----
-
-## Prerequisites
-
-- **Node.js** (v18 or higher) & **npm** installed
-- **Docker** & **Docker Compose** installed
-- **uv** (Python package installer) installed
-- An **Alpaca API** key & secret
-- Create a `.envs/.env` file with your API credentials
-
-> **Note:** The setup will automatically check for all prerequisites and guide you through any missing requirements.
-
----
-
-## Installation
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/naveedkhan1998/alpaca-main.git
-cd alpaca-main
-
-# Install everything automatically (NX + Frontend + Backend)
-npm install
+git clone <your-repo-url>
+cd alpaca-main/backend
 ```
 
-**What happens during installation:**
-
-- ✅ Checks for Node.js, Docker, and uv installation
-- ✅ Validates Alpaca API credentials in `.envs/.env`
-- ✅ Installs NX monorepo tooling
-- ✅ Installs frontend dependencies (~768 packages)
-- ✅ Installs and syncs backend dependencies (~72 Python packages)
-- ✅ Creates setup completion marker
-
-> **Note:** If any prerequisites are missing, the installation will stop and provide clear instructions on what to install.
-
----
-
-## Running the Application
-
-### Quick Start (Recommended)
+### 2. Create Virtual Environment
 
 ```bash
-# Install everything automatically
-npm install
-
-# Start all services (frontend + backend infrastructure)
-npm run dev
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-This single command will:
-
-- 🚀 Start the frontend Vite dev server (with hot reload)
-- 🐳 Start Docker infrastructure (PostgreSQL, Redis, Backend API, Celery, WebSocket, Flower)
-- ⚡ Run both in parallel automatically via NX
-
-> **Note:** `npm install` includes prerequisite checks and will guide you if anything is missing.
-
-### Individual Services
+### 3. Install Dependencies
 
 ```bash
-# Frontend only (requires backend infrastructure running)
-npm run dev:frontend
-
-# Backend infrastructure only
-npm run dev:backend
-
-# Or manually start Docker services
-npm run docker:up
+pip install -r requirements.txt
 ```
 
-### Access Points
+### 4. Environment Configuration
 
-Once everything is running, you can access:
+Create a `.env` file in the project root:
 
-- **Frontend Application**: [http://localhost:5173](http://localhost:5173) — React SPA with Vite HMR
-- **Backend API**: [http://localhost:8000](http://localhost:8000) — Django REST API
-- **Django Admin**: [http://localhost:8000/admin](http://localhost:8000/admin) — Admin interface
-- **Celery Flower**: [http://localhost:5555](http://localhost:5555) — Task monitoring dashboard
+```env
+# Django Settings
+DJANGO_SECRET_KEY=your-secret-key-here
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
 
-> **Note:** Frontend runs locally with Vite for fast hot reload. Backend services run in Docker for consistency.
+# Database (SQLite for dev, PostgreSQL for production)
+# DB_NAME=propfirm_db
+# DB_USER=postgres
+# DB_PASSWORD=your-password
+# DB_HOST=localhost
+# DB_PORT=5432
 
----
+# Stripe Configuration
+STRIPE_PUBLIC_KEY=pk_test_your_public_key
+STRIPE_SECRET_KEY=sk_test_your_secret_key
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
 
-## Development Workflow
+# Alpaca API (Paper Trading)
+APCA_API_KEY=your_alpaca_key
+APCA_API_SECRET_KEY=your_alpaca_secret
+APCA_API_BASE_URL=https://paper-api.alpaca.markets
+APCA_DATA_BASE_URL=https://data.alpaca.markets
 
-### NX Monorepo Commands
+# Email Configuration (Optional)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+DEFAULT_FROM_EMAIL=noreply@propfirm.com
 
-All commands run via NX for intelligent caching and parallel execution:
+# Redis (Optional - for Celery)
+CELERY_BROKER_URL=redis://localhost:6379/0
+CELERY_RESULT_BACKEND=redis://localhost:6379/0
+```
+
+### 5. Database Setup
 
 ```bash
-# Development
-npm run dev              # Start both frontend + backend
-npm run dev:frontend     # Frontend only
-npm run dev:backend      # Backend only
+# Run migrations
+python manage.py makemigrations
+python manage.py migrate
 
-# Code Quality
-npm run lint             # Lint both projects
-npm run lint:fix         # Lint and auto-fix both projects
-npm run format           # Format both projects
-npm run format:check     # Check formatting without changes
+# Create superuser
+python manage.py createsuperuser
 
-# Testing
-npm run test             # Test both projects
-npm run test:coverage    # Test both with coverage reports
-
-# Database Management
-npm run makemigrations       # Make migrations in Docker container
-npm run makemigrations:local # Make migrations locally (faster for development)
-npm run migrate              # Apply migrations in Docker container
-
-# Docker Management
-npm run docker:up        # Start Docker services
-npm run docker:down      # Stop Docker services
-npm run docker:logs      # View Docker logs
-npm run docker:clean     # Clean Docker volumes
-npm run backend:shell    # Shell into backend Docker container
-
-# Build
-npm run build            # Build frontend for production
+# Load initial data (optional)
+python manage.py loaddata initial_plans.json
 ```
 
-### Hot Reload
-
-- **Frontend**: Vite dev server with instant HMR (Hot Module Replacement)
-- **Backend**: Code mounted as Docker volume, auto-reloads on changes
-
-### Database Development
-
-For faster development iterations, use local migration commands:
+### 6. Create Initial Plans
 
 ```bash
-# Make migrations locally (faster than Docker)
-npm run makemigrations:local
-
-# Apply migrations in container
-npm run migrate
+python manage.py shell
 ```
 
-> **Tip:** Use `makemigrations:local` during development for quicker feedback, then `migrate` to apply in the container.
+```python
+from prop_firm.models import PropFirmPlan
+from decimal import Decimal
 
-### Running Tests
+# Create $50K Challenge
+PropFirmPlan.objects.create(
+    name="$50K Challenge",
+    description="Prove your trading skills with a $50,000 account",
+    plan_type="EVALUATION",
+    starting_balance=Decimal('50000.00'),
+    price=Decimal('99.00'),
+    max_daily_loss=Decimal('2500.00'),  # 5%
+    max_total_loss=Decimal('5000.00'),  # 10%
+    profit_target=Decimal('5000.00'),  # 10%
+    min_trading_days=5,
+    max_position_size=Decimal('100.00'),
+    profit_split=Decimal('80.00'),
+    is_active=True
+)
+
+# Create $100K Challenge
+PropFirmPlan.objects.create(
+    name="$100K Challenge",
+    description="Trade with a $100,000 account",
+    plan_type="EVALUATION",
+    starting_balance=Decimal('100000.00'),
+    price=Decimal('149.00'),
+    max_daily_loss=Decimal('5000.00'),
+    max_total_loss=Decimal('10000.00'),
+    profit_target=Decimal('10000.00'),
+    min_trading_days=5,
+    max_position_size=Decimal('100.00'),
+    profit_split=Decimal('80.00'),
+    is_active=True
+)
+```
+
+### 7. Run Development Server
 
 ```bash
-# All tests with NX caching
-npm run test
-
-# Tests with coverage reports
-npm run test:coverage
+python manage.py runserver
 ```
 
-> **Tip:** NX caches test results. Only changed projects and their dependents will re-run tests!
+The API will be available at `http://localhost:8000`
 
----
+## 📚 API Endpoints
 
-## Testing & Monitoring
+### Authentication
+```
+POST   /api/account/register/          # Register new user
+POST   /api/account/login/             # Login
+POST   /api/account/refresh_token/     # Refresh JWT token
+GET    /api/account/profile/           # Get user profile
+```
 
-### Follow Celery logs
+### Prop Firm Plans
+```
+GET    /api/prop-firm/plans/           # List available plans
+GET    /api/prop-firm/plans/{id}/      # Get plan details
+```
+
+### Prop Firm Accounts
+```
+GET    /api/prop-firm/accounts/        # List user's accounts
+GET    /api/prop-firm/accounts/{id}/   # Get account details
+POST   /api/prop-firm/accounts/{id}/refresh_balance/  # Update balance
+GET    /api/prop-firm/accounts/{id}/activities/       # Account activities
+GET    /api/prop-firm/accounts/{id}/violations/       # Rule violations
+GET    /api/prop-firm/accounts/{id}/statistics/       # Account stats
+```
+
+### Checkout & Payments
+```
+POST   /api/prop-firm/checkout/create_session/  # Create Stripe checkout
+POST   /api/prop-firm/checkout/verify_payment/  # Verify payment
+POST   /api/prop-firm/webhook/stripe/           # Stripe webhook handler
+```
+
+### Paper Trading
+```
+GET    /api/paper-trading/trades/       # List trades
+POST   /api/paper-trading/trades/       # Create trade
+POST   /api/paper-trading/trades/{id}/close/    # Close trade
+POST   /api/paper-trading/trades/{id}/cancel/   # Cancel trade
+```
+
+### Market Data
+```
+GET    /api/core/assets/               # Search assets
+GET    /api/core/assets/{id}/candles_v2/  # Get price data
+GET    /api/core/watchlists/           # Manage watchlists
+```
+
+## 🔧 Configuration
+
+### Stripe Setup
+
+1. **Create Stripe Account**: Sign up at https://stripe.com
+2. **Get API Keys**: Dashboard → Developers → API Keys
+3. **Set up Webhook**:
+   - Dashboard → Developers → Webhooks
+   - Add endpoint: `https://your-domain.com/api/prop-firm/webhook/stripe/`
+   - Select events: `payment_intent.succeeded`, `payment_intent.payment_failed`, `checkout.session.completed`
+
+### Alpaca Setup
+
+1. **Create Account**: Sign up at https://alpaca.markets
+2. **Generate Paper Trading Keys**: Dashboard → Paper Trading → Generate Keys
+3. **Add to Environment**: Copy keys to `.env` file
+
+## 🏗️ Project Structure
+
+```
+alpacabackend/
+├── account/              # User authentication & management
+├── core/                 # Market data, assets, candles
+├── paper_trading/        # Paper trading functionality
+├── prop_firm/           # NEW: Prop firm specific features
+│   ├── models.py        # Account, Plan, Payout models
+│   ├── serializers.py   # API serializers
+│   ├── views.py         # API endpoints
+│   ├── services/
+│   │   ├── stripe_service.py    # Stripe integration
+│   │   └── rule_engine.py       # Trading rules enforcement
+│   └── admin.py         # Django admin configuration
+├── manage.py
+└── requirements.txt
+```
+
+## 🎯 Usage Flow
+
+### For Users (Traders)
+
+1. **Register Account**: Create user account
+2. **Browse Plans**: View available challenge tiers
+3. **Purchase Plan**: Complete payment via Stripe
+4. **Account Activation**: Automatic activation after payment
+5. **Start Trading**: Place paper trades with real-time data
+6. **Monitor Progress**: Track P&L, rules, and statistics
+7. **Pass Evaluation**: Meet profit targets and trading requirements
+8. **Request Payout**: Submit payout requests for funded accounts
+
+### For Administrators
+
+1. **Create Plans**: Define challenge parameters via Django admin
+2. **Monitor Accounts**: View all accounts and their status
+3. **Review Violations**: Check rule violations
+4. **Process Payouts**: Review and approve payout requests
+5. **Analytics**: Track platform performance and user metrics
+
+## 🔒 Security Considerations
+
+- **JWT Authentication**: Secure API access
+- **Stripe Webhook Verification**: Validate all payment webhooks
+- **CORS Configuration**: Properly configure allowed origins
+- **Environment Variables**: Never commit secrets to repository
+- **SQL Injection Protection**: Django ORM protects against SQL injection
+- **HTTPS**: Use HTTPS in production
+
+## 🚀 Deployment
+
+### For Production
+
+1. **Switch to PostgreSQL**:
+   ```python
+   # In settings.py, uncomment PostgreSQL config
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql',
+           'NAME': os.getenv('DB_NAME'),
+           # ...
+       }
+   }
+   ```
+
+2. **Set DEBUG=False**:
+   ```env
+   DEBUG=False
+   ```
+
+3. **Configure Allowed Hosts**:
+   ```env
+   ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+   ```
+
+4. **Collect Static Files**:
+   ```bash
+   python manage.py collectstatic
+   ```
+
+5. **Use Production Server**:
+   - Gunicorn: `gunicorn alpacabackend.wsgi:application`
+   - Nginx for static files and reverse proxy
+
+6. **Set up SSL Certificate**: Use Let's Encrypt or your provider
+
+## 🧪 Testing
 
 ```bash
-# all workers
-docker compose exec backend tail -f /var/log/celery/w*.log
+# Run all tests
+python manage.py test
+
+# Run specific app tests
+python manage.py test prop_firm
+
+# Run with coverage
+pytest --cov=prop_firm
 ```
 
-### Multitail (optional)
+## 📊 Monitoring
 
+### Check Account Rules
 ```bash
-# install once on the host
-sudo apt-get install multitail  # or yum install multitail
-
-# split‑screen log view
-docker compose exec backend multitail /var/log/celery/w1.log /var/log/celery/w2.log
+python manage.py shell
 ```
 
-### Flower dashboard
+```python
+from prop_firm.models import PropFirmAccount
+from prop_firm.services.rule_engine import RuleEngine
 
-Open **[http://localhost:5555](http://localhost:5555)** in your browser for task‑level visibility.
+account = PropFirmAccount.objects.get(account_number='PA12345678')
+engine = RuleEngine(account)
+violations = engine.check_all_rules()
+print(violations)
+```
 
-> **Tip:** Configure log‑rotation (`logrotate`) inside the container—or mount `/var/log/celery` to your host—to keep log sizes under control.
+### Update All Account Balances
+```python
+from prop_firm.models import PropFirmAccount
 
----
+for account in PropFirmAccount.objects.filter(status='ACTIVE'):
+    account.update_balance()
+    account.check_rules()
+```
 
-## Contributing
+## 🤝 Contributing
 
-We welcome contributions! Here's how to get started:
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
 
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Make your changes** and ensure tests pass
-4. **Commit your changes**: `git commit -m 'Add amazing feature'`
-5. **Push to the branch**: `git push origin feature/amazing-feature`
-6. **Open a Pull Request**
+## 📝 License
 
-### Development Guidelines
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-- Follow the existing code style (we use `black` for Python and `prettier` for JavaScript)
-- Add tests for new features
-- Update documentation as needed
-- Ensure all tests pass before submitting
+## 🆘 Support
 
-### Issues
+For issues and questions:
+- Create an issue on GitHub
+- Email: support@yourpropfirm.com
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/naveedkhan1998/alpaca-main/issues) with:
+## 🙏 Acknowledgments
 
-- Clear description of the problem or feature
-- Steps to reproduce (for bugs)
-- Expected vs actual behavior
-- Your environment details
-
----
-
-## License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-### MIT License Summary
-
-- ✅ **Use** - Use the software for any purpose
-- ✅ **Modify** - Change the software to suit your needs
-- ✅ **Distribute** - Share the software with others
-- ✅ **Commercial use** - Use the software for commercial purposes
-- ❗ **Include license** - Include the original license when distributing
+- Alpaca Markets for market data API
+- Stripe for payment processing
+- Django & DRF community
 
 ---
 
-## Acknowledgements
-
-This project wouldn't be possible without these amazing technologies and resources:
-
-### Core Technologies
-
-- [Alpaca API](https://alpaca.markets/) - The financial data API that powers this wrapper
-- [NX](https://nx.dev/) - Smart monorepo build system with intelligent caching and task orchestration
-- [Django](https://www.djangoproject.com/) & [Django REST Framework](https://www.django-rest-framework.org/) - Web framework and API toolkit
-- [Django Channels](https://channels.readthedocs.io/) - WebSocket support for Django
-- [Celery](https://docs.celeryproject.org/) - Distributed task queue
-- [Redis](https://redis.io/) - In-memory data structure store
-- [PostgreSQL](https://www.postgresql.org/) - Powerful, open source object-relational database
-- [React](https://reactjs.org/) & [Vite](https://vitejs.dev/) - Frontend framework and build tool
-
-### Infrastructure & DevOps
-
-- [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) - Containerization platform
-- [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces) - Monorepo package management
-- [uv](https://github.com/astral-sh/uv) - Fast Python package installer
-
-### Development Tools
-
-- [Black](https://black.readthedocs.io/) - Python code formatter
-- [Ruff](https://github.com/astral-sh/ruff) - Fast Python linter
-- [pytest](https://docs.pytest.org/) - Python testing framework
-- [Vitest](https://vitest.dev/) - Vite-native testing framework
-
-### Special Thanks
-
-- The open source community for creating and maintaining these incredible tools
-- All contributors who have helped improve this project
-
-> **Disclaimer:** This project is not affiliated with Alpaca Markets. Use at your own risk and ensure compliance with Alpaca's terms of service.
-
----
-
-## Contact
-
-**Naveed Khan**  
-📧 **Email:** [naveedkhan13041998@gmail.com](mailto:naveedkhan13041998@gmail.com)  
-🐙 **GitHub:** [naveedkhan1998](https://github.com/naveedkhan1998)  
-🌐 **Website:** [mnaveedk.com](https://mnaveedk.com)
-
----
-
-## to run with observibility
-
-docker compose -f docker-compose.yaml -f docker-compose.local.yaml up -d
-
-_Happy hacking & good trades! 🚀_
+**Happy Trading! 📈**

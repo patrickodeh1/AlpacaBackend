@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.core.models import (
+from core.models import (
     AlpacaAccount,
     Asset,
     Candle,
