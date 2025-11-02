@@ -22,6 +22,7 @@ idna==3.11
 iniconfig==2.3.0
 kombu==5.5.4
 msgpack==1.1.2
+gunicorn
 numpy==2.3.4
 packaging==25.0
 pandas==2.3.3
@@ -56,3 +57,4 @@ wcwidth==0.2.14
 websocket-client==1.7.0
 websockets==11.0.3
 wheel==0.45.1
+whitenoise
