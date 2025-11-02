@@ -1,6 +1,48 @@
-# API Documentation - Prop Trading Firm
+# API Documentation - Alpaca Trading Platform
 
 Base URL: `http://localhost:8000/api`
+
+## Frontend Architecture Overview
+
+### Technology Stack
+- **Frontend**: React 18 + TypeScript + Vite
+- **State Management**: Redux Toolkit + RTK Query
+- **UI Framework**: Tailwind CSS + shadcn/ui components
+- **Authentication**: JWT tokens with automatic refresh
+- **API Client**: RTK Query for type-safe API calls
+
+### Application Structure
+```
+src/
+├── app/                    # Redux store, middleware, bootstrap
+├── features/               # Feature-based modules (auth, accounts, etc.)
+├── shared/                 # Shared utilities and components
+│   ├── api/               # API services and base configuration
+│   ├── components/        # Reusable UI components
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utilities (analytics, environment, etc.)
+│   └── types/             # TypeScript type definitions
+├── landing/               # Landing page components
+└── test/                  # Testing utilities
+```
+
+### Authentication Flow
+1. User logs in via `/account/login/` or registers via `/account/register/`
+2. JWT tokens are stored in Redux state and cookies
+3. All API requests automatically include `Authorization: Bearer {token}` header
+4. Token refresh happens automatically on 401 responses
+5. Logout clears tokens and redirects to landing page
+
+### Key Features
+- **Real-time Market Data**: WebSocket connections for live price updates
+- **Paper Trading**: Simulated trading environment
+- **Prop Firm Accounts**: Evaluation challenges and funded accounts
+- **Watchlists**: Custom asset collections with historical data backfill
+- **Analytics**: Trading performance metrics and charts
+
+---
+
+## 🔐 Authentication Endpoints
 
 ## 🔐 Authentication
 
@@ -431,7 +473,130 @@ Response 200:
 
 ---
 
-## 📈 Market Data
+## 📈 Market Data (Core API)
+
+### Alpaca Account Management
+```http
+GET /core/alpaca/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "msg": "Okay",
+  "data": [
+    {
+      "id": 1,
+      "account_id": "PA12345678",
+      "status": "ACTIVE",
+      "cash": "100000.00",
+      "portfolio_value": "100000.00",
+      "buying_power": "200000.00"
+    }
+  ]
+}
+```
+
+### Create Alpaca Account
+```http
+POST /core/alpaca/
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "account_type": "PAPER"  // or "LIVE"
+}
+
+Response 201:
+{
+  "msg": "Account created successfully",
+  "data": {
+    "id": 1,
+    "account_id": "PA12345678",
+    "status": "ACTIVE",
+    ...
+  }
+}
+```
+
+### Alpaca API Status Check
+```http
+GET /core/alpaca/alpaca_status/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "msg": "Status checked",
+  "data": {
+    "connection_status": true
+  }
+}
+```
+
+### Sync Assets from Alpaca
+```http
+POST /core/alpaca/sync_assets/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "msg": "Assets synced started successfully",
+  "data": "Syncing in progress. You can check the status later."
+}
+```
+
+### Get Sync Status
+```http
+GET /core/alpaca/sync_status/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "msg": "Sync status retrieved",
+  "data": {
+    "last_sync_at": "2024-01-01T10:00:00Z",
+    "total_assets": 8500,
+    "needs_sync": false,
+    "is_syncing": false
+  }
+}
+```
+
+### List Assets
+```http
+GET /core/assets/
+Authorization: Bearer {token}
+
+Query Parameters:
+- search: symbol or name search
+- asset_class: us_equity, crypto, etc.
+- exchange: NASDAQ, NYSE, etc.
+- tradable: true/false
+- marginable: true/false
+- shortable: true/false
+- fractionable: true/false
+- limit: pagination limit
+- offset: pagination offset
+- ordering: symbol, name, etc.
+
+Response 200:
+{
+  "msg": "Assets retrieved successfully",
+  "data": [
+    {
+      "id": 1,
+      "symbol": "AAPL",
+      "name": "Apple Inc",
+      "asset_class": "us_equity",
+      "exchange": "NASDAQ",
+      "tradable": true,
+      "marginable": true,
+      "shortable": true,
+      "fractionable": true
+    }
+  ],
+  "count": 8500
+}
+```
 
 ### Search Assets
 ```http
@@ -454,7 +619,55 @@ Response 200:
 }
 ```
 
-### Get Asset Price Data
+### Get Asset Details
+```http
+GET /core/assets/{id}/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "id": 1,
+  "symbol": "AAPL",
+  "name": "Apple Inc",
+  "asset_class": "us_equity",
+  "exchange": "NASDAQ",
+  "status": "active",
+  "tradable": true,
+  "marginable": true,
+  "shortable": true,
+  "fractionable": true,
+  "min_order_size": "1.000000",
+  "max_order_size": "1000000.000000",
+  "min_trade_increment": "0.010000"
+}
+```
+
+### Get Asset Statistics
+```http
+GET /core/assets/stats/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "asset_classes": [
+    {
+      "value": "us_equity",
+      "label": "US Equity",
+      "count": 8000
+    }
+  ],
+  "exchanges": [
+    {
+      "value": "NASDAQ",
+      "label": "NASDAQ",
+      "count": 3000
+    }
+  ],
+  "total_count": 8500
+}
+```
+
+### Get Asset Price Data (Candles v2)
 ```http
 GET /core/assets/{id}/candles_v2/?tf=1&limit=100
 Authorization: Bearer {token}
@@ -468,17 +681,142 @@ Response 200:
 {
   "results": [
     {
-      "date": "2024-01-01T10:00:00Z",
+      "bucket": "2024-01-01T10:00:00Z",
+      "o": "150.00",
+      "h_": "151.50",
+      "l_": "149.50",
+      "c": "151.00",
+      "v_": "1000000.00"
+    }
+  ],
+  "count": 1000,
+  "next": true,
+  "previous": false
+}
+```
+
+### Get Chart Data (Legacy)
+```http
+GET /core/candles/chart/?symbol=AAPL&timeframe=1D&days=30
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "msg": "Chart data retrieved",
+  "data": [
+    {
+      "timestamp": "2024-01-01T10:00:00Z",
       "open": "150.00",
       "high": "151.50",
       "low": "149.50",
       "close": "151.00",
       "volume": "1000000.00"
     }
-  ],
-  "count": 1000,
-  "next": true,
-  "previous": false
+  ]
+}
+```
+
+### Watchlist Management
+```http
+GET /core/watchlists/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "msg": "Watchlists retrieved successfully",
+  "data": [
+    {
+      "id": 1,
+      "name": "Tech Stocks",
+      "description": "My favorite tech companies",
+      "is_default": false,
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "asset_count": 5
+    }
+  ]
+}
+```
+
+### Create Watchlist
+```http
+POST /core/watchlists/
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "name": "Tech Stocks",
+  "description": "My favorite tech companies"
+}
+
+Response 201:
+{
+  "msg": "Watchlist created successfully",
+  "data": {
+    "id": 1,
+    "name": "Tech Stocks",
+    ...
+  }
+}
+```
+
+### Add Asset to Watchlist
+```http
+POST /core/watchlists/{id}/add_asset/
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "asset_id": 1
+}
+
+Response 201:
+{
+  "msg": "Asset added to watchlist",
+  "data": {
+    "id": 1,
+    "watchlist": 1,
+    "asset": 1,
+    "asset_symbol": "AAPL",
+    "is_active": true
+  }
+}
+```
+
+### Remove Asset from Watchlist
+```http
+DELETE /core/watchlists/{watchlist_id}/remove_asset/{asset_id}/
+Authorization: Bearer {token}
+
+Response 200:
+{
+  "msg": "Asset removed from watchlist"
+}
+```
+
+### Tick Data (Real-time Quotes)
+```http
+GET /core/ticks/
+Authorization: Bearer {token}
+
+Query Parameters:
+- asset_id: filter by asset ID
+- symbol: filter by symbol
+
+Response 200:
+{
+  "count": 100,
+  "results": [
+    {
+      "id": 1,
+      "asset": 1,
+      "symbol": "AAPL",
+      "price": "150.25",
+      "size": "100",
+      "timestamp": "2024-01-01T10:00:00Z",
+      "exchange": "NASDAQ"
+    }
+  ]
 }
 ```
 
