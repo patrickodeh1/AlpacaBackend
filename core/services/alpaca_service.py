@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING, Literal
 from celery.utils.log import get_task_logger
 import requests
 
-from main import const
-from main.settings.base import APCA_API_KEY, APCA_API_SECRET_KEY
+from alpacabackend import const
+from alpacabackend.settings import APCA_API_KEY, APCA_API_SECRET_KEY
 
 if TYPE_CHECKING:
     from collections.abc import Iterable

@@ -4,8 +4,8 @@ import logging
 
 from django.core.cache import cache
 
-from apps.core.tasks import fetch_historical_data
-from main.cache_keys import cache_keys
+from core.tasks import fetch_historical_data
+from  alpacabackend.cache_keys import cache_keys
 
 logger = logging.getLogger(__name__)
 

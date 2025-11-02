@@ -13,7 +13,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from apps.core.models import (
+from core.models import (
     AlpacaAccount,
     Asset,
     Candle,
@@ -21,8 +21,8 @@ from apps.core.models import (
     WatchList,
     WatchListAsset,
 )
-from apps.core.pagination import CandleBucketPagination, OffsetPagination
-from apps.core.serializers import (
+from core.pagination import CandleBucketPagination, OffsetPagination
+from core.serializers import (
     AggregatedCandleSerializer,
     AlpacaAccountSerializer,
     AssetSerializer,
@@ -33,10 +33,10 @@ from apps.core.serializers import (
     WatchListCreateSerializer,
     WatchListSerializer,
 )
-from apps.core.services.alpaca_service import alpaca_service
-from apps.core.services.backfill_coordinator import request_backfill
-from apps.core.tasks import alpaca_sync_task
-from apps.core.utils import get_timeframe
+from core.services.alpaca_service import alpaca_service
+from core.services.backfill_coordinator import request_backfill
+from core.tasks import alpaca_sync_task
+from core.utils import get_timeframe
 
 logger = logging.getLogger(__name__)
 

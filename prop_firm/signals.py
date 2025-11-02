@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from apps.paper_trading.models import PaperTrade
+from paper_trading.models import PaperTrade
 from .models import PropFirmAccount, AccountActivity
 import logging
 

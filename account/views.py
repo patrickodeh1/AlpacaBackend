@@ -11,8 +11,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from main import const
-from main.settings.base import GOOGLE_OAUTH_CLIENT_ID
+from alpacabackend import const
+from alpacabackend.settings import GOOGLE_OAUTH_CLIENT_ID
 
 from .models import User
 from .renderers import UserRenderer

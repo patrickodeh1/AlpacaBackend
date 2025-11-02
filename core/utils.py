@@ -11,7 +11,7 @@ from django.db.models import (
 from django.db.models.functions import Coalesce, FirstValue, RowNumber
 from rest_framework.exceptions import ValidationError
 
-from apps.core.models import Candle
+from core.models import Candle
 
 
 def get_timeframe(request):

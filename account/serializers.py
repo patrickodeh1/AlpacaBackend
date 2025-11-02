@@ -6,9 +6,9 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
-from apps.account.utils import Util
-from main import const
-from settings import BASE_DIR
+from account.utils import Util
+from alpacabackend import const
+from alpacabackend.settings import BASE_DIR
 
 from .models import User
 

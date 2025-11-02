@@ -7,13 +7,13 @@ from django.core.cache import cache
 from django.utils import timezone
 import pytz
 
-from apps.core.models import (
+from core.models import (
     Asset,
     Candle,
     WatchListAsset,
 )
-from main import const
-from main.cache_keys import cache_keys
+from alpacabackend import const
+from alpacabackend.cache_keys import cache_keys
 
 from .services.alpaca_service import alpaca_service
 

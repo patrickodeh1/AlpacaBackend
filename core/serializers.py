@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from apps.core.models import (
+from core.models import (
     AlpacaAccount,
     Asset,
     Candle,
