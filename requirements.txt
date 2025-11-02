@@ -26,7 +26,7 @@ gunicorn
 numpy==2.3.4
 packaging==25.0
 pandas==2.3.3
-pillow==10.2.0
+pillow==10.4.0
 pluggy==1.6.0
 prompt_toolkit==3.0.52
 psycopg2-binary==2.9.9
