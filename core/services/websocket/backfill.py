@@ -8,10 +8,10 @@ import time
 from django.core.cache import cache
 from django.utils import timezone
 
-from apps.core.models import Candle, WatchListAsset
-from apps.core.services.backfill_coordinator import request_backfill
-from main import const
-from main.cache_keys import cache_keys
+from core.models import Candle, WatchListAsset
+from core.services.backfill_coordinator import request_backfill
+from alpacabackend import const
+from alpacabackend.cache_keys import cache_keys
 
 
 @dataclass

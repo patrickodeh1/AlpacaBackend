@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Any
 
-from main import const
+from alpacabackend import const
 
 from .backfill import BackfillGuard
 from .persistence import CandleRepository

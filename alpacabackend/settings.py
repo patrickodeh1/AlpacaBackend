@@ -6,6 +6,11 @@ from pathlib import Path
 import os
 from datetime import timedelta
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -14,9 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-qt1toh4rrc_e3g*i&u1&($xui=x6-is&811mql3b*p79pem0ip')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'False'
+DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = [host.strip() for host in config('ALLOWED_HOSTS').split(',')]
 
 
 # Application definition
@@ -76,25 +81,19 @@ TEMPLATES = [
 WSGI_APPLICATION = 'alpacabackend.wsgi.application'
 
 
-# Database - SQLite for development
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
 
 # For production, use PostgreSQL:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DB_NAME', 'propfirm_db'),
-#         'USER': os.getenv('DB_USER', 'postgres'),
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-#         'HOST': os.getenv('DB_HOST', 'localhost'),
-#         'PORT': os.getenv('DB_PORT', '5432'),
-#     }
-# }
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': os.getenv('DB_NAME', 'postgres'),
+         'USER': os.getenv('DB_USER', 'postgres.sqbfyjptalqcqpndimvx'),
+         'PASSWORD': os.getenv('DB_PASSWORD'),
+         'HOST': os.getenv('DB_HOST', 'aws-1-eu-north-1.pooler.supabase.com'),
+         'PORT': os.getenv('DB_PORT', '5432'),
+     }
+ }
 
 
 # Password validation
@@ -166,40 +165,37 @@ SIMPLE_JWT = {
 
 
 # CORS Settings
-CORS_ALLOWED_ORIGINS = os.environ.get(
-    'CORS_ALLOWED_ORIGINS',
-    'https://alpaca-frontend.vercel.app',
-).split(',')
+CORS_ALLOWED_ORIGINS = [host.strip() for host in config('CORS_ALLOWED_ORIGINS').split(',')]
 
 CORS_ALLOW_CREDENTIALS = True
 
 
 # Stripe Configuration
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
-STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', '')
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
 
 
 # Alpaca API Configuration
-APCA_API_KEY = os.getenv('APCA_API_KEY', '')
-APCA_API_SECRET_KEY = os.getenv('APCA_API_SECRET_KEY', '')
-APCA_API_BASE_URL = os.getenv('APCA_API_BASE_URL', 'https://paper-api.alpaca.markets')
-APCA_DATA_BASE_URL = os.getenv('APCA_DATA_BASE_URL', 'https://data.alpaca.markets')
+APCA_API_KEY = config('APCA_API_KEY')
+APCA_API_SECRET_KEY = config('APCA_API_SECRET_KEY')
+APCA_API_BASE_URL = config('APCA_API_BASE_URL')
+APCA_DATA_BASE_URL = config('APCA_DATA_BASE_URL')
 
 
 # Email Configuration (for notifications)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@propfirm.com')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = int(config('EMAIL_PORT'))
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 
 # Celery Configuration (for background tasks)
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

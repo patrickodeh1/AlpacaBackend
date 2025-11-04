@@ -35,7 +35,7 @@ class RuleEngine:
     
     def check_daily_loss_limit(self):
         """Check if daily loss limit has been exceeded"""
-        from apps.paper_trading.models import PaperTrade
+        from paper_trading.models import PaperTrade
         
         today = timezone.now().date()
         
@@ -107,7 +107,7 @@ class RuleEngine:
     
     def check_minimum_trading_days(self):
         """Update trading days count"""
-        from apps.paper_trading.models import PaperTrade
+        from paper_trading.models import PaperTrade
         
         # Get unique trading dates
         trading_dates = PaperTrade.objects.filter(
@@ -144,7 +144,7 @@ class RuleEngine:
     
     def _handle_violations(self):
         """Handle rule violations - fail account and record violations"""
-        from apps.prop_firm.models import RuleViolation, AccountActivity
+        from prop_firm.models import RuleViolation, AccountActivity
         
         # Fail the account
         self.account.status = 'FAILED'
@@ -177,7 +177,7 @@ class RuleEngine:
     
     def _pass_evaluation(self):
         """Mark account as passed evaluation"""
-        from apps.prop_firm.models import AccountActivity
+        from prop_firm.models import AccountActivity
         
         self.account.status = 'PASSED'
         self.account.passed_at = timezone.now()
@@ -220,7 +220,7 @@ class TradeValidator:
             errors.append(violation['description'])
         
         # Check if account has open positions that would exceed limits
-        from apps.paper_trading.models import PaperTrade
+        from paper_trading.models import PaperTrade
         
         open_positions_value = PaperTrade.objects.filter(
             user=self.account.user,

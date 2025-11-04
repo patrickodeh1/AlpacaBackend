@@ -4,7 +4,7 @@ from unittest.mock import patch
 from django.utils import timezone
 import pytz
 
-from apps.core.services.websocket.utils import (
+from core.services.websocket.utils import (
     floor_to_bucket,
     is_regular_trading_hours,
     parse_tick_timestamp,
@@ -125,7 +125,7 @@ class TestIsRegularTradingHours:
         ts = datetime(2023, 10, 30, 20, 0, tzinfo=pytz.UTC)
         assert is_regular_trading_hours(ts) is False
 
-    @patch("apps.core.services.websocket.utils.pytz.timezone")
+    @patch("core.services.websocket.utils.pytz.timezone")
     def test_exception_fallback(self, mock_timezone):
         """Test exception handling falls back to True."""
         mock_timezone.side_effect = Exception("Timezone error")

@@ -21,7 +21,7 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from apps.core.services.websocket import WebsocketClient
+from core.services.websocket import WebsocketClient
 
 logger = logging.getLogger(__name__)
 

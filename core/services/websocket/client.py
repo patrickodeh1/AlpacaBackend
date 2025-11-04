@@ -12,8 +12,8 @@ from typing import Any
 from django.db import close_old_connections
 import websocket
 
-from main import const
-from main.settings.base import APCA_API_KEY, APCA_API_SECRET_KEY
+from alpacabackend import const
+from alpacabackend.settings.base import APCA_API_KEY, APCA_API_SECRET_KEY
 
 from .aggregator import TimeframeAggregator
 from .backfill import BackfillGuard
@@ -472,7 +472,7 @@ class WebsocketClient:
             # Persist open buckets immediately for lower latency updates
             self.aggregator.persist_open(touched_by_tf, latest_ts)
             # Attach minute ids to accumulators
-            from main import const as _const
+            from alpacabackend import const as _const
 
             for tf, delta in _const.TF_CFG.items():
                 if tf == _const.TF_1T:
@@ -504,7 +504,7 @@ class WebsocketClient:
     def _schedule_backfill_for_asset(self, asset_id: int) -> None:
         # No longer used directly; BackfillGuard invokes coordinator instead.
         # Kept for compatibility if needed in the future.
-        from apps.core.services.backfill_coordinator import request_backfill
+        from core.services.backfill_coordinator import request_backfill
 
         try:
             request_backfill(asset_id, source="websocket-service")

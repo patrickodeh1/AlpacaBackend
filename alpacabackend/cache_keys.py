@@ -2,7 +2,7 @@
 Centralized cache key management system.
 
 Usage:
-    from main.cache_keys import cache_keys
+    from alpacabackend.cache_keys import cache_keys
 
     # Backfill keys
     key = cache_keys.backfill(asset_id).queued()

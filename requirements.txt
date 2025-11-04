@@ -18,11 +18,11 @@ django-filter==23.5
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.1
 google-auth==2.42.1
+gunicorn==23.0.0
 idna==3.11
 iniconfig==2.3.0
 kombu==5.5.4
 msgpack==1.1.2
-gunicorn
 numpy==2.3.4
 packaging==25.0
 pandas==2.3.3
@@ -38,6 +38,7 @@ PyJWT==2.8.0
 pytest==7.4.3
 pytest-django==4.7.0
 python-dateutil==2.9.0.post0
+python-decouple==3.8
 python-dotenv==1.0.0
 pytz==2023.3
 redis==5.0.1
@@ -57,4 +58,4 @@ wcwidth==0.2.14
 websocket-client==1.7.0
 websockets==11.0.3
 wheel==0.45.1
-whitenoise
+whitenoise==6.11.0

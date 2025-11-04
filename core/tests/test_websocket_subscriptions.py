@@ -2,8 +2,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from apps.core.models import Asset, WatchList, WatchListAsset
-from apps.core.services.websocket.subscriptions import SubscriptionManager
+from core.models import Asset, WatchList, WatchListAsset
+from core.services.websocket.subscriptions import SubscriptionManager
 
 
 @pytest.mark.django_db

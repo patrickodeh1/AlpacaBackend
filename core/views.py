@@ -123,7 +123,7 @@ class AlpacaAccountViewSet(viewsets.ModelViewSet):
         Sync assets from Alpaca API to local database.
         """
         try:
-            from apps.core.models import SyncStatus
+            from core.models import SyncStatus
 
             # Get or create sync status for assets
             sync_status, created = SyncStatus.objects.get_or_create(
@@ -162,7 +162,7 @@ class AlpacaAccountViewSet(viewsets.ModelViewSet):
         Get the sync status including last sync time and asset count.
         """
         try:
-            from apps.core.models import Asset, SyncStatus
+            from core.models import Asset, SyncStatus
 
             # Get total asset count
             total_assets = Asset.objects.filter(status="active").count()
@@ -495,7 +495,7 @@ class AssetViewSet(viewsets.ReadOnlyModelViewSet):
         limit = int(request.query_params.get("limit", 1000))
 
         # Map minutes to stored timeframe labels using shared const
-        from main import const as _const
+        from alpacabackend import const as _const
 
         minutes_to_tf = {
             1: _const.TF_1T,
@@ -714,7 +714,7 @@ class CandleViewSet(viewsets.ReadOnlyModelViewSet):
         Get chart data for a specific asset.
         """
         symbol = request.query_params.get("symbol")
-        from main import const as _const
+        from alpacabackend import const as _const
 
         timeframe = request.query_params.get("timeframe", _const.TF_1D)
         days = int(request.query_params.get("days", 30))

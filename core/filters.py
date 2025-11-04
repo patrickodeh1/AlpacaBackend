@@ -1,7 +1,7 @@
 from django.db.models import Q
 import django_filters
 
-from apps.core.models import Asset, Candle
+from core.models import Asset, Candle
 
 
 class AssetFilter(django_filters.FilterSet):

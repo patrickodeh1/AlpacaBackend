@@ -179,7 +179,7 @@ class PropFirmAccount(models.Model):
     
     def calculate_daily_pnl(self):
         """Calculate P&L for today"""
-        from apps.paper_trading.models import PaperTrade
+        from paper_trading.models import PaperTrade
         today = timezone.now().date()
         
         trades_today = PaperTrade.objects.filter(
@@ -197,7 +197,7 @@ class PropFirmAccount(models.Model):
     
     def update_balance(self):
         """Recalculate current balance based on closed trades"""
-        from apps.paper_trading.models import PaperTrade
+        from paper_trading.models import PaperTrade
         
         # Get all closed trades for this account
         closed_trades = PaperTrade.objects.filter(

@@ -3,10 +3,10 @@ from unittest.mock import Mock
 
 from django.utils import timezone
 
-from apps.core.services.websocket.aggregator import TimeframeAggregator
-from apps.core.services.websocket.persistence import CandleRepository
-from apps.core.services.websocket.utils import floor_to_bucket
-from main import const
+from core.services.websocket.aggregator import TimeframeAggregator
+from core.services.websocket.persistence import CandleRepository
+from core.services.websocket.utils import floor_to_bucket
+from alpacabackend import const
 
 
 class TestTimeframeAggregator:

@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 from django.utils import timezone
 import pytest
 
-from apps.core.services.websocket.client import WebsocketClient
+from core.services.websocket.client import WebsocketClient
 
 
 class TestWebsocketClient:

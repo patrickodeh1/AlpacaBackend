@@ -6,7 +6,7 @@ import threading
 
 from django.db import close_old_connections
 
-from apps.core.models import Asset, WatchListAsset
+from core.models import Asset, WatchListAsset
 
 SendFn = Callable[[str, list[str]], None]
 

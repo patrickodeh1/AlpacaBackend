@@ -3,9 +3,9 @@ from unittest.mock import Mock
 from django.utils import timezone
 import pytest
 
-from apps.core.models import Asset, Candle
-from apps.core.services.websocket.persistence import CandleRepository
-from main import const
+from core.models import Asset, Candle
+from core.services.websocket.persistence import CandleRepository
+from alpacabackend import const
 
 
 @pytest.mark.django_db

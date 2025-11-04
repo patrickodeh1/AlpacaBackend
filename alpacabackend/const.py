@@ -1,8 +1,8 @@
 """
 Shared constants for the backend.
 
-Note: For cache key helpers, import from `main.cache_keys` directly:
-    from main.cache_keys import cache_keys
+Note: For cache key helpers, import from `alpacabackend.cache_keys` directly:
+    from alpacabackend.cache_keys import cache_keys
 """
 
 from datetime import timedelta

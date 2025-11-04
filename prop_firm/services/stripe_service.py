@@ -145,7 +145,7 @@ class PaymentProcessor:
     
     def create_account_purchase(self, success_url, cancel_url):
         """Create payment session for account purchase"""
-        from apps.prop_firm.models import PropFirmAccount, AccountActivity
+        from prop_firm.models import PropFirmAccount, AccountActivity
         
         # Create pending account
         account = PropFirmAccount.objects.create(
@@ -186,7 +186,7 @@ class PaymentProcessor:
     
     def complete_payment(self, account, payment_intent_id):
         """Complete payment and activate account"""
-        from apps.prop_firm.models import AccountActivity
+        from prop_firm.models import AccountActivity
         from django.utils import timezone
         
         # Verify payment

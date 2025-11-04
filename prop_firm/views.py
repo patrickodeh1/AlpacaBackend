@@ -149,7 +149,7 @@ class PropFirmAccountViewSet(viewsets.ModelViewSet):
     def statistics(self, request, pk=None):
         """Get account statistics"""
         account = get_object_or_404(self.get_queryset(), pk=pk)
-        from apps.paper_trading.models import PaperTrade
+        from paper_trading.models import PaperTrade
         from decimal import Decimal
         
         # Get all trades for this account

@@ -6,8 +6,8 @@ from typing import Any
 
 from django.db import transaction
 
-from apps.core.models import Candle
-from main import const
+from core.models import Candle
+from alpacabackend import const
 
 
 @dataclass

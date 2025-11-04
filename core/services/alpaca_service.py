@@ -103,6 +103,11 @@ class AlpacaService:
                 ) from err
             raise
 
+    def list_watchlists(self) -> list[dict]:
+        """Retrieve all watchlists from Alpaca."""
+        url = f"{self.base_url}/v2/watchlists"
+        return self._make_request("GET", url)
+
     def get_historic_bars(
         self,
         symbol: str,

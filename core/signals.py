@@ -5,7 +5,7 @@ import logging
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from apps.core.models import Candle, WatchListAsset
+from core.models import Candle, WatchListAsset
 
 logger = logging.getLogger(__name__)
 

@@ -89,7 +89,7 @@ def alpaca_sync_task(asset_classes: list = None, batch_size: int = 1000):
     try:
         from django.utils import timezone
 
-        from apps.core.models import SyncStatus
+        from core.models import SyncStatus
 
         # Get or create sync status for assets
         sync_status, created = SyncStatus.objects.get_or_create(
@@ -423,96 +423,95 @@ def fetch_historical_data(asset_id: int):
                     )
                 )
 
-                # Build buckets using SQL for efficiency; collect minute IDs
-                # anchor for date_bin is market open ET to align intraday buckets
-                anchor = "1970-01-01 09:30:00-05:00"
-                from django.db import connection
+                # Fetch 1T candles for resampling
+                m1_candles = list(
+                    Candle.objects.filter(
+                        asset=asset,
+                        timeframe=const.TF_1T,
+                        timestamp__gte=start_ts,
+                        timestamp__lt=end_date,
+                    ).order_by("timestamp")
+                )
 
-                with connection.cursor() as cur:
-                    cur.execute(
-                        """
-                        WITH m1 AS (
-                            SELECT id, timestamp, open, high, low, close, volume
-                            FROM core_candle
-                            WHERE asset_id = %s AND timeframe = %s AND timestamp >= %s AND timestamp < %s
-                        ),
-                        binned AS (
-                            SELECT
-                                date_bin(INTERVAL %s, timestamp, TIMESTAMP %s) AS bucket,
-                                id,
-                                open, high, low, close, volume,
-                                row_number() OVER (PARTITION BY date_bin(INTERVAL %s, timestamp, TIMESTAMP %s) ORDER BY timestamp ASC) AS rn_open,
-                                row_number() OVER (PARTITION BY date_bin(INTERVAL %s, timestamp, TIMESTAMP %s) ORDER BY timestamp DESC) AS rn_close
-                            FROM m1
-                        ),
-                        agg AS (
-                            SELECT
-                                bucket,
-                                MIN(low) AS l,
-                                MAX(high) AS h,
-                                SUM(volume) AS v,
-                                ARRAY_AGG(id ORDER BY id) AS ids,
-                                MIN(CASE WHEN rn_open=1 THEN open END) AS o,
-                                MIN(CASE WHEN rn_close=1 THEN close END) AS c
-                            FROM binned
-                            GROUP BY bucket
-                        )
-                        SELECT bucket, o, h, l, c, v, ids
-                        FROM agg
-                        ORDER BY bucket DESC
-                        ;
-                        """,
-                        [
-                            asset.id,
-                            const.TF_1T,
-                            start_ts,
-                            end_date,
-                            delta,
-                            anchor,
-                            delta,
-                            anchor,
-                            delta,
-                            anchor,
-                        ],
-                    )
-                    rows = cur.fetchall()
+                if not m1_candles:
+                    continue
 
-                if not rows:
+                # Group candles into time buckets using Python (SQLite-compatible)
+                from collections import defaultdict
+                buckets = defaultdict(list)
+
+                delta_seconds = int(delta.total_seconds())
+                anchor_ts = datetime(1970, 1, 1, 9, 30, tzinfo=pytz.timezone("US/Eastern")).timestamp()
+
+                for candle in m1_candles:
+                    # Convert to Unix timestamp
+                    ts_unix = candle.timestamp.timestamp()
+
+                    # Calculate bucket start (aligned to market open for intraday)
+                    if delta_seconds < 86400:  # Intraday timeframes
+                        # Align to market open (9:30 ET)
+                        days_since_epoch = int((ts_unix - anchor_ts) // 86400)
+                        bucket_start = anchor_ts + (days_since_epoch * 86400) + ((ts_unix - (anchor_ts + days_since_epoch * 86400)) // delta_seconds) * delta_seconds
+                    else:  # Daily timeframe
+                        bucket_start = (ts_unix // delta_seconds) * delta_seconds
+
+                    bucket_ts = datetime.fromtimestamp(bucket_start, tz=timezone.utc)
+                    buckets[bucket_ts].append(candle)
+
+                # Aggregate each bucket
+                aggregated_data = []
+                for bucket_ts, candles_in_bucket in buckets.items():
+                    if not candles_in_bucket:
+                        continue
+
+                    # Sort by timestamp for proper OHLC
+                    sorted_candles = sorted(candles_in_bucket, key=lambda c: c.timestamp)
+
+                    o = sorted_candles[0].open
+                    h = max(c.high for c in sorted_candles)
+                    l = min(c.low for c in sorted_candles)
+                    c = sorted_candles[-1].close
+                    v = sum(c.volume for c in sorted_candles)
+                    ids = [c.id for c in sorted_candles]
+
+                    aggregated_data.append((bucket_ts, o, h, l, c, v, ids))
+
+                if not aggregated_data:
                     continue
 
                 # Upsert aggregated candles (create new + update existing)
-                buckets = [row[0] for row in rows]
+                buckets_ts = [row[0] for row in aggregated_data]
                 existing = {
                     c.timestamp: c
                     for c in Candle.objects.filter(
-                        asset=asset, timeframe=tf, timestamp__in=buckets
+                        asset=asset, timeframe=tf, timestamp__in=buckets_ts
                     )
                 }
 
                 to_create = []
                 to_update = []
-                for bucket, o, h, low_, c, v, ids in rows:
-                    if bucket in existing:
-                        cobj = existing[bucket]
+                for bucket_ts, o, h, l, c, v, ids in aggregated_data:
+                    if bucket_ts in existing:
+                        cobj = existing[bucket_ts]
                         cobj.open = float(o)
                         cobj.high = float(h)
-                        cobj.low = float(low_)
+                        cobj.low = float(l)
                         cobj.close = float(c)
                         cobj.volume = int(v or 0)
-                        cobj.minute_candle_ids = list(ids) if ids else []
+                        cobj.minute_candle_ids = ids
                         to_update.append(cobj)
                     else:
                         to_create.append(
                             Candle(
                                 asset=asset,
                                 timeframe=tf,
-                                timestamp=bucket,
+                                timestamp=bucket_ts,
                                 open=float(o),
                                 high=float(h),
-                                low=float(low_),
+                                low=float(l),
                                 close=float(c),
                                 volume=int(v or 0),
-                                minute_candle_ids=list(ids) if ids else [],
+                                minute_candle_ids=ids,
                             )
                         )
 
@@ -825,11 +824,11 @@ def _resample_higher_timeframes(asset, start_date, end_date):
                         const.TF_1T,
                         start_date,
                         end_date,
-                        delta,
+                        str(delta),
                         anchor,
-                        delta,
+                        str(delta),
                         anchor,
-                        delta,
+                        str(delta),
                         anchor,
                     ],
                 )

@@ -4,9 +4,9 @@ from unittest.mock import Mock, patch
 from django.utils import timezone
 import pytest
 
-from apps.core.models import Asset, Candle, WatchListAsset
-from apps.core.services.websocket.backfill import BackfillGuard
-from main import const
+from core.models import Asset, Candle, WatchListAsset
+from core.services.websocket.backfill import BackfillGuard
+from alpacabackend import const
 
 
 @pytest.mark.django_db
@@ -26,7 +26,7 @@ class TestBackfillGuard:
         )
 
         # Create watchlist and associate asset for all tests
-        from apps.core.models import WatchList
+        from core.models import WatchList
 
         self.watchlist = WatchList.objects.create(name="Test Watchlist", is_active=True)
         WatchListAsset.objects.create(
@@ -36,7 +36,7 @@ class TestBackfillGuard:
     def test_maybe_schedule_for_assets_no_data(self):
         """Test scheduling when asset has no candle data."""
         with patch(
-            "apps.core.services.websocket.backfill.request_backfill"
+            "core.services.websocket.backfill.request_backfill"
         ) as mock_request:
             scheduled = self.guard.maybe_schedule_for_assets([self.asset.id])
 
@@ -81,7 +81,7 @@ class TestBackfillGuard:
         )
 
         with patch(
-            "apps.core.services.websocket.backfill.request_backfill"
+            "core.services.websocket.backfill.request_backfill"
         ) as mock_request:
             scheduled = self.guard.maybe_schedule_for_assets([self.asset.id])
 
@@ -93,7 +93,7 @@ class TestBackfillGuard:
     def test_maybe_schedule_for_assets_cooldown(self):
         """Test cooldown prevents repeated scheduling."""
         with patch(
-            "apps.core.services.websocket.backfill.request_backfill"
+            "core.services.websocket.backfill.request_backfill"
         ) as mock_request:
             # First call should schedule
             scheduled1 = self.guard.maybe_schedule_for_assets([self.asset.id])
@@ -119,7 +119,7 @@ class TestBackfillGuard:
         )
 
         with patch(
-            "apps.core.services.websocket.backfill.request_backfill"
+            "core.services.websocket.backfill.request_backfill"
         ) as mock_request:
             # asset2 has no data, should schedule
             # asset1 has no data, should schedule
@@ -141,7 +141,7 @@ class TestBackfillGuard:
     def test_is_historical_complete_running_flag(self):
         """Test completion check when backfill is running."""
         with patch(
-            "apps.core.services.websocket.backfill.cache.get", return_value=True
+            "core.services.websocket.backfill.cache.get", return_value=True
         ):
             result = self.guard.is_historical_complete(
                 self.asset.id, const.TF_5T, datetime.now()
@@ -150,7 +150,7 @@ class TestBackfillGuard:
 
     def test_is_historical_complete_explicit_completion(self):
         """Test completion check with explicit completion flag."""
-        with patch("apps.core.services.websocket.backfill.cache.get") as mock_get:
+        with patch("core.services.websocket.backfill.cache.get") as mock_get:
             # First call returns None (not running), second returns True (completed)
             mock_get.side_effect = [None, True]
 
@@ -162,7 +162,7 @@ class TestBackfillGuard:
     def test_is_historical_complete_no_data(self):
         """Test completion check with no candle data."""
         with patch(
-            "apps.core.services.websocket.backfill.cache.get", return_value=None
+            "core.services.websocket.backfill.cache.get", return_value=None
         ):
             result = self.guard.is_historical_complete(
                 self.asset.id, const.TF_5T, datetime.now()
@@ -185,7 +185,7 @@ class TestBackfillGuard:
         )
 
         with patch(
-            "apps.core.services.websocket.backfill.cache.get", return_value=None
+            "core.services.websocket.backfill.cache.get", return_value=None
         ):
             result = self.guard.is_historical_complete(
                 self.asset.id, const.TF_5T, datetime.now()
@@ -234,7 +234,7 @@ class TestBackfillGuard:
         )
 
         with patch(
-            "apps.core.services.websocket.backfill.cache.get", return_value=None
+            "core.services.websocket.backfill.cache.get", return_value=None
         ):
             result = self.guard.is_historical_complete(
                 self.asset.id, const.TF_5T, datetime.now()
@@ -281,7 +281,7 @@ class TestBackfillGuard:
         )
 
         with patch(
-            "apps.core.services.websocket.backfill.cache.get", return_value=None
+            "core.services.websocket.backfill.cache.get", return_value=None
         ):
             result = self.guard.is_historical_complete(
                 self.asset.id, const.TF_5T, datetime.now()
@@ -291,7 +291,7 @@ class TestBackfillGuard:
     def test_is_historical_complete_cache_exception(self):
         """Test completion check handles cache exceptions."""
         with patch(
-            "apps.core.services.websocket.backfill.cache.get",
+            "core.services.websocket.backfill.cache.get",
             side_effect=Exception("Cache error"),
         ):
             # Should fall through to heuristic checks
@@ -300,7 +300,7 @@ class TestBackfillGuard:
             )
             assert result is False  # No data, so False
 
-    @patch("apps.core.services.websocket.backfill.request_backfill")
+    @patch("core.services.websocket.backfill.request_backfill")
     def test_maybe_schedule_calls_request_backfill(self, mock_request_backfill):
         """Test that maybe_schedule calls the request_backfill function."""
         scheduled = self.guard.maybe_schedule_for_assets([self.asset.id])
@@ -315,7 +315,7 @@ class TestBackfillGuard:
         import time
 
         with patch(
-            "apps.core.services.websocket.backfill.request_backfill"
+            "core.services.websocket.backfill.request_backfill"
         ) as mock_request:
             # First call
             scheduled1 = self.guard.maybe_schedule_for_assets([self.asset.id])
@@ -325,7 +325,7 @@ class TestBackfillGuard:
 
             # Mock time to be just after cooldown
             with patch(
-                "apps.core.services.websocket.backfill.time.time",
+                "core.services.websocket.backfill.time.time",
                 return_value=first_call_time + 901,
             ):
                 scheduled2 = self.guard.maybe_schedule_for_assets([self.asset.id])
@@ -335,7 +335,7 @@ class TestBackfillGuard:
     def test_watchlist_asset_filtering(self):
         """Test that only active watchlist assets are considered."""
         # Create watchlist and associate asset
-        from apps.core.models import WatchList
+        from core.models import WatchList
 
         watchlist = WatchList.objects.create(name="Test Watchlist", is_active=True)
         WatchListAsset.objects.create(
@@ -343,7 +343,7 @@ class TestBackfillGuard:
         )
 
         with patch(
-            "apps.core.services.websocket.backfill.request_backfill"
+            "core.services.websocket.backfill.request_backfill"
         ) as mock_request:
             # Should still work the same way
             scheduled = self.guard.maybe_schedule_for_assets([self.asset.id])

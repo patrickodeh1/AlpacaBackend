@@ -4,9 +4,9 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from apps.account.models import User
-from apps.core.models import Asset
-from apps.paper_trading.models import PaperTrade
+from account.models import User
+from core.models import Asset
+from paper_trading.models import PaperTrade
 
 
 class PaperTradeApiTests(APITestCase):
