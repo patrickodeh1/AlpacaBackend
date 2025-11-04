@@ -18,3 +18,11 @@ app.autodiscover_tasks()
 def debug_task(self):
     print(f'Request: {self.request!r}')
     
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'cleanup-stuck-syncs': {
+        'task': 'core.tasks.cleanup_stuck_syncs',
+        'schedule': crontab(minute='*/15'),  # Every 15 minutes
+    },
+}

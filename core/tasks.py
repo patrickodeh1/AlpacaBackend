@@ -5,6 +5,7 @@ from celery.utils.log import get_task_logger
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
+from django.db import transaction
 import pytz
 
 from core.models import (
@@ -20,25 +21,26 @@ from .services.alpaca_service import alpaca_service
 logger = get_task_logger(__name__)
 
 
-LOCK_TTL = 300  # 5 minutes
+LOCK_TTL = 300  # 5 minutes
 LOCK_WAIT = 5  # seconds to wait for lock
 RETRY_MAX = None  # unlimited
 RETRY_BACKOFF = True
-RETRY_BACKOFF_MAX = 300  # cap 5 min
+RETRY_BACKOFF_MAX = 300  # cap 5 min
+
+# Task lock TTL - prevent zombie locks
+TASK_LOCK_TTL = 600  # 10 minutes
 
 
 class SingleInstanceTask(Task):
     """Custom task class that prevents multiple instances of the same task"""
 
     def apply_async(self, args=None, kwargs=None, task_id=None, **options):
-        # Generate a unique task_id based on task + logical entity to prevent duplicates
-        # Note: we scope keys differently per task type
+        # Generate a unique task_id based on task + logical entity
         key_suffix = None
         if args and len(args) > 0:
             arg0 = args[0]
             try:
                 if self.name == "fetch_historical_data":
-                    # arg0 is watchlist_asset_id → resolve to asset_id to serialize per-asset
                     wla = (
                         WatchListAsset.objects.filter(id=arg0)
                         .values("asset_id")
@@ -57,51 +59,96 @@ class SingleInstanceTask(Task):
         if key_suffix:
             task_id = f"{self.name}-{key_suffix}"
 
-        # Check if task is already running
-        from celery import current_app
-
-        active_tasks = current_app.control.inspect().active()
-
-        if active_tasks:
-            for worker, tasks in active_tasks.items():
-                for task in tasks:
-                    if task.get("id") == task_id:
-                        logger.warning(
-                            f"Task {task_id} is already running on worker {worker}. Skipping new instance."
-                        )
-                        return None
+        # Use cache-based locking instead of inspect for better reliability
+        lock_key = f"task_lock:{task_id}"
+        if cache.get(lock_key):
+            logger.warning(
+                f"Task {task_id} is already running (cache lock exists). Skipping new instance."
+            )
+            return None
+        
+        # Set lock with TTL to prevent zombie locks
+        cache.set(lock_key, 1, timeout=TASK_LOCK_TTL)
 
         return super().apply_async(args, kwargs, task_id=task_id, **options)
 
 
-@shared_task(name="alpaca_sync", base=SingleInstanceTask)
-def alpaca_sync_task(asset_classes: list = None, batch_size: int = 1000):
+@shared_task(name="alpaca_sync", base=SingleInstanceTask, bind=True)
+def alpaca_sync_task(self, asset_classes: list = None, batch_size: int = 1000):
     """
     Optimized sync task that efficiently syncs assets from Alpaca API.
+    Automatically detects and recovers from stuck syncs.
 
     Args:
-        asset_classes: List of asset classes to sync (defaults to all: ["us_equity", "us_option", "crypto"])
+        asset_classes: List of asset classes to sync (defaults to all)
         batch_size: Number of assets to process in each batch
     """
     if asset_classes is None:
         asset_classes = ["us_equity", "us_option", "crypto"]
 
+    from core.models import SyncStatus
+
+    # Get or create sync status
+    sync_status, created = SyncStatus.objects.get_or_create(
+        sync_type="assets", 
+        defaults={"total_items": 0, "is_syncing": False}
+    )
+    
+    logger.info(f"Sync request received. Current status: is_syncing={sync_status.is_syncing}, updated_at={sync_status.updated_at}")
+
+    # Auto-detect and fix stale/stuck syncs (more than 5 minutes old)
+    if sync_status.is_syncing:
+        stale_threshold = timezone.now() - timedelta(minutes=5)
+        is_stale = sync_status.updated_at < stale_threshold
+        
+        if is_stale:
+            time_stuck = (timezone.now() - sync_status.updated_at).total_seconds() / 60
+            logger.warning(
+                f"Detected stale sync (stuck for {time_stuck:.1f} minutes). "
+                f"Auto-recovering and starting fresh..."
+            )
+            sync_status.is_syncing = False
+            sync_status.save()
+        else:
+            # Sync is actually running (updated recently)
+            time_since_update = (timezone.now() - sync_status.updated_at).total_seconds()
+            logger.warning(
+                f"Sync already in progress (running for {time_since_update:.0f}s). "
+                f"Please wait for it to complete."
+            )
+            return {
+                "success": False, 
+                "error": "Sync already in progress. Please wait.",
+                "seconds_running": int(time_since_update)
+            }
+
+    # Mark as syncing with atomic transaction
     try:
-        from django.utils import timezone
+        with transaction.atomic():
+            # Re-fetch with lock to prevent race conditions
+            sync_status = SyncStatus.objects.select_for_update().get(id=sync_status.id)
+            
+            # Double-check after lock
+            if sync_status.is_syncing:
+                time_since = (timezone.now() - sync_status.updated_at).total_seconds() / 60
+                if time_since > 5:
+                    logger.warning(f"Sync stuck for {time_since:.1f}m. Resetting...")
+                    sync_status.is_syncing = False
+                else:
+                    logger.warning("Race condition: Sync started elsewhere")
+                    return {"success": False, "error": "Sync already in progress"}
+            
+            sync_status.is_syncing = True
+            sync_status.updated_at = timezone.now()
+            sync_status.save()
+            logger.info(f"✓ Acquired sync lock at {sync_status.updated_at}")
+            
+    except Exception as e:
+        logger.error(f"Failed to acquire sync lock: {e}", exc_info=True)
+        return {"success": False, "error": f"Database lock error: {str(e)}"}
 
-        from core.models import SyncStatus
-
-        # Get or create sync status for assets
-        sync_status, created = SyncStatus.objects.get_or_create(
-            sync_type="assets", defaults={"total_items": 0, "is_syncing": True}
-        )
-
-        # Mark as syncing
-        sync_status.is_syncing = True
-        sync_status.save()
-
+    try:
         service = alpaca_service
-
         total_created = 0
         total_updated = 0
         total_errors = 0
@@ -109,9 +156,13 @@ def alpaca_sync_task(asset_classes: list = None, batch_size: int = 1000):
         # Process each asset class
         for asset_class in asset_classes:
             logger.info(f"Starting sync for asset class: {asset_class}")
+            
+            # Update heartbeat
+            sync_status.updated_at = timezone.now()
+            sync_status.save(update_fields=['updated_at'])
 
             try:
-                # Fetch assets from Alpaca with fallback for data-only keys
+                # Fetch assets from Alpaca
                 fallback_symbols = (
                     ["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA"]
                     if asset_class == "us_equity"
@@ -130,135 +181,127 @@ def alpaca_sync_task(asset_classes: list = None, batch_size: int = 1000):
 
                 logger.info(f"Fetched {len(assets_data)} assets for {asset_class}")
 
-                # Get existing assets in batches to avoid memory issues
-                existing_alpaca_ids = set(
-                    Asset.objects.filter(asset_class=asset_class).values_list(
-                        "alpaca_id", flat=True
+                # Process in smaller chunks to avoid memory issues
+                chunk_size = min(batch_size, 500)
+                for i in range(0, len(assets_data), chunk_size):
+                    # Update heartbeat every chunk
+                    sync_status.updated_at = timezone.now()
+                    sync_status.save(update_fields=['updated_at'])
+                    
+                    chunk = assets_data[i:i + chunk_size]
+                    
+                    # Get existing assets for this chunk
+                    chunk_alpaca_ids = [
+                        asset_data.get("id", asset_data["symbol"]) 
+                        for asset_data in chunk
+                    ]
+                    existing_alpaca_ids = set(
+                        Asset.objects.filter(
+                            alpaca_id__in=chunk_alpaca_ids,
+                            asset_class=asset_class
+                        ).values_list("alpaca_id", flat=True)
                     )
-                )
 
-                assets_to_create = []
-                assets_to_update = []
+                    assets_to_create = []
+                    assets_to_update = []
 
-                # Separate assets into create vs update batches
-                for asset_data in assets_data:
-                    alpaca_id = asset_data.get("id", asset_data["symbol"])
+                    # Separate into create vs update
+                    for asset_data in chunk:
+                        alpaca_id = asset_data.get("id", asset_data["symbol"])
 
-                    asset_dict = {
-                        "alpaca_id": alpaca_id,
-                        "symbol": asset_data["symbol"],
-                        "name": asset_data.get("name", ""),
-                        "asset_class": asset_data.get("class", asset_class),
-                        "exchange": asset_data.get("exchange"),
-                        "status": asset_data.get("status", "active"),
-                        "tradable": asset_data.get("tradable", False),
-                        "marginable": asset_data.get("marginable", False),
-                        "shortable": asset_data.get("shortable", False),
-                        "easy_to_borrow": asset_data.get("easy_to_borrow", False),
-                        "fractionable": asset_data.get("fractionable", False),
-                        "maintenance_margin_requirement": asset_data.get(
-                            "maintenance_margin_requirement"
-                        ),
-                        "margin_requirement_long": asset_data.get(
-                            "margin_requirement_long"
-                        ),
-                        "margin_requirement_short": asset_data.get(
-                            "margin_requirement_short"
-                        ),
-                    }
-
-                    if alpaca_id in existing_alpaca_ids:
-                        assets_to_update.append(asset_dict)
-                    else:
-                        assets_to_create.append(Asset(**asset_dict))
-
-                # Bulk create new assets
-                if assets_to_create:
-                    try:
-                        created_assets = Asset.objects.bulk_create(
-                            assets_to_create,
-                            batch_size=batch_size,
-                            ignore_conflicts=True,
-                        )
-                        created_count = len(created_assets)
-                        total_created += created_count
-                        logger.info(
-                            f"Bulk created {created_count} new assets for {asset_class}"
-                        )
-                    except Exception as e:
-                        logger.error(
-                            f"Error bulk creating assets for {asset_class}: {e}"
-                        )
-                        total_errors += len(assets_to_create)
-
-                # Bulk update existing assets
-                if assets_to_update:
-                    try:
-                        # For updates, we need to fetch existing objects and update them
-                        alpaca_ids_to_update = [
-                            asset["alpaca_id"] for asset in assets_to_update
-                        ]
-                        existing_assets = {
-                            asset.alpaca_id: asset
-                            for asset in Asset.objects.filter(
-                                alpaca_id__in=alpaca_ids_to_update,
-                                asset_class=asset_class,
-                            )
+                        asset_dict = {
+                            "alpaca_id": alpaca_id,
+                            "symbol": asset_data["symbol"],
+                            "name": asset_data.get("name", ""),
+                            "asset_class": asset_data.get("class", asset_class),
+                            "exchange": asset_data.get("exchange"),
+                            "status": asset_data.get("status", "active"),
+                            "tradable": asset_data.get("tradable", False),
+                            "marginable": asset_data.get("marginable", False),
+                            "shortable": asset_data.get("shortable", False),
+                            "easy_to_borrow": asset_data.get("easy_to_borrow", False),
+                            "fractionable": asset_data.get("fractionable", False),
+                            "maintenance_margin_requirement": asset_data.get(
+                                "maintenance_margin_requirement"
+                            ),
+                            "margin_requirement_long": asset_data.get(
+                                "margin_requirement_long"
+                            ),
+                            "margin_requirement_short": asset_data.get(
+                                "margin_requirement_short"
+                            ),
                         }
 
-                        assets_to_bulk_update = []
-                        for asset_data in assets_to_update:
-                            alpaca_id = asset_data["alpaca_id"]
-                            if alpaca_id in existing_assets:
-                                existing_asset = existing_assets[alpaca_id]
+                        if alpaca_id in existing_alpaca_ids:
+                            assets_to_update.append(asset_dict)
+                        else:
+                            assets_to_create.append(Asset(**asset_dict))
 
-                                # Update fields
-                                for field, value in asset_data.items():
-                                    if field != "alpaca_id":  # Don't update the ID
-                                        setattr(existing_asset, field, value)
-
-                                assets_to_bulk_update.append(existing_asset)
-
-                        if assets_to_bulk_update:
-                            Asset.objects.bulk_update(
-                                assets_to_bulk_update,
-                                [
-                                    "symbol",
-                                    "name",
-                                    "asset_class",
-                                    "exchange",
-                                    "status",
-                                    "tradable",
-                                    "marginable",
-                                    "shortable",
-                                    "easy_to_borrow",
-                                    "fractionable",
-                                    "maintenance_margin_requirement",
-                                    "margin_requirement_long",
-                                    "margin_requirement_short",
-                                ],
-                                batch_size=batch_size,
+                    # Bulk create
+                    if assets_to_create:
+                        try:
+                            created_assets = Asset.objects.bulk_create(
+                                assets_to_create,
+                                batch_size=200,
+                                ignore_conflicts=True,
                             )
-                            updated_count = len(assets_to_bulk_update)
-                            total_updated += updated_count
-                            logger.info(
-                                f"Bulk updated {updated_count} existing assets for {asset_class}"
-                            )
+                            created_count = len(created_assets)
+                            total_created += created_count
+                            logger.info(f"Created {created_count} assets")
+                        except Exception as e:
+                            logger.error(f"Error creating assets: {e}")
+                            total_errors += len(assets_to_create)
 
-                    except Exception as e:
-                        logger.error(
-                            f"Error bulk updating assets for {asset_class}: {e}"
-                        )
-                        total_errors += len(assets_to_update)
+                    # Bulk update
+                    if assets_to_update:
+                        try:
+                            update_ids = [a["alpaca_id"] for a in assets_to_update]
+                            existing = {
+                                asset.alpaca_id: asset
+                                for asset in Asset.objects.filter(
+                                    alpaca_id__in=update_ids,
+                                    asset_class=asset_class,
+                                )
+                            }
+
+                            to_update = []
+                            for asset_data in assets_to_update:
+                                alpaca_id = asset_data["alpaca_id"]
+                                if alpaca_id in existing:
+                                    obj = existing[alpaca_id]
+                                    for field, value in asset_data.items():
+                                        if field != "alpaca_id":
+                                            setattr(obj, field, value)
+                                    to_update.append(obj)
+
+                            if to_update:
+                                Asset.objects.bulk_update(
+                                    to_update,
+                                    [
+                                        "symbol", "name", "asset_class", "exchange",
+                                        "status", "tradable", "marginable", "shortable",
+                                        "easy_to_borrow", "fractionable",
+                                        "maintenance_margin_requirement",
+                                        "margin_requirement_long",
+                                        "margin_requirement_short",
+                                    ],
+                                    batch_size=200,
+                                )
+                                updated_count = len(to_update)
+                                total_updated += updated_count
+                                logger.info(f"Updated {updated_count} assets")
+
+                        except Exception as e:
+                            logger.error(f"Error updating assets: {e}")
+                            total_errors += len(assets_to_update)
 
                 logger.info(
-                    f"Completed sync for {asset_class}: {len(assets_to_create)} created, {len(assets_to_update)} updated"
+                    f"Completed {asset_class}: {total_created} created, "
+                    f"{total_updated} updated"
                 )
 
             except Exception as e:
-                logger.error(
-                    f"Error syncing asset class {asset_class}: {e}", exc_info=True
-                )
+                logger.error(f"Error syncing {asset_class}: {e}", exc_info=True)
                 total_errors += 1
                 continue
 
@@ -270,7 +313,7 @@ def alpaca_sync_task(asset_classes: list = None, batch_size: int = 1000):
             "asset_classes_processed": asset_classes,
         }
 
-        # Update sync status on successful sync
+        # Update sync status on success
         sync_status.last_sync_at = timezone.now()
         sync_status.total_items = Asset.objects.filter(status="active").count()
         sync_status.is_syncing = False
@@ -283,18 +326,43 @@ def alpaca_sync_task(asset_classes: list = None, batch_size: int = 1000):
         error_msg = f"Critical error in alpaca_sync_task: {e}"
         logger.error(error_msg, exc_info=True)
 
-        # Mark sync as not running on error
+        # Always mark sync as not running on error
         try:
             sync_status.is_syncing = False
             sync_status.save()
-        except Exception:
-            pass  # Ignore errors when updating sync status
+        except Exception as save_error:
+            logger.error(f"Failed to reset sync status: {save_error}")
 
         return {"success": False, "error": error_msg}
 
+    finally:
+        # CRITICAL: Always ensure is_syncing is reset, no matter what
+        try:
+            # Re-fetch from database to get latest state
+            fresh_status = SyncStatus.objects.filter(sync_type='assets').first()
+            if fresh_status and fresh_status.is_syncing:
+                fresh_status.is_syncing = False
+                fresh_status.save()
+                logger.info("✓ Reset is_syncing=False in finally block")
+        except Exception as e:
+            logger.error(f"CRITICAL: Failed to reset sync status in finally: {e}")
+            # Last resort: try without refresh
+            try:
+                SyncStatus.objects.filter(sync_type='assets').update(is_syncing=False)
+                logger.info("✓ Force-reset is_syncing using update()")
+            except Exception as e2:
+                logger.error(f"CRITICAL: Complete failure to reset: {e2}")
+        
+        # Clear task lock
+        try:
+            lock_key = f"task_lock:{self.request.id}"
+            cache.delete(lock_key)
+        except Exception:
+            pass  # Ignore cache errors
 
-@shared_task(name="fetch_historical_data", base=SingleInstanceTask)
-def fetch_historical_data(asset_id: int):
+
+@shared_task(name="fetch_historical_data", base=SingleInstanceTask, bind=True)
+def fetch_historical_data(self, asset_id: int):
     """
     Backfill strategy:
     1) Fetch only 1-minute bars from Alpaca and persist as 1T.
@@ -319,11 +387,10 @@ def fetch_historical_data(asset_id: int):
 
     try:
         service = alpaca_service
-        # Define timeframes
-
         end_date = timezone.now()
 
         # Step 1: Fetch 1T only
+        logger.info(f"Starting 1T candle fetch for {symbol}")
         try:
             last_1t = (
                 Candle.objects.filter(asset=asset, timeframe=const.TF_1T)
@@ -382,46 +449,52 @@ def fetch_historical_data(asset_id: int):
                             )
                         )
                     if candles:
-                        # Order of insertion follows API order (latest-first), which is desired
                         Candle.objects.bulk_create(candles, ignore_conflicts=True)
                         created_total += len(candles)
                     current_end = r_start
                 logger.info(
-                    "Backfilled %d %s candles for %s (newest first)",
-                    created_total,
-                    const.TF_1T,
-                    symbol,
+                    f"Backfilled {created_total} 1T candles for {symbol}"
                 )
+            else:
+                logger.info(f"1T candles for {symbol} are already up-to-date")
         except Exception as e:
-            logger.error("Error backfilling 1T for %s: %s", symbol, e, exc_info=True)
+            logger.error(f"Error backfilling 1T for {symbol}: {e}", exc_info=True)
 
         # Step 2: Resample from 1T to higher TFs and persist with linkage
+        logger.info(f"Starting resampling for higher timeframes for {symbol}")
         for tf, delta in const.TF_LIST:
             if tf == const.TF_1T:
                 continue
             try:
-                last_tf = None
+                logger.info(f"Processing {tf} timeframe for {symbol}")
+                
+                # Check if we have any 1T candles
+                m1_count = Candle.objects.filter(
+                    asset=asset, 
+                    timeframe=const.TF_1T
+                ).count()
+                
+                if m1_count == 0:
+                    logger.warning(f"No 1T candles found for {symbol}, skipping {tf}")
+                    continue
+                
+                logger.info(f"Found {m1_count} 1T candles for resampling to {tf}")
 
-                candle_count = (
+                # Get the last higher TF candle to determine where to start
+                last_tf = (
                     Candle.objects.filter(asset=asset, timeframe=tf)
                     .order_by("-timestamp")
-                    .count()
+                    .first()
                 )
 
-                if candle_count > 2:
-                    last_tf = (
-                        Candle.objects.filter(asset=asset, timeframe=tf)
-                        .order_by("-timestamp")
-                        .first()
-                    )
                 # Determine start bucket to (re)build
-                start_ts = (
-                    last_tf.timestamp + delta
-                    if last_tf
-                    else (
-                        end_date - timedelta(days=settings.HISTORIC_DATA_LOADING_LIMIT)
-                    )
-                )
+                # Start from the last TF candle + delta, or go back full history
+                if last_tf:
+                    start_ts = last_tf.timestamp + delta
+                    logger.info(f"Resuming {tf} from {start_ts} (after last candle)")
+                else:
+                    start_ts = end_date - timedelta(days=settings.HISTORIC_DATA_LOADING_LIMIT)
+                    logger.info(f"Starting fresh {tf} from {start_ts} (full history)")
 
                 # Fetch 1T candles for resampling
                 m1_candles = list(
@@ -434,14 +507,20 @@ def fetch_historical_data(asset_id: int):
                 )
 
                 if not m1_candles:
+                    logger.info(f"No 1T candles in range {start_ts} to {end_date} for {tf}")
                     continue
+
+                logger.info(f"Found {len(m1_candles)} 1T candles to resample into {tf}")
 
                 # Group candles into time buckets using Python (SQLite-compatible)
                 from collections import defaultdict
                 buckets = defaultdict(list)
 
                 delta_seconds = int(delta.total_seconds())
-                anchor_ts = datetime(1970, 1, 1, 9, 30, tzinfo=pytz.timezone("US/Eastern")).timestamp()
+                
+                # Use market open as anchor for intraday timeframes
+                eastern = pytz.timezone("US/Eastern")
+                anchor_ts = datetime(1970, 1, 1, 9, 30, tzinfo=eastern).timestamp()
 
                 for candle in m1_candles:
                     # Convert to Unix timestamp
@@ -451,16 +530,20 @@ def fetch_historical_data(asset_id: int):
                     if delta_seconds < 86400:  # Intraday timeframes
                         # Align to market open (9:30 ET)
                         days_since_epoch = int((ts_unix - anchor_ts) // 86400)
-                        bucket_start = anchor_ts + (days_since_epoch * 86400) + ((ts_unix - (anchor_ts + days_since_epoch * 86400)) // delta_seconds) * delta_seconds
+                        seconds_into_day = ts_unix - (anchor_ts + days_since_epoch * 86400)
+                        bucket_offset = (seconds_into_day // delta_seconds) * delta_seconds
+                        bucket_start = anchor_ts + (days_since_epoch * 86400) + bucket_offset
                     else:  # Daily timeframe
                         bucket_start = (ts_unix // delta_seconds) * delta_seconds
 
                     bucket_ts = datetime.fromtimestamp(bucket_start, tz=timezone.utc)
                     buckets[bucket_ts].append(candle)
 
+                logger.info(f"Created {len(buckets)} buckets for {tf}")
+
                 # Aggregate each bucket
                 aggregated_data = []
-                for bucket_ts, candles_in_bucket in buckets.items():
+                for bucket_ts, candles_in_bucket in sorted(buckets.items()):
                     if not candles_in_bucket:
                         continue
 
@@ -477,7 +560,10 @@ def fetch_historical_data(asset_id: int):
                     aggregated_data.append((bucket_ts, o, h, l, c, v, ids))
 
                 if not aggregated_data:
+                    logger.warning(f"No aggregated data for {tf}")
                     continue
+
+                logger.info(f"Aggregated {len(aggregated_data)} {tf} candles")
 
                 # Upsert aggregated candles (create new + update existing)
                 buckets_ts = [row[0] for row in aggregated_data]
@@ -490,12 +576,12 @@ def fetch_historical_data(asset_id: int):
 
                 to_create = []
                 to_update = []
-                for bucket_ts, o, h, l, c, v, ids in aggregated_data:
+                for bucket_ts, o, h, low_, c, v, ids in aggregated_data:
                     if bucket_ts in existing:
                         cobj = existing[bucket_ts]
                         cobj.open = float(o)
                         cobj.high = float(h)
-                        cobj.low = float(l)
+                        cobj.low = float(low_)
                         cobj.close = float(c)
                         cobj.volume = int(v or 0)
                         cobj.minute_candle_ids = ids
@@ -508,7 +594,7 @@ def fetch_historical_data(asset_id: int):
                                 timestamp=bucket_ts,
                                 open=float(o),
                                 high=float(h),
-                                low=float(l),
+                                low=float(low_),
                                 close=float(c),
                                 volume=int(v or 0),
                                 minute_candle_ids=ids,
@@ -516,36 +602,25 @@ def fetch_historical_data(asset_id: int):
                         )
 
                 if to_create:
-                    Candle.objects.bulk_create(to_create, ignore_conflicts=True)
+                    Candle.objects.bulk_create(to_create, ignore_conflicts=True, batch_size=500)
+                    logger.info(f"Created {len(to_create)} new {tf} candles for {symbol}")
+                    
                 if to_update:
                     Candle.objects.bulk_update(
                         to_update,
-                        [
-                            "open",
-                            "high",
-                            "low",
-                            "close",
-                            "volume",
-                            "minute_candle_ids",
-                        ],
+                        ["open", "high", "low", "close", "volume", "minute_candle_ids"],
+                        batch_size=500,
                     )
-                logger.info(
-                    "Built %d %s candles for %s from %s (newest first); updated %d",
-                    len(to_create),
-                    tf,
-                    symbol,
-                    const.TF_1T,
-                    len(to_update),
-                )
+                    logger.info(f"Updated {len(to_update)} existing {tf} candles for {symbol}")
+
             except Exception as e:
                 logger.error(
-                    "Error resampling %s for %s: %s", tf, symbol, e, exc_info=True
+                    f"Error resampling {tf} for {symbol}: {e}", exc_info=True
                 )
 
         # Mark backfill as complete by setting a cache flag
-        # This allows WebSocket to know it's safe to create higher TF candles
         completion_key = cache_keys.backfill(asset.id).completed()
-        cache.set(completion_key, 1, timeout=86400 * 1)  # Keep for 1 day
+        cache.set(completion_key, 1, timeout=86400 * 7)  # Keep for 7 days
         logger.info(f"Marked backfill complete for asset_id={asset.id} symbol={symbol}")
 
     finally:
@@ -553,6 +628,10 @@ def fetch_historical_data(asset_id: int):
         queued_key = cache_keys.backfill(asset.id).queued()
         cache.delete(running_key)
         cache.delete(queued_key)
+        
+        # Clear task lock
+        lock_key = f"task_lock:{self.request.id}"
+        cache.delete(lock_key)
 
 
 @shared_task(name="check_watchlist_candles")
@@ -599,10 +678,9 @@ def check_watchlist_candles():
                     continue
             except Exception as e:
                 logger.warning(f"Failed to check backfill status for {symbol}: {e}")
-                # Continue anyway if we can't check
+                continue
 
             # Check for missing 1T candles in the last month
-            # We'll look for gaps in the timestamp sequence during market hours
             missing_periods = _find_missing_candle_periods(asset, start_date, end_date)
 
             if not missing_periods:
@@ -626,7 +704,8 @@ def check_watchlist_candles():
         assets_processed += 1
 
     logger.info(
-        f"Watchlist candle check completed. Processed {assets_processed} assets, fetched {total_missing_found} missing candles"
+        f"Watchlist candle check completed. Processed {assets_processed} assets, "
+        f"fetched {total_missing_found} missing candles"
     )
 
 
@@ -635,11 +714,9 @@ def _find_missing_candle_periods(asset, start_date, end_date):
     Find periods where 1T candles are missing during market hours.
     Returns list of (start, end) tuples for missing periods.
     """
-
     missing_periods = []
 
     # Get all existing 1T candles in the period, ordered by timestamp
-
     existing_candles = list(
         Candle.objects.filter(
             asset=asset,
@@ -747,7 +824,8 @@ def _fetch_missing_candles(asset, missing_periods):
                     Candle.objects.bulk_create(candles, ignore_conflicts=True)
                     total_fetched += len(candles)
                     logger.debug(
-                        f"Fetched {len(candles)} candles for {symbol} in {chunk_start}->{current_end}"
+                        f"Fetched {len(candles)} candles for {symbol} in "
+                        f"{chunk_start}->{current_end}"
                     )
 
                 current_end = chunk_start
@@ -757,206 +835,3 @@ def _fetch_missing_candles(asset, missing_periods):
                 f"Error fetching missing candles for {symbol}: {e}", exc_info=True
             )
             continue
-
-    return total_fetched
-
-
-def _resample_higher_timeframes(asset, start_date, end_date):
-    """
-    Resample higher timeframes from 1T candles for the given period.
-    Uses similar logic to fetch_historical_data task.
-    Only resamples if backfill is complete (following websocket service logic).
-    """
-    from django.db import connection
-
-    # Check if backfill is complete before resampling higher TFs
-    # This follows the same logic as websocket_service._is_historical_backfill_complete
-    if not _is_backfill_complete_for_asset(asset):
-        logger.info(
-            f"Skipping higher TF resampling for {asset.symbol} - backfill not complete"
-        )
-        return
-
-    for tf, delta in const.TF_LIST:
-        if tf == const.TF_1T:
-            continue
-
-        try:
-            # Build buckets using SQL for efficiency
-            anchor = "1970-01-01 09:30:00-05:00"
-
-            with connection.cursor() as cur:
-                cur.execute(
-                    """
-                    WITH m1 AS (
-                        SELECT id, timestamp, open, high, low, close, volume
-                        FROM core_candle
-                        WHERE asset_id = %s AND timeframe = %s AND timestamp >= %s AND timestamp < %s
-                    ),
-                    binned AS (
-                        SELECT
-                            date_bin(INTERVAL %s, timestamp, TIMESTAMP %s) AS bucket,
-                            id,
-                            open, high, low, close, volume,
-                            row_number() OVER (PARTITION BY date_bin(INTERVAL %s, timestamp, TIMESTAMP %s) ORDER BY timestamp ASC) AS rn_open,
-                            row_number() OVER (PARTITION BY date_bin(INTERVAL %s, timestamp, TIMESTAMP %s) ORDER BY timestamp DESC) AS rn_close
-                        FROM m1
-                    ),
-                    agg AS (
-                        SELECT
-                            bucket,
-                            MIN(low) AS l,
-                            MAX(high) AS h,
-                            SUM(volume) AS v,
-                            ARRAY_AGG(id ORDER BY id) AS ids,
-                            MIN(CASE WHEN rn_open=1 THEN open END) AS o,
-                            MIN(CASE WHEN rn_close=1 THEN close END) AS c
-                        FROM binned
-                        GROUP BY bucket
-                    )
-                    SELECT bucket, o, h, l, c, v, ids
-                    FROM agg
-                    ORDER BY bucket DESC
-                    ;
-                    """,
-                    [
-                        asset.id,
-                        const.TF_1T,
-                        start_date,
-                        end_date,
-                        str(delta),
-                        anchor,
-                        str(delta),
-                        anchor,
-                        str(delta),
-                        anchor,
-                    ],
-                )
-                rows = cur.fetchall()
-
-            if not rows:
-                continue
-
-            # Upsert aggregated candles
-            buckets = [row[0] for row in rows]
-            existing = {
-                c.timestamp: c
-                for c in Candle.objects.filter(
-                    asset=asset, timeframe=tf, timestamp__in=buckets
-                )
-            }
-
-            to_create = []
-            to_update = []
-            for bucket, o, h, low_, c, v, ids in rows:
-                if bucket in existing:
-                    cobj = existing[bucket]
-                    cobj.open = float(o)
-                    cobj.high = float(h)
-                    cobj.low = float(low_)
-                    cobj.close = float(c)
-                    cobj.volume = int(v or 0)
-                    cobj.minute_candle_ids = list(ids) if ids else []
-                    to_update.append(cobj)
-                else:
-                    to_create.append(
-                        Candle(
-                            asset=asset,
-                            timeframe=tf,
-                            timestamp=bucket,
-                            open=float(o),
-                            high=float(h),
-                            low=float(low_),
-                            close=float(c),
-                            volume=int(v or 0),
-                            minute_candle_ids=list(ids) if ids else [],
-                        )
-                    )
-
-            if to_create:
-                Candle.objects.bulk_create(to_create, ignore_conflicts=True)
-            if to_update:
-                Candle.objects.bulk_update(
-                    to_update,
-                    [
-                        "open",
-                        "high",
-                        "low",
-                        "close",
-                        "volume",
-                        "minute_candle_ids",
-                    ],
-                )
-            logger.info(
-                f"Resampled {len(to_create)} new and updated {len(to_update)} {tf} candles for {asset.symbol}"
-            )
-
-        except Exception as e:
-            logger.error(
-                f"Error resampling {tf} for {asset.symbol}: {e}", exc_info=True
-            )
-
-
-def _is_backfill_complete_for_asset(asset):
-    """
-    Check if historical backfill is complete for this asset.
-    Mirrors websocket_service._is_historical_backfill_complete logic.
-    """
-    # Check if backfill is currently running
-    running_key = cache_keys.backfill(asset.id).running()
-    try:
-        if cache.get(running_key):
-            return False
-    except Exception as e:
-        logger.warning(f"Failed to check cache for running backfill {running_key}: {e}")
-        # Assume not running if we can't check
-        pass
-
-    # Check if backfill has been explicitly marked as complete
-    completion_key = cache_keys.backfill(asset.id).completed()
-    try:
-        if cache.get(completion_key):
-            return True
-    except Exception as e:
-        logger.warning(
-            f"Failed to check cache for backfill completion {completion_key}: {e}"
-        )
-        # Assume not complete if we can't check
-        pass
-
-    # For assets without explicit completion flag, use heuristics
-    # Check if we have sufficient historical 1T data coverage (at least 2 days of 1T data)
-    now_dt = timezone.now()
-    coverage_threshold = now_dt - timedelta(days=4)
-
-    earliest_1t = (
-        Candle.objects.filter(asset=asset, timeframe=const.TF_1T)
-        .order_by("timestamp")
-        .first()
-    )
-
-    if not earliest_1t or earliest_1t.timestamp > coverage_threshold:
-        # Not enough historical coverage, let backfill handle higher TFs
-        return False
-
-    # Check if higher TF already has historical data (not just today's data)
-    historical_threshold = now_dt.replace(
-        hour=0, minute=0, second=0, microsecond=0
-    ) - timedelta(days=1)
-    existing_historical_higher_tf = Candle.objects.filter(
-        asset=asset,
-        timeframe__in=[tf for tf in const.TF_CFG.keys() if tf != const.TF_1T],
-        timestamp__lt=historical_threshold,
-    ).exists()
-
-    return existing_historical_higher_tf
-
-
-def _is_market_hours(dt: datetime) -> bool:
-    eastern = pytz.timezone("US/Eastern")
-    if dt.tzinfo is None:
-        dt = timezone.make_aware(dt, pytz.UTC)
-    et = dt.astimezone(eastern)
-    if et.weekday() > 4:
-        return False
-    return time(9, 30) <= et.time() < time(16, 0)

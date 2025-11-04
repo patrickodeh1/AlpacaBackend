@@ -27,3 +27,488 @@ WARNING 2025-11-04 05:36:50,588 log 112923 126079335380672 Unauthorized: /api/ac
 WARNING 2025-11-04 05:36:50,590 basehttp 112923 126079335380672 "GET /api/account/profile/ HTTP/1.1" 401 59
 WARNING 2025-11-04 05:38:52,056 log 112923 126079343773376 Unauthorized: /api/account/profile/
 WARNING 2025-11-04 05:38:52,057 basehttp 112923 126079343773376 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-04 05:40:52,914 log 112923 126079343773376 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 05:40:52,918 basehttp 112923 126079343773376 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-04 05:42:53,543 log 112923 126079343773376 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 05:42:53,545 basehttp 112923 126079343773376 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-04 05:46:19,832 autoreload 115103 139286767313024 Watching for file changes with StatReloader
+WARNING 2025-11-04 05:46:58,128 log 115103 139286387267264 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 05:46:58,132 basehttp 115103 139286387267264 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-04 05:48:59,036 log 115103 139286387267264 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 05:48:59,038 basehttp 115103 139286387267264 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-04 05:50:00,304 autoreload 115103 139286767313024 /home/soarer/freelance/alpaca/AlpacaBackend/core/tasks.py changed, reloading.
+INFO 2025-11-04 05:50:01,573 autoreload 115597 124698071171200 Watching for file changes with StatReloader
+WARNING 2025-11-04 05:50:59,938 log 115597 124697691985600 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 05:50:59,939 basehttp 115597 124697691985600 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-04 05:52:56,322 basehttp 115597 124697683592896 "GET /admin/core/asset/ HTTP/1.1" 302 0
+INFO 2025-11-04 05:52:56,454 basehttp 115597 124697683592896 "GET /admin/login/?next=/admin/core/asset/ HTTP/1.1" 200 4186
+INFO 2025-11-04 05:52:56,541 basehttp 115597 124697683592896 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-11-04 05:52:56,546 basehttp 115597 124697683592896 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-11-04 05:52:56,563 basehttp 115597 124697673103040 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-11-04 05:52:56,570 basehttp 115597 124697463224000 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-11-04 05:52:56,583 basehttp 115597 124697673103040 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:52:56,585 basehttp 115597 124697463224000 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:52:56,658 basehttp 115597 124697454831296 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+WARNING 2025-11-04 05:53:00,767 log 115597 124697691985600 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 05:53:00,772 basehttp 115597 124697691985600 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-04 05:53:03,232 basehttp 115597 124697454831296 "POST /admin/login/?next=/admin/core/asset/ HTTP/1.1" 302 0
+INFO 2025-11-04 05:53:05,054 basehttp 115597 124697454831296 "GET /admin/core/asset/ HTTP/1.1" 200 11450
+INFO 2025-11-04 05:53:05,139 basehttp 115597 124697454831296 "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,141 basehttp 115597 124697673103040 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,151 basehttp 115597 124697683592896 "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,164 basehttp 115597 124697673103040 "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,166 basehttp 115597 124697683592896 "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,169 basehttp 115597 124697445390016 "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,173 basehttp 115597 124697445390016 "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,180 basehttp 115597 124697436997312 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,191 basehttp 115597 124697454831296 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:05,244 basehttp 115597 124697454831296 "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:06,445 basehttp 115597 124697463224000 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-11-04 05:53:06,492 basehttp 115597 124697454831296 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:06,493 basehttp 115597 124697463224000 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2025-11-04 05:53:11,173 basehttp 115597 124697428604608 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-04 05:53:15,814 basehttp 115597 124697428604608 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-04 05:53:15,884 log 115597 124697691985600 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 05:53:15,889 basehttp 115597 124697691985600 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-04 05:53:15,965 basehttp 115597 124697428604608 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-04 05:53:16,023 basehttp 115597 124697691985600 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-04 05:53:16,692 basehttp 115597 124697428604608 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+INFO 2025-11-04 05:53:17,965 basehttp 115597 124697691985600 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-04 05:53:18,395 log 115597 124697411819200 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 05:53:18,396 basehttp 115597 124697411819200 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 05:53:19,252 basehttp 115597 124697428604608 "OPTIONS /api/core/watchlists/? HTTP/1.1" 200 0
+INFO 2025-11-04 05:53:20,576 basehttp 115597 124697411819200 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-04 05:53:23,697 basehttp 115597 124697683592896 "OPTIONS /api/core/assets/stats/ HTTP/1.1" 200 0
+INFO 2025-11-04 05:53:23,698 basehttp 115597 124697454831296 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 0
+INFO 2025-11-04 05:53:25,167 basehttp 115597 124697683592896 "OPTIONS /api/core/alpaca/sync_assets/ HTTP/1.1" 200 0
+INFO 2025-11-04 05:53:25,212 basehttp 115597 124697691985600 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 52
+INFO 2025-11-04 05:53:25,674 basehttp 115597 124697673103040 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-04 05:53:25,834 basehttp 115597 124697420211904 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:53:27,080 basehttp 115597 124697445390016 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 106
+WARNING 2025-11-04 05:53:28,498 log 115597 124697445390016 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 05:53:28,499 basehttp 115597 124697445390016 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 05:53:32,250 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:53:39,159 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:53:46,058 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:53:52,954 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:00,024 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:07,563 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:14,084 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:21,013 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:27,927 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:34,463 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:39,239 basehttp 115597 124697445390016 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 05:54:39,319 basehttp 115597 124697420211904 "GET /admin/core/asset/ HTTP/1.1" 200 11450
+WARNING 2025-11-04 05:54:39,715 log 115597 124697683592896 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 05:54:39,716 basehttp 115597 124697683592896 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 05:54:40,371 basehttp 115597 124697445390016 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 05:54:40,660 basehttp 115597 124697420211904 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-11-04 05:54:42,642 basehttp 115597 124697683592896 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-04 05:54:42,785 basehttp 115597 124697445390016 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-04 05:54:42,803 basehttp 115597 124697463224000 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 52
+INFO 2025-11-04 05:54:43,232 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:50,115 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:54:57,456 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:05,831 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:12,310 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:19,183 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:26,019 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:33,486 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:39,883 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:47,185 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:55:54,114 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:56:01,516 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+ERROR 2025-11-04 05:56:09,237 log 115597 124697691985600 Internal Server Error: /api/core/alpaca/sync_status/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 324, in perform_authentication
+    request.user
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 130, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 643, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1926, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Name or service not known
+
+ERROR 2025-11-04 05:56:09,258 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 500 30771
+INFO 2025-11-04 05:56:16,240 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:56:23,172 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:56:30,138 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:56:37,466 basehttp 115597 124697691985600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:56:43,071 basehttp 115597 124697691985600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 05:56:44,273 basehttp 115597 124697463224000 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:56:51,246 basehttp 115597 124697463224000 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:56:58,130 basehttp 115597 124697463224000 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:05,810 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:12,615 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:19,380 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:26,163 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:33,073 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:40,545 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:47,406 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:57:54,248 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:58:01,200 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:58:08,053 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:58:15,704 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 05:58:22,308 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:58:28,732 basehttp 115597 124697445390016 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:58:34,252 basehttp 115597 124697445390016 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-04 05:58:34,704 log 115597 124697420211904 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 05:58:34,705 basehttp 115597 124697420211904 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 05:58:35,481 basehttp 115597 124697445390016 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 05:58:37,402 basehttp 115597 124697420211904 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-04 05:58:37,521 basehttp 115597 124697445390016 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-04 05:58:37,553 basehttp 115597 124697463224000 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 52
+INFO 2025-11-04 05:58:37,905 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:58:45,614 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:58:52,448 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:58:59,304 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:06,269 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:13,002 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:20,662 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:27,408 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:34,392 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:41,161 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:48,393 basehttp 115597 124697683592896 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 05:59:53,673 autoreload 115597 124698071171200 /home/soarer/freelance/alpaca/AlpacaBackend/core/tasks.py changed, reloading.
+INFO 2025-11-04 05:59:59,026 autoreload 118508 133214916894848 Watching for file changes with StatReloader
+INFO 2025-11-04 06:00:13,406 basehttp 118508 133214537684672 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:00:20,752 basehttp 118508 133214537684672 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:00:28,392 basehttp 118508 133214537684672 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:00:35,543 basehttp 118508 133214537684672 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:00:38,825 basehttp 118508 133214537684672 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:00:42,242 basehttp 118508 133214537684672 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:00:46,018 autoreload 118508 133214916894848 /home/soarer/freelance/alpaca/AlpacaBackend/alpacabackend/celery.py changed, reloading.
+INFO 2025-11-04 06:00:47,103 autoreload 118750 132881879486592 Watching for file changes with StatReloader
+INFO 2025-11-04 06:00:57,815 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:05,277 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:12,269 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:19,237 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:26,425 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:33,473 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:40,329 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:47,323 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:01:54,110 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:01,468 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:08,384 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:15,303 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:22,208 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:29,383 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:36,444 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:41,095 basehttp 118750 132881497364160 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:02:43,313 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:02:50,307 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+WARNING 2025-11-04 06:02:54,388 log 118750 132881488971456 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 06:02:54,389 basehttp 118750 132881488971456 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-04 06:02:57,156 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:03:00,363 basehttp 118750 132881497364160 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 106
+WARNING 2025-11-04 06:03:01,642 log 118750 132881497364160 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 06:03:01,642 basehttp 118750 132881497364160 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 06:03:04,003 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:03:11,480 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:03:18,409 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:03:25,225 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:03:32,414 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:03:39,555 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:03:46,492 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:03:53,328 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:00,383 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:07,134 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:14,404 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:21,402 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:28,221 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:35,458 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:42,154 basehttp 118750 132881497364160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:04:43,043 basehttp 118750 132881480578752 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:04:49,358 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:04:56,302 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:03,097 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:10,175 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:17,526 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:24,349 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:31,530 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:38,728 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:46,066 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:54,207 basehttp 118750 132881480578752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:05:58,146 autoreload 118750 132881879486592 /home/soarer/freelance/alpaca/AlpacaBackend/core/tasks.py changed, reloading.
+INFO 2025-11-04 06:06:00,736 autoreload 120400 128421557473408 Watching for file changes with StatReloader
+INFO 2025-11-04 06:06:09,621 basehttp 120400 128421177849536 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:06:11,180 basehttp 120400 128421169456832 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 106
+WARNING 2025-11-04 06:06:12,575 log 120400 128421169456832 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 06:06:12,576 basehttp 120400 128421169456832 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 06:06:16,056 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:06:22,916 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:06:29,384 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:06:36,301 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:06:43,087 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:06:44,359 basehttp 120400 128421169456832 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:06:49,494 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:06:56,474 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:03,429 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:10,244 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:17,168 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:24,026 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:31,477 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:38,339 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:45,553 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:52,134 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:07:59,089 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:06,495 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:13,374 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:20,520 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:27,205 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:34,611 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:41,463 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:46,281 basehttp 120400 128421169456832 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:08:48,536 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:08:55,454 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:02,018 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:09,803 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:16,614 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:23,231 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:30,110 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:37,033 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:44,541 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:51,601 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:09:58,200 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:10:05,137 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:10:12,876 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 116
+INFO 2025-11-04 06:10:19,725 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 117
+INFO 2025-11-04 06:10:26,732 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 117
+INFO 2025-11-04 06:10:33,460 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 117
+INFO 2025-11-04 06:10:40,388 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 117
+INFO 2025-11-04 06:10:47,727 basehttp 120400 128421169456832 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 118
+INFO 2025-11-04 06:10:48,653 basehttp 120400 128421177849536 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:10:54,744 basehttp 120400 128421177849536 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 118
+INFO 2025-11-04 06:11:01,170 basehttp 120400 128421177849536 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 144
+INFO 2025-11-04 06:11:02,688 basehttp 120400 128421177849536 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4830
+INFO 2025-11-04 06:11:07,533 basehttp 120400 128421177849536 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 144
+INFO 2025-11-04 06:11:13,917 basehttp 120400 128421177849536 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 144
+INFO 2025-11-04 06:11:21,509 basehttp 120400 128421177849536 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 144
+INFO 2025-11-04 06:11:25,719 autoreload 120400 128421557473408 /home/soarer/freelance/alpaca/AlpacaBackend/core/tasks.py changed, reloading.
+INFO 2025-11-04 06:11:27,943 autoreload 122528 139436643172480 Watching for file changes with StatReloader
+INFO 2025-11-04 06:11:34,971 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 144
+INFO 2025-11-04 06:11:42,176 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 144
+WARNING 2025-11-04 06:11:49,019 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:11:49,022 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:11:49,048 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:11:50,865 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:11:50,866 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:11:57,313 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:11:57,316 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:11:57,335 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:11:58,498 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:11:58,499 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:12:05,008 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:05,011 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:12:05,031 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:06,266 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:06,267 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:12:12,788 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:12,791 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:12:12,817 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:14,030 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:14,031 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:12:20,627 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:20,627 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:12:20,636 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:21,851 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:21,852 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:12:29,121 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:29,124 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:12:29,166 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:30,339 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:30,340 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:12:36,974 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:36,978 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:12:36,998 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:38,181 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:38,182 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:12:44,769 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:44,770 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:12:44,778 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:45,991 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:45,994 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+WARNING 2025-11-04 06:12:49,799 log 122528 139436262332096 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 06:12:49,801 basehttp 122528 139436262332096 "GET /api/account/profile/ HTTP/1.1" 401 54
+INFO 2025-11-04 06:12:49,828 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:51,057 log 122528 139436262332096 Unauthorized: /api/account/profile/
+WARNING 2025-11-04 06:12:51,058 basehttp 122528 139436262332096 "GET /api/account/profile/ HTTP/1.1" 401 54
+WARNING 2025-11-04 06:12:52,672 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:52,673 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:12:52,680 basehttp 122528 139436262332096 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+WARNING 2025-11-04 06:12:53,948 log 122528 139436262332096 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-04 06:12:53,949 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 51
+INFO 2025-11-04 06:13:02,228 basehttp 122528 139436262332096 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:13:06,703 basehttp 122528 139436262332096 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-04 06:13:07,113 log 122528 139436180371136 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 06:13:07,114 basehttp 122528 139436180371136 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 06:13:07,844 basehttp 122528 139436262332096 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:13:09,675 basehttp 122528 139436171978432 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 52
+INFO 2025-11-04 06:13:09,691 basehttp 122528 139436262332096 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-04 06:13:10,013 basehttp 122528 139436180371136 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-04 06:13:10,164 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:13:14,892 basehttp 122528 139436163585728 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 106
+WARNING 2025-11-04 06:13:16,277 log 122528 139436163585728 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 06:13:16,278 basehttp 122528 139436163585728 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 06:13:16,509 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:13:23,013 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:13:30,566 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:13:37,385 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:13:44,261 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:13:50,566 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:13:57,044 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:04,656 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:11,471 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:18,263 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:25,149 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:32,212 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:39,537 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:46,288 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:14:52,680 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:00,658 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:08,916 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:10,158 basehttp 122528 139436180371136 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:15:15,362 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:22,209 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:29,091 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:36,036 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:43,454 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:50,299 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:15:57,214 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:16:05,060 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:16:12,793 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:16:19,453 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:16:26,313 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:16:33,215 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:16:40,092 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:16:47,551 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:16:54,329 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:17:01,271 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:17:08,098 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:17:12,046 basehttp 122528 139436180371136 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:17:15,032 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:17:22,377 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:17:29,399 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:17:36,169 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 114
+INFO 2025-11-04 06:17:41,924 basehttp 122528 139436180371136 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 106
+INFO 2025-11-04 06:17:42,873 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+WARNING 2025-11-04 06:17:44,131 log 122528 139436163585728 Not Found: /api/core/alpaca/
+WARNING 2025-11-04 06:17:44,133 basehttp 122528 139436163585728 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-04 06:17:49,926 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:17:56,855 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:03,226 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:10,254 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:17,394 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:24,494 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:31,302 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:38,345 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:45,133 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:52,037 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:18:59,499 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:19:06,412 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:19:13,173 basehttp 122528 139436163585728 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:19:13,867 basehttp 122528 139436180371136 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-04 06:19:20,300 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:19:26,999 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:19:34,414 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
