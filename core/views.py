@@ -120,69 +120,119 @@ class AlpacaAccountViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=["post"], url_path="sync_assets")
     def sync_assets(self, request):
         """
-        Sync assets from Alpaca API to local database.
+        Sync assets from Alpaca API with auto-recovery from stuck syncs.
+        Safe to call repeatedly - handles all edge cases automatically.
         """
         try:
+            from django.utils import timezone
+            from datetime import timedelta
             from core.models import SyncStatus
-
-            # Get or create sync status for assets
+            
+            force = request.data.get('force', False)
+            asset_classes = request.data.get('asset_classes', None)
+            
+            # Get or create sync status
             sync_status, created = SyncStatus.objects.get_or_create(
-                sync_type="assets", defaults={"total_items": 0, "is_syncing": False}
+                sync_type="assets", 
+                defaults={"total_items": 0, "is_syncing": False}
             )
-
-            # Check if already syncing
-            if sync_status.is_syncing:
+            
+            # Auto-detect stuck syncs (>5 minutes old)
+            if sync_status.is_syncing and not force:
+                time_since_update = (timezone.now() - sync_status.updated_at).total_seconds()
+                
+                # If stuck for more than 5 minutes, auto-force recovery
+                if time_since_update > 300:
+                    logger.warning(
+                        f"Detected stuck sync ({time_since_update/60:.1f}m old). "
+                        f"Auto-recovering..."
+                    )
+                    force = True
+                else:
+                    # Sync is actively running
+                    return Response(
+                        {
+                            "msg": "Sync already in progress",
+                            "data": {
+                                "is_syncing": True,
+                                "seconds_running": int(time_since_update),
+                                "hint": "Wait or use force=true to override"
+                            }
+                        },
+                        status=status.HTTP_409_CONFLICT,
+                    )
+            
+            # Trigger sync task with force flag if needed
+            result = alpaca_sync_task.apply_async(
+                kwargs={
+                    'asset_classes': asset_classes,
+                    'force': force
+                }
+            )
+            
+            if result:
                 return Response(
-                    {"msg": "Sync already in progress"},
+                    {
+                        "msg": "Asset sync started successfully",
+                        "data": {
+                            "task_id": result.id,
+                            "force_used": force,
+                            "status": "syncing"
+                        }
+                    },
+                    status=status.HTTP_200_OK,
+                )
+            else:
+                # Task was skipped (already running with cache lock)
+                return Response(
+                    {
+                        "msg": "Sync already in progress (locked)",
+                        "data": {"is_syncing": True}
+                    },
                     status=status.HTTP_409_CONFLICT,
                 )
-
-            # Mark as syncing
-            sync_status.is_syncing = True
-            sync_status.save()
-
-            alpaca_sync_task.delay()
-            return Response(
-                {
-                    "msg": "Assets synced started successfully",
-                    "data": "Syncing in progress. You can check the status later.",
-                },
-                status=status.HTTP_200_OK,
-            )
+                
         except Exception as e:
-            logger.error(f"Error syncing assets: {e}", exc_info=True)
+            logger.error(f"Error starting sync: {e}", exc_info=True)
             return Response(
-                {"msg": "Error syncing assets", "error": str(e)},
+                {"msg": "Error starting sync", "error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
 
     @action(detail=False, methods=["get"], url_path="sync_status")
     def get_sync_status(self, request):
         """
-        Get the sync status including last sync time and asset count.
+        Get detailed sync status with stuck detection.
+        Frontend can poll this to show sync progress.
         """
         try:
+            from datetime import timedelta
+            from django.utils import timezone
             from core.models import Asset, SyncStatus
-
+            
             # Get total asset count
             total_assets = Asset.objects.filter(status="active").count()
-
+            
             # Get sync status
             sync_status, created = SyncStatus.objects.get_or_create(
                 sync_type="assets",
                 defaults={"total_items": total_assets, "is_syncing": False},
             )
-
+            
             # Update total_items if it doesn't match
             if sync_status.total_items != total_assets:
                 sync_status.total_items = total_assets
                 sync_status.save()
-
-            # Check if sync is needed (no assets or last sync > 1 week ago)
-            from datetime import timedelta
-
-            from django.utils import timezone
-
+            
+            # Detect if sync is stuck
+            is_stuck = False
+            time_running = None
+            if sync_status.is_syncing:
+                time_running = (timezone.now() - sync_status.updated_at).total_seconds()
+                is_stuck = time_running > 300  # 5 minutes threshold
+            
+            # Check if sync is needed
             needs_sync = False
             if total_assets == 0:
                 needs_sync = True
@@ -190,15 +240,25 @@ class AlpacaAccountViewSet(viewsets.ModelViewSet):
                 one_week_ago = timezone.now() - timedelta(days=7)
                 if sync_status.last_sync_at < one_week_ago:
                     needs_sync = True
-
+            else:
+                needs_sync = True  # Never synced
+            
             return Response(
                 {
                     "msg": "Sync status retrieved",
                     "data": {
                         "last_sync_at": sync_status.last_sync_at,
+                        "updated_at": sync_status.updated_at,
                         "total_assets": total_assets,
                         "needs_sync": needs_sync,
                         "is_syncing": sync_status.is_syncing,
+                        "is_stuck": is_stuck,
+                        "seconds_running": int(time_running) if time_running else None,
+                        "status": (
+                            "stuck" if is_stuck 
+                            else "syncing" if sync_status.is_syncing 
+                            else "idle"
+                        )
                     },
                 },
                 status=status.HTTP_200_OK,
@@ -432,6 +492,146 @@ class AssetViewSet(viewsets.ReadOnlyModelViewSet):
             {"msg": "No assets found", "data": [], "count": 0},
             status=status.HTTP_200_OK,
         )
+
+    @action(detail=True, methods=["post"], url_path="fetch_history")
+    def fetch_history(self, request, pk=None):
+        """
+        Trigger historical data fetch for a specific asset.
+        Uses high-priority mode for faster chart loading.
+        """
+        asset = self.get_object()
+        
+        try:
+            from core.tasks import fetch_historical_data
+            from django.core.cache import cache
+            from alpacabackend.cache_keys import cache_keys
+            
+            # Check if backfill is already running
+            running_key = cache_keys.backfill(asset.id).running()
+            if cache.get(running_key):
+                return Response(
+                    {
+                        "msg": "Data fetch already in progress",
+                        "data": {
+                            "asset": asset.symbol,
+                            "status": "loading"
+                        }
+                    },
+                    status=status.HTTP_409_CONFLICT,
+                )
+            
+            # Check if we have recent data
+            from django.utils import timezone
+            from datetime import timedelta
+            
+            has_recent_data = Candle.objects.filter(
+                asset=asset,
+                timeframe='1T',
+                timestamp__gte=timezone.now() - timedelta(days=7)
+            ).exists()
+            
+            # Use high priority for assets without recent data
+            priority = 'normal' if has_recent_data else 'high'
+            
+            # Trigger fetch
+            result = fetch_historical_data.apply_async(
+                args=[asset.id],
+                kwargs={'priority': priority}
+            )
+            
+            if result:
+                return Response(
+                    {
+                        "msg": "Historical data fetch started",
+                        "data": {
+                            "task_id": result.id,
+                            "asset": asset.symbol,
+                            "priority": priority,
+                            "has_existing_data": has_recent_data
+                        }
+                    },
+                    status=status.HTTP_200_OK,
+                )
+            else:
+                return Response(
+                    {
+                        "msg": "Fetch already in progress",
+                        "data": {"asset": asset.symbol}
+                    },
+                    status=status.HTTP_409_CONFLICT,
+                )
+                
+        except Exception as e:
+            logger.error(f"Error fetching history for {asset.symbol}: {e}", exc_info=True)
+            return Response(
+                {"msg": "Error fetching historical data", "error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+
+    @action(detail=True, methods=["get"], url_path="data_status")
+    def data_status(self, request, pk=None):
+        """
+        Check if chart data is ready for an asset.
+        Frontend can poll this while showing loading indicator.
+        """
+        asset = self.get_object()
+        
+        try:
+            from django.utils import timezone
+            from datetime import timedelta
+            from django.core.cache import cache
+            from alpacabackend.cache_keys import cache_keys
+            from alpacabackend import const
+            
+            # Check data availability for each timeframe
+            end_date = timezone.now()
+            start_date = end_date - timedelta(days=7)
+            
+            timeframes_status = {}
+            for tf, _ in const.TF_LIST:
+                count = Candle.objects.filter(
+                    asset=asset,
+                    timeframe=tf,
+                    timestamp__gte=start_date
+                ).count()
+                timeframes_status[tf] = {
+                    'count': count,
+                    'ready': count > 0
+                }
+            
+            # Check if backfill is running or completed
+            running_key = cache_keys.backfill(asset.id).running()
+            completed_key = cache_keys.backfill(asset.id).completed()
+            
+            is_loading = bool(cache.get(running_key))
+            is_complete = bool(cache.get(completed_key))
+            
+            # Get total candle count
+            total_candles = Candle.objects.filter(asset=asset).count()
+            
+            return Response(
+                {
+                    "msg": "Data status retrieved",
+                    "data": {
+                        "asset": asset.symbol,
+                        "is_loading": is_loading,
+                        "is_complete": is_complete,
+                        "timeframes": timeframes_status,
+                        "ready_for_display": timeframes_status.get('1T', {}).get('ready', False),
+                        "total_candles": total_candles,
+                        "has_recent_data": timeframes_status.get('1T', {}).get('count', 0) > 0
+                    }
+                },
+                status=status.HTTP_200_OK,
+            )
+            
+        except Exception as e:
+            logger.error(f"Error getting data status for {asset.symbol}: {e}", exc_info=True)
+            return Response(
+                {"msg": "Error getting data status", "error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
     @action(detail=False, methods=["get"], url_path="stats")
     def get_stats(self, request):

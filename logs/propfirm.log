@@ -513,3 +513,1685 @@ INFO 2025-11-04 06:19:20,300 basehttp 122528 139436180371136 "GET /api/core/alpa
 INFO 2025-11-04 06:19:26,999 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
 INFO 2025-11-04 06:19:34,414 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
 INFO 2025-11-04 06:19:41,282 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:19:48,189 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:19:55,138 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:20:02,477 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:20:09,368 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:20:16,250 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:20:23,482 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:20:30,093 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-04 06:20:37,594 basehttp 122528 139436180371136 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:13:07,077 autoreload 113851 127384137760896 Watching for file changes with StatReloader
+WARNING 2025-11-05 10:15:29,817 log 113851 127383758698176 Not Found: /
+WARNING 2025-11-05 10:15:29,820 basehttp 113851 127383758698176 "GET / HTTP/1.1" 404 2772
+INFO 2025-11-05 10:15:38,182 basehttp 113851 127383758698176 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-11-05 10:15:45,172 basehttp 113851 127383758698176 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4164
+INFO 2025-11-05 10:15:47,509 basehttp 113851 127383739815616 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-11-05 10:15:47,544 basehttp 113851 127383748208320 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-11-05 10:15:47,665 basehttp 113851 127383758698176 "GET /static/admin/css/base.css HTTP/1.1" 200 21544
+INFO 2025-11-05 10:15:47,711 basehttp 113851 127383731422912 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2682
+INFO 2025-11-05 10:15:47,815 basehttp 113851 127383739815616 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-11-05 10:15:48,346 basehttp 113851 127383714637504 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-11-05 10:15:48,356 basehttp 113851 127383723030208 "GET /static/admin/css/responsive.css HTTP/1.1" 200 17905
+INFO 2025-11-05 10:15:54,603 basehttp 113851 127383739815616 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4323
+INFO 2025-11-05 10:16:05,780 basehttp 113851 127383739815616 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-11-05 10:16:08,769 basehttp 113851 127383739815616 "GET /admin/ HTTP/1.1" 200 11765
+INFO 2025-11-05 10:16:09,274 basehttp 113851 127383739815616 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-11-05 10:16:09,967 basehttp 113851 127383739815616 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-11-05 10:16:09,991 basehttp 113851 127383723030208 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-11-05 10:17:20,074 basehttp 113851 127383739815616 "GET /admin/core/asset/ HTTP/1.1" 200 11450
+INFO 2025-11-05 10:17:20,648 basehttp 113851 127383723030208 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9042
+INFO 2025-11-05 10:17:21,037 basehttp 113851 127383723030208 "GET /static/admin/css/changelists.css HTTP/1.1" 200 6811
+INFO 2025-11-05 10:17:21,039 basehttp 113851 127383748208320 "GET /static/admin/js/actions.js HTTP/1.1" 200 8067
+INFO 2025-11-05 10:17:21,042 basehttp 113851 127383714637504 "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-11-05 10:17:21,063 basehttp 113851 127383714637504 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-11-05 10:17:21,064 basehttp 113851 127383723030208 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-11-05 10:17:21,063 basehttp 113851 127383706244800 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-11-05 10:17:21,075 basehttp 113851 127383758698176 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-11-05 10:17:21,551 basehttp 113851 127383748208320 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-11-05 10:17:21,824 basehttp 113851 127383748208320 "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-11-05 10:17:23,438 basehttp 113851 127383739815616 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-11-05 10:17:24,322 basehttp 113851 127383739815616 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-11-05 10:18:40,943 basehttp 113851 127383739815616 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:18:41,644 basehttp 113851 127383758698176 "OPTIONS /api/account/login/ HTTP/1.1" 200 166
+INFO 2025-11-05 10:20:41,420 basehttp 113851 127383723030208 "OPTIONS /api/account/login/ HTTP/1.1" 200 166
+WARNING 2025-11-05 10:22:34,094 log 113851 127383706244800 Unauthorized: /api/account/profile/
+WARNING 2025-11-05 10:22:34,096 basehttp 113851 127383706244800 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-05 10:22:36,205 log 113851 127383706244800 Unauthorized: /api/account/profile/
+WARNING 2025-11-05 10:22:36,206 basehttp 113851 127383706244800 "GET /api/account/profile/ HTTP/1.1" 401 59
+ERROR 2025-11-05 10:23:46,307 log 113851 127383739815616 Internal Server Error: /api/account/login/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/account/views.py", line 129, in post
+    if serializer.is_valid():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/account/serializers.py", line 98, in validate
+    user = authenticate(username=email, password=password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/debug.py", line 73, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 79, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/contrib/auth/backends.py", line 42, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 55, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 643, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1926, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+ERROR 2025-11-05 10:23:46,427 basehttp 113851 127383739815616 "POST /api/account/login/ HTTP/1.1" 500 30530
+WARNING 2025-11-05 10:23:46,826 log 113851 127383723030208 Unauthorized: /api/account/profile/
+WARNING 2025-11-05 10:23:46,840 basehttp 113851 127383723030208 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-05 10:23:57,070 basehttp 113851 127383739815616 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-05 10:23:57,085 log 113851 127383723030208 Unauthorized: /api/account/profile/
+WARNING 2025-11-05 10:23:57,086 basehttp 113851 127383723030208 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-05 10:23:57,139 basehttp 113851 127383739815616 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:23:57,189 basehttp 113851 127383723030208 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-05 10:23:57,316 basehttp 113851 127383739815616 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:23:57,325 basehttp 113851 127383739815616 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:23:58,934 basehttp 113851 127383723030208 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 10:23:59,183 log 113851 127383758698176 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:23:59,184 basehttp 113851 127383758698176 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:24:01,698 basehttp 113851 127383739815616 "OPTIONS /api/core/watchlists/? HTTP/1.1" 200 0
+INFO 2025-11-05 10:24:03,576 basehttp 113851 127383758698176 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-05 10:24:24,670 basehttp 113851 127383739815616 "OPTIONS /api/core/assets/stats/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:24:24,670 basehttp 113851 127383706244800 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 0
+INFO 2025-11-05 10:24:24,673 basehttp 113851 127383706244800 "OPTIONS /api/core/alpaca/sync_status/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:24:26,320 basehttp 113851 127383706244800 "OPTIONS /api/core/alpaca/sync_assets/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:24:26,720 basehttp 113851 127383723030208 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 52
+INFO 2025-11-05 10:24:27,514 basehttp 113851 127383758698176 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-05 10:24:27,540 basehttp 113851 127383361287872 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+WARNING 2025-11-05 10:24:28,817 log 113851 127383352895168 Conflict: /api/core/alpaca/sync_assets/
+WARNING 2025-11-05 10:24:28,818 basehttp 113851 127383352895168 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 409 34
+WARNING 2025-11-05 10:24:30,480 log 113851 127383352895168 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:24:30,481 basehttp 113851 127383352895168 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:24:34,986 basehttp 113851 127383352895168 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:24:36,530 basehttp 113851 127383352895168 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:24:44,281 basehttp 113851 127383352895168 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:24:52,108 basehttp 113851 127383352895168 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:25:29,982 basehttp 113851 127383352895168 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:25:37,313 basehttp 113851 127383352895168 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:25:45,585 basehttp 113851 127383352895168 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:25:54,114 basehttp 113851 127383352895168 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+ERROR 2025-11-05 10:27:38,205 log 113851 127383361287872 Internal Server Error: /api/account/profile/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 324, in perform_authentication
+    request.user
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 130, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 643, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1926, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+ERROR 2025-11-05 10:27:38,211 basehttp 113851 127383361287872 "GET /api/account/profile/ HTTP/1.1" 500 30783
+INFO 2025-11-05 10:29:40,688 basehttp 113851 127383361287872 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:31:42,599 basehttp 113851 127383361287872 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:33:44,582 basehttp 113851 127383361287872 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:34:02,968 autoreload 113851 127384137760896 /home/soarer/freelance/alpaca/AlpacaBackend/core/tasks.py changed, reloading.
+INFO 2025-11-05 10:34:07,311 autoreload 118022 132496701124736 Watching for file changes with StatReloader
+INFO 2025-11-05 10:34:19,911 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:34:26,536 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:34:33,568 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:34:40,537 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:34:47,999 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:34:54,801 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:01,701 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:08,814 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:15,734 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:23,044 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:29,561 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:38,161 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:45,619 basehttp 118022 132496322721472 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:46,651 basehttp 118022 132496314328768 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:35:53,014 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:35:59,807 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:06,741 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:13,627 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:20,630 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:28,010 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:34,736 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:41,639 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:48,832 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:36:55,894 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:02,694 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:09,849 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:16,673 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:23,680 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:30,628 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:37,727 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:44,628 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:48,395 basehttp 118022 132496314328768 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:37:51,863 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:37:58,854 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:06,115 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:14,187 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:21,674 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:28,827 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:35,656 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:42,770 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:49,932 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:38:56,579 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:03,890 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:10,801 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:17,892 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:24,798 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:31,762 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:39,303 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:46,683 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:39:50,311 basehttp 118022 132496314328768 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:39:53,657 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:00,753 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:07,865 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:14,825 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:21,726 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:28,718 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:35,654 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:42,656 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:50,014 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:40:56,776 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:04,004 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:11,110 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:19,226 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:28,301 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:36,438 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:43,731 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:50,617 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:41:52,432 basehttp 118022 132496314328768 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:41:57,843 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:42:04,812 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:42:12,029 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:42:18,969 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:42:30,323 basehttp 118022 132496314328768 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 113
+INFO 2025-11-05 10:42:37,467 autoreload 118022 132496701124736 /home/soarer/freelance/alpaca/AlpacaBackend/core/views.py changed, reloading.
+INFO 2025-11-05 10:42:43,252 autoreload 120516 133592662446208 Watching for file changes with StatReloader
+INFO 2025-11-05 10:43:03,765 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:43:10,706 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:43:17,947 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:43:24,810 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:43:32,061 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:43:38,629 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:43:45,631 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:43:57,449 basehttp 120516 133592272504512 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:43:57,587 basehttp 120516 133592280897216 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:44:07,118 autoreload 120516 133592662446208 /home/soarer/freelance/alpaca/AlpacaBackend/core/views.py changed, reloading.
+INFO 2025-11-05 10:44:09,910 autoreload 120912 125875948052608 Watching for file changes with StatReloader
+INFO 2025-11-05 10:44:14,414 autoreload 120912 125875948052608 /home/soarer/freelance/alpaca/AlpacaBackend/core/views.py changed, reloading.
+INFO 2025-11-05 10:44:15,540 autoreload 120964 124521749487744 Watching for file changes with StatReloader
+INFO 2025-11-05 10:44:30,755 basehttp 120964 124521370613440 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 10:44:31,765 log 120964 124521361172160 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:44:31,766 basehttp 120964 124521361172160 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:44:33,872 basehttp 120964 124521370613440 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:44:37,495 basehttp 120964 124521370613440 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-05 10:44:37,565 basehttp 120964 124521352779456 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 52
+INFO 2025-11-05 10:44:37,725 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:44:37,918 basehttp 120964 124521361172160 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-05 10:44:45,110 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:44:52,100 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:44:58,777 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:45:05,658 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:45:12,681 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:45:20,332 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:45:27,698 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:45:34,902 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 214
+INFO 2025-11-05 10:45:41,805 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:45:48,726 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:45:55,033 basehttp 120964 124521361172160 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 137
+INFO 2025-11-05 10:45:55,349 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+WARNING 2025-11-05 10:45:56,821 log 120964 124521344386752 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:45:56,822 basehttp 120964 124521344386752 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:46:04,701 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:46:11,801 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:46:18,907 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:46:26,019 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:46:32,766 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:46:35,577 basehttp 120964 124521344386752 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:46:39,744 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:46:46,861 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:46:53,693 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:00,772 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:07,951 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:15,319 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:23,169 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:31,606 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:38,994 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:45,769 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:47:52,803 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:48:00,396 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:48:07,009 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:48:19,634 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:48:27,362 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:48:37,736 basehttp 120964 124521344386752 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:48:41,001 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:48:48,353 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:48:55,933 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:02,988 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:11,725 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:18,886 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:25,695 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:32,612 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:40,085 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:47,965 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:49:54,626 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:01,580 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:08,652 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:15,217 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:22,757 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:29,659 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:37,172 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:41,065 basehttp 120964 124521344386752 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:50:44,633 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:51,573 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:50:58,646 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:51:05,605 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:51:12,513 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:51:19,777 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:51:26,539 basehttp 120964 124521344386752 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:51:31,098 basehttp 120964 124521344386752 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 10:51:31,292 log 120964 124521361172160 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:51:31,293 basehttp 120964 124521361172160 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:51:32,230 basehttp 120964 124521344386752 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:51:35,299 basehttp 120964 124521361172160 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-05 10:51:35,461 basehttp 120964 124521344386752 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-05 10:51:36,100 basehttp 120964 124521370613440 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 52
+INFO 2025-11-05 10:51:36,399 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+WARNING 2025-11-05 10:51:39,701 log 120964 124521352779456 Conflict: /api/core/alpaca/sync_assets/
+WARNING 2025-11-05 10:51:39,702 basehttp 120964 124521352779456 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 409 70
+WARNING 2025-11-05 10:51:41,141 log 120964 124521352779456 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:51:41,142 basehttp 120964 124521352779456 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:51:43,070 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:51:49,670 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+WARNING 2025-11-05 10:51:54,543 log 120964 124521352779456 Conflict: /api/core/alpaca/sync_assets/
+WARNING 2025-11-05 10:51:54,544 basehttp 120964 124521352779456 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 409 70
+WARNING 2025-11-05 10:51:56,120 log 120964 124521352779456 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:51:56,121 basehttp 120964 124521352779456 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:51:56,563 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:03,304 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:11,189 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:17,680 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:24,824 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:31,547 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:38,709 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+WARNING 2025-11-05 10:52:43,158 log 120964 124521352779456 Conflict: /api/core/alpaca/sync_assets/
+WARNING 2025-11-05 10:52:43,159 basehttp 120964 124521352779456 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 409 70
+WARNING 2025-11-05 10:52:44,629 log 120964 124521352779456 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:52:44,630 basehttp 120964 124521352779456 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:52:45,265 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:51,749 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:52:58,438 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:53:04,966 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:53:11,751 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:53:18,715 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:53:26,038 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:53:32,582 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:53:34,438 basehttp 120964 124521361172160 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:53:39,758 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+ERROR 2025-11-05 10:54:13,770 log 120964 124521361172160 Internal Server Error: /api/core/alpaca/sync_status/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 324, in perform_authentication
+    request.user
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 130, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 643, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1926, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+ERROR 2025-11-05 10:54:13,783 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 500 30843
+INFO 2025-11-05 10:54:20,802 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:54:28,223 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:54:36,177 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:54:43,697 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:54:51,177 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:54:58,698 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:55:06,156 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+WARNING 2025-11-05 10:55:11,110 log 120964 124521361172160 Conflict: /api/core/alpaca/sync_assets/
+WARNING 2025-11-05 10:55:11,111 basehttp 120964 124521361172160 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 409 70
+WARNING 2025-11-05 10:55:12,686 log 120964 124521361172160 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:55:12,687 basehttp 120964 124521361172160 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:55:12,854 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:55:19,562 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:55:26,114 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:55:32,707 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:55:36,327 basehttp 120964 124521352779456 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:55:39,589 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:55:46,624 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:55:53,713 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:56:00,622 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:56:07,904 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:56:14,438 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 213
+INFO 2025-11-05 10:56:15,133 basehttp 120964 124521361172160 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 137
+WARNING 2025-11-05 10:56:16,559 log 120964 124521361172160 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:56:16,560 basehttp 120964 124521361172160 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:56:21,605 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 212
+INFO 2025-11-05 10:56:29,683 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 216
+INFO 2025-11-05 10:56:38,515 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 216
+INFO 2025-11-05 10:56:48,750 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 216
+INFO 2025-11-05 10:56:56,388 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 216
+INFO 2025-11-05 10:57:07,314 basehttp 120964 124521352779456 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 10:57:08,146 log 120964 124521370613440 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:57:08,148 basehttp 120964 124521370613440 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:57:09,853 basehttp 120964 124521352779456 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:57:12,718 basehttp 120964 124521370613440 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-05 10:57:12,993 basehttp 120964 124521361172160 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-05 10:57:13,153 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 216
+INFO 2025-11-05 10:57:13,352 basehttp 120964 124521344386752 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4803
+WARNING 2025-11-05 10:57:17,605 log 120964 124521344386752 Conflict: /api/core/alpaca/sync_assets/
+WARNING 2025-11-05 10:57:17,607 basehttp 120964 124521344386752 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 409 70
+WARNING 2025-11-05 10:57:20,558 log 120964 124521344386752 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:57:20,558 basehttp 120964 124521344386752 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:57:21,637 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 216
+INFO 2025-11-05 10:57:30,243 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 216
+INFO 2025-11-05 10:57:38,919 basehttp 120964 124521352779456 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 217
+INFO 2025-11-05 10:57:44,339 basehttp 120964 124521352779456 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 10:57:44,497 log 120964 124521344386752 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:57:44,498 basehttp 120964 124521344386752 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:57:46,047 basehttp 120964 124521352779456 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:57:49,882 basehttp 120964 124521344386752 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-05 10:57:50,132 basehttp 120964 124521352779456 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-05 10:57:50,412 basehttp 120964 124521361172160 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4827
+INFO 2025-11-05 10:57:50,456 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 217
+INFO 2025-11-05 10:57:57,418 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 217
+INFO 2025-11-05 10:58:04,674 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:58:14,304 basehttp 120964 124521361172160 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 10:58:14,551 log 120964 124521352779456 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 10:58:14,552 basehttp 120964 124521352779456 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 10:58:15,736 basehttp 120964 124521361172160 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 10:58:17,861 basehttp 120964 124521344386752 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-05 10:58:18,029 basehttp 120964 124521352779456 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-05 10:58:18,348 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:58:18,544 basehttp 120964 124521370613440 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4827
+INFO 2025-11-05 10:58:24,978 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:58:31,810 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:58:37,865 basehttp 120964 124521331799744 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol&tradable=true HTTP/1.1" 200 0
+INFO 2025-11-05 10:58:38,411 basehttp 120964 124521370613440 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:58:39,433 basehttp 120964 124521361172160 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&tradable=true HTTP/1.1" 200 4840
+INFO 2025-11-05 10:58:44,206 basehttp 120964 124521331799744 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol&search=b&tradable=true HTTP/1.1" 200 0
+INFO 2025-11-05 10:58:45,087 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:58:45,317 basehttp 120964 124521331799744 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol&search=btc&tradable=true HTTP/1.1" 200 0
+INFO 2025-11-05 10:58:45,761 basehttp 120964 124521370613440 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&search=b&tradable=true HTTP/1.1" 200 5097
+INFO 2025-11-05 10:58:47,156 basehttp 120964 124521361172160 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&search=btc&tradable=true HTTP/1.1" 200 4804
+INFO 2025-11-05 10:58:51,902 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:58:58,558 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:59:10,111 basehttp 120964 124521331799744 "OPTIONS /api/core/watchlists/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:59:11,855 basehttp 120964 124521361172160 "POST /api/core/watchlists/ HTTP/1.1" 201 101
+INFO 2025-11-05 10:59:13,934 basehttp 120964 124521361172160 "GET /api/core/watchlists/? HTTP/1.1" 200 226
+INFO 2025-11-05 10:59:16,751 basehttp 120964 124521331799744 "OPTIONS /api/core/watchlists/1/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:59:18,557 basehttp 120964 124521361172160 "GET /api/core/watchlists/1/ HTTP/1.1" 200 174
+INFO 2025-11-05 10:59:29,198 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:59:34,683 basehttp 120964 124521331799744 "OPTIONS /api/core/watchlists/1/add_asset/ HTTP/1.1" 200 0
+INFO 2025-11-05 10:59:35,988 basehttp 120964 124521361172160 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 10:59:37,126 basehttp 120964 124521370613440 "POST /api/core/watchlists/1/add_asset/ HTTP/1.1" 201 576
+INFO 2025-11-05 10:59:38,545 basehttp 120964 124521361172160 "GET /api/core/assets/stats/ HTTP/1.1" 200 51
+INFO 2025-11-05 10:59:39,139 basehttp 120964 124521352779456 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&search=btc&tradable=true HTTP/1.1" 200 4804
+INFO 2025-11-05 10:59:39,391 basehttp 120964 124521370613440 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-05 10:59:41,957 basehttp 120964 124521370613440 "GET /api/core/watchlists/1/ HTTP/1.1" 200 708
+INFO 2025-11-05 10:59:53,569 basehttp 120964 124521331799744 "OPTIONS /api/core/assets/12916/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 10:59:56,034 basehttp 120964 124521331799744 "OPTIONS /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 10:59:56,513 basehttp 120964 124521370613440 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 59004
+INFO 2025-11-05 10:59:57,007 basehttp 120964 124521331799744 "OPTIONS /api/paper-trading/trades/?asset=12916&current_price=100686.102 HTTP/1.1" 200 0
+INFO 2025-11-05 10:59:59,182 basehttp 120964 124521370613440 "GET /api/paper-trading/trades/?asset=12916&current_price=100686.102 HTTP/1.1" 200 52
+INFO 2025-11-05 10:59:59,541 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:02,369 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:06,233 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:10,118 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:15,497 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:18,617 basehttp 120964 124521370613440 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:00:18,993 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:21,942 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:23,932 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:25,886 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:28,308 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:31,999 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:33,939 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:35,932 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:38,326 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:41,564 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:43,506 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:45,529 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:47,610 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:49,569 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:51,584 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:53,688 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:00:54,701 basehttp 120964 124521331799744 "OPTIONS /api/core/assets/12916/candles_v2/?tf=5&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:00:54,787 basehttp 120964 124521331799744 "OPTIONS /api/paper-trading/trades/?asset=12916 HTTP/1.1" 200 0
+INFO 2025-11-05 11:00:56,335 basehttp 120964 124521370613440 "GET /api/paper-trading/trades/?asset=12916 HTTP/1.1" 200 52
+INFO 2025-11-05 11:00:56,470 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=500 HTTP/1.1" 200 54
+INFO 2025-11-05 11:00:56,679 basehttp 120964 124521331799744 "OPTIONS /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:00:58,503 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:00:59,920 basehttp 120964 124521370613440 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 59004
+INFO 2025-11-05 11:01:01,443 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:05,122 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:07,016 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:10,296 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:14,047 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:16,278 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:20,040 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:21,895 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:23,879 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:25,918 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:28,095 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:31,835 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:33,945 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:35,809 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:38,359 basehttp 120964 124521352779456 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:01:41,060 autoreload 120964 124521749487744 /home/soarer/freelance/alpaca/AlpacaBackend/core/tasks.py changed, reloading.
+INFO 2025-11-05 11:01:49,121 autoreload 127360 135615650099328 Watching for file changes with StatReloader
+INFO 2025-11-05 11:01:57,283 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:00,223 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:03,841 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:05,953 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:12,191 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:21,084 basehttp 127360 135615271139008 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:02:39,050 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:42,279 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:46,018 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:47,908 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:49,850 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:51,948 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:53,944 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:55,945 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:02:58,331 basehttp 127360 135615271139008 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:02,635 autoreload 127360 135615650099328 /home/soarer/freelance/alpaca/AlpacaBackend/core/tasks.py changed, reloading.
+INFO 2025-11-05 11:03:05,630 autoreload 127787 123692130963584 Watching for file changes with StatReloader
+INFO 2025-11-05 11:03:11,756 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:13,836 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:18,529 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:22,279 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:25,134 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:26,073 basehttp 127787 123691743569600 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-05 11:03:26,081 basehttp 127787 123691734128320 "GET /api/core/watchlists/1/ HTTP/1.1" 200 708
+INFO 2025-11-05 11:03:31,635 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 59004
+INFO 2025-11-05 11:03:33,099 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:36,930 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:03:38,871 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=15&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:03:40,080 basehttp 127787 123691743569600 "GET /api/paper-trading/trades/?asset=12916 HTTP/1.1" 200 52
+INFO 2025-11-05 11:03:40,523 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:03:41,007 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=15&limit=500 HTTP/1.1" 200 54
+INFO 2025-11-05 11:03:42,547 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:03:45,948 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:03:48,358 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:03:50,321 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:03:52,848 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:03:58,804 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:03:59,021 basehttp 127787 123691743569600 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&search=btc&tradable=true HTTP/1.1" 200 4804
+INFO 2025-11-05 11:04:06,100 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:04:12,414 basehttp 127787 123691743569600 "POST /api/core/watchlists/1/add_asset/ HTTP/1.1" 201 577
+INFO 2025-11-05 11:04:12,743 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:04:24,522 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:04:24,677 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:04:33,248 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 11:04:33,426 log 127787 123691734128320 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 11:04:33,428 basehttp 127787 123691734128320 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 11:04:34,463 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:04:44,987 basehttp 127787 123691743569600 "GET /api/core/watchlists/? HTTP/1.1" 200 1296
+INFO 2025-11-05 11:04:49,227 basehttp 127787 123691743569600 "GET /api/core/watchlists/1/ HTTP/1.1" 200 1244
+INFO 2025-11-05 11:04:52,484 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12919/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:04:54,752 basehttp 127787 123691743569600 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 58321
+INFO 2025-11-05 11:04:55,079 basehttp 127787 123691725735616 "OPTIONS /api/paper-trading/trades/?asset=12919&current_price=100772 HTTP/1.1" 200 0
+INFO 2025-11-05 11:04:55,138 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:04:56,520 basehttp 127787 123691743569600 "GET /api/paper-trading/trades/?asset=12919&current_price=100772 HTTP/1.1" 200 52
+INFO 2025-11-05 11:04:56,873 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:04:58,847 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:00,899 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:03,080 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:04,913 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:06,870 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:09,349 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:13,039 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:14,943 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:16,939 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:18,825 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:21,344 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:24,986 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:27,028 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:28,834 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:30,963 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:34,609 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 169
+INFO 2025-11-05 11:05:35,992 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12919/candles_v2/?tf=15&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:05:36,135 basehttp 127787 123691725735616 "OPTIONS /api/paper-trading/trades/?asset=12919 HTTP/1.1" 200 0
+INFO 2025-11-05 11:05:37,882 basehttp 127787 123691743569600 "GET /api/paper-trading/trades/?asset=12919 HTTP/1.1" 200 52
+INFO 2025-11-05 11:05:37,896 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=500 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:38,103 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:05:39,839 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:44,920 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:48,200 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:51,979 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:53,848 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:55,912 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:57,987 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:05:59,789 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:01,881 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:04,078 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:07,929 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:09,886 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:12,451 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:15,906 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:17,984 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:19,956 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:21,945 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:24,010 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:26,210 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:28,004 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:30,157 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:32,011 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:33,914 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:35,899 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:06:36,358 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:06:37,859 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:07:11,773 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:08:02,550 basehttp 127787 123691734128320 "GET /api/core/assets/12919/candles_v2/?tf=15&limit=1 HTTP/1.1" 200 54
+INFO 2025-11-05 11:08:05,118 basehttp 127787 123691743569600 "GET /api/core/watchlists/1/ HTTP/1.1" 200 1244
+INFO 2025-11-05 11:08:05,314 basehttp 127787 123691734128320 "GET /api/core/watchlists/? HTTP/1.1" 200 1296
+INFO 2025-11-05 11:08:08,867 basehttp 127787 123691743569600 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4827
+INFO 2025-11-05 11:08:08,939 basehttp 127787 123691751962304 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:08:09,044 basehttp 127787 123691734128320 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-05 11:08:24,785 basehttp 127787 123691734128320 "DELETE /api/core/watchlists/1/ HTTP/1.1" 204 0
+INFO 2025-11-05 11:08:34,777 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 11:08:34,930 log 127787 123691751962304 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 11:08:34,932 basehttp 127787 123691751962304 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 11:08:35,993 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:08:38,059 basehttp 127787 123691734128320 "GET /api/core/watchlists/? HTTP/1.1" 200 52
+INFO 2025-11-05 11:08:45,655 basehttp 127787 123691734128320 "POST /api/core/watchlists/ HTTP/1.1" 201 101
+INFO 2025-11-05 11:08:47,818 basehttp 127787 123691734128320 "GET /api/core/watchlists/? HTTP/1.1" 200 226
+INFO 2025-11-05 11:08:48,809 basehttp 127787 123691751962304 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-05 11:08:49,192 basehttp 127787 123691743569600 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4827
+INFO 2025-11-05 11:08:49,333 basehttp 127787 123691717342912 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:08:52,194 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol&search=bt HTTP/1.1" 200 0
+INFO 2025-11-05 11:08:52,784 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol&search=btc HTTP/1.1" 200 0
+INFO 2025-11-05 11:08:54,054 basehttp 127787 123691717342912 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&search=bt HTTP/1.1" 200 4820
+INFO 2025-11-05 11:08:54,703 basehttp 127787 123691743569600 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&search=btc HTTP/1.1" 200 4790
+INFO 2025-11-05 11:08:54,894 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/9536/ HTTP/1.1" 200 0
+INFO 2025-11-05 11:08:56,134 basehttp 127787 123691717342912 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:08:56,351 basehttp 127787 123691743569600 "GET /api/core/assets/9536/ HTTP/1.1" 200 478
+INFO 2025-11-05 11:09:13,197 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:09:18,332 basehttp 127787 123691725735616 "OPTIONS /api/core/watchlists/2/add_asset/ HTTP/1.1" 200 0
+INFO 2025-11-05 11:09:19,808 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:09:20,804 basehttp 127787 123691717342912 "POST /api/core/watchlists/2/add_asset/ HTTP/1.1" 201 576
+INFO 2025-11-05 11:09:22,209 basehttp 127787 123691743569600 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-05 11:09:22,770 basehttp 127787 123691751962304 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol&search=btc HTTP/1.1" 200 4790
+INFO 2025-11-05 11:09:23,079 basehttp 127787 123691717342912 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-05 11:09:27,097 basehttp 127787 123691717342912 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:09:48,091 basehttp 127787 123691725735616 "OPTIONS /api/core/watchlists/2/ HTTP/1.1" 200 0
+ERROR 2025-11-05 11:10:32,957 log 127787 123691734128320 Internal Server Error: /api/core/alpaca/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 324, in perform_authentication
+    request.user
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 130, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 643, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1926, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+ERROR 2025-11-05 11:10:32,959 log 127787 123691743569600 Internal Server Error: /api/account/profile/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 324, in perform_authentication
+    request.user
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 130, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 643, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1926, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: could not translate host name "aws-1-eu-north-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+ERROR 2025-11-05 11:10:33,000 basehttp 127787 123691734128320 "GET /api/core/alpaca/ HTTP/1.1" 500 30773
+ERROR 2025-11-05 11:10:33,008 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 500 30783
+INFO 2025-11-05 11:10:34,637 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:10:37,870 basehttp 127787 123691743569600 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-05 11:10:41,613 basehttp 127787 123691743569600 "GET /api/core/watchlists/2/ HTTP/1.1" 200 708
+INFO 2025-11-05 11:10:46,243 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 59004
+INFO 2025-11-05 11:10:47,893 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:10:48,024 basehttp 127787 123691743569600 "GET /api/paper-trading/trades/?asset=12916&current_price=100686.102 HTTP/1.1" 200 52
+INFO 2025-11-05 11:10:49,866 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:10:51,875 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:10:53,843 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:10:56,001 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:10:57,824 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:10:59,748 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:01,747 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:03,703 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:05,727 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:07,862 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:09,874 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:11,158 basehttp 127787 123691751962304 "GET /api/paper-trading/trades/?asset=12916 HTTP/1.1" 200 52
+INFO 2025-11-05 11:11:11,752 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=500 HTTP/1.1" 200 58575
+INFO 2025-11-05 11:11:13,038 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:15,108 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:17,775 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:18,888 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=60&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:11:20,871 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:11:21,061 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=500 HTTP/1.1" 200 12432
+INFO 2025-11-05 11:11:22,750 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:11:24,200 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=240&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:11:24,788 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:11:26,165 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:11:26,277 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=500 HTTP/1.1" 200 5131
+INFO 2025-11-05 11:11:28,104 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:30,006 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:31,832 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=1440&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:11:32,231 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:33,808 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:11:34,371 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=500 HTTP/1.1" 200 1818
+INFO 2025-11-05 11:11:35,849 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:11:39,799 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:11:41,834 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:11:43,703 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:11:45,643 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:11:47,742 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:11:49,721 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:11:51,232 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=500 HTTP/1.1" 200 5131
+INFO 2025-11-05 11:11:52,931 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:54,858 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:11:56,877 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=500 HTTP/1.1" 200 12432
+INFO 2025-11-05 11:11:58,454 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:12:00,376 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:12:02,389 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:12:03,687 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=500 HTTP/1.1" 200 1818
+INFO 2025-11-05 11:12:05,272 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:07,316 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:09,368 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:11,428 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:13,386 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:16,011 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:18,006 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:21,887 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:25,561 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:27,857 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:32,514 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:35,820 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1440&limit=1 HTTP/1.1" 200 175
+INFO 2025-11-05 11:12:36,588 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:12:37,254 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=500 HTTP/1.1" 200 5131
+INFO 2025-11-05 11:12:38,826 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:12:42,606 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:12:44,531 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=500 HTTP/1.1" 200 12432
+INFO 2025-11-05 11:12:46,080 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:12:49,997 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:12:52,206 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:12:56,036 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:12:58,173 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:01,926 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:03,859 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:10,383 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:13,801 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:15,838 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:17,849 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:19,816 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=60&limit=1 HTTP/1.1" 200 171
+INFO 2025-11-05 11:13:21,111 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=500 HTTP/1.1" 200 5131
+INFO 2025-11-05 11:13:22,686 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:24,691 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:26,695 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:28,782 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:30,661 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:32,799 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:34,985 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:37,030 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:38,927 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:40,939 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:42,743 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:44,927 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:46,926 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:48,968 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:52,932 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:55,355 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:13:59,583 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:03,282 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:06,853 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:08,673 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:10,641 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:12,759 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:14,835 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:17,217 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:20,806 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:22,734 basehttp 127787 123691743569600 "GET /api/core/assets/12916/candles_v2/?tf=240&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:23,818 basehttp 127787 123691734128320 "GET /api/paper-trading/trades/?asset=12916 HTTP/1.1" 200 52
+INFO 2025-11-05 11:14:24,597 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 59004
+INFO 2025-11-05 11:14:26,131 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:28,130 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:30,353 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:32,216 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:34,303 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:36,110 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:38,321 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:14:38,861 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:40,897 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:42,774 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:44,959 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:46,771 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:48,777 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:50,743 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:52,755 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:54,774 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:14:56,913 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:00,107 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:02,081 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:04,250 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:06,170 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:08,159 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:10,038 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:12,190 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:14,167 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:16,293 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:18,532 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:22,101 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-05 11:15:22,346 log 127787 123691751962304 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 11:15:22,347 basehttp 127787 123691751962304 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 11:15:23,300 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:15:26,126 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 59004
+INFO 2025-11-05 11:15:27,724 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:27,852 basehttp 127787 123691734128320 "GET /api/paper-trading/trades/?asset=12916&current_price=100686.102 HTTP/1.1" 200 52
+INFO 2025-11-05 11:15:29,770 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:31,832 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:33,687 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:35,926 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:37,743 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:39,658 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:41,718 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:43,739 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:45,831 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:47,794 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:49,971 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:50,578 basehttp 127787 123691751962304 "GET /api/paper-trading/trades/?asset=12916 HTTP/1.1" 200 52
+INFO 2025-11-05 11:15:53,687 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:55,865 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:57,873 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:15:59,818 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:01,837 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:03,993 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:06,200 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:09,798 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:11,791 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:13,689 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:15,967 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:18,068 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:21,735 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:23,720 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:25,624 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:27,786 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:29,760 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:31,695 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:33,736 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:35,722 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:37,992 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:41,072 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:45,433 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:47,840 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:50,474 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:53,991 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:16:57,784 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:00,179 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:03,954 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:06,034 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:09,933 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:12,184 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:16,429 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:20,300 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:23,990 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:24,958 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:17:28,132 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:31,687 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:33,954 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:36,021 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:38,576 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:42,270 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:46,337 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:49,978 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:51,946 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:54,013 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:17:56,279 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:00,363 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:04,096 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:07,965 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:10,007 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:12,438 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:16,041 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:20,232 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:23,879 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:28,216 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:31,784 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:33,667 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:35,677 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:37,854 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:40,520 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:43,828 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:45,928 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:48,413 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:52,560 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:18:56,104 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:00,551 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:06,265 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:10,114 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:15,902 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:18,575 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:22,063 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:28,991 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:19:29,247 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:31,798 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:33,679 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:35,714 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:37,621 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:39,797 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:42,016 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:45,896 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:47,715 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:49,949 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:52,382 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:56,173 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:19:59,891 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:02,127 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:07,896 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:09,753 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:11,756 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:13,710 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:15,793 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:17,907 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:20,022 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:24,045 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:26,232 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:30,361 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:34,107 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:38,068 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:41,699 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:44,039 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:47,974 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:52,051 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:55,895 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:57,810 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:20:59,931 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:01,940 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:04,025 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:09,164 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:12,817 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:15,727 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:18,462 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:21,877 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:23,962 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:26,118 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:29,876 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:30,339 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:21:31,943 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:34,333 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:38,223 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:42,439 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:46,503 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:50,229 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:54,384 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:21:58,982 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:02,176 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:06,049 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:10,063 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:14,290 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:19,128 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:23,448 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:26,783 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:30,506 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:35,086 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:41,282 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:44,667 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:48,580 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:52,024 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:22:55,973 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:00,430 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:04,072 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:08,059 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:09,916 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:12,159 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:15,733 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:17,922 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:19,754 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:21,746 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:23,649 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:25,661 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:27,643 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:29,563 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:31,455 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:23:31,687 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:33,655 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:35,779 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:37,686 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:39,650 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:41,852 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:43,759 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:45,738 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:48,187 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:23:50,103 basehttp 127787 123691743569600 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-05 11:23:52,060 basehttp 127787 123691751962304 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-05 11:23:52,407 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:23:52,934 basehttp 127787 123691734128320 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4827
+INFO 2025-11-05 11:23:54,290 basehttp 127787 123691743569600 "POST /api/core/alpaca/sync_assets/ HTTP/1.1" 200 137
+WARNING 2025-11-05 11:23:58,036 log 127787 123691743569600 Unauthorized: /api/core/alpaca/sync_status/
+WARNING 2025-11-05 11:23:58,037 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 401 183
+INFO 2025-11-05 11:23:58,091 basehttp 127787 123691743569600 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-05 11:23:59,738 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:24:06,672 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:24:13,413 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:24:20,176 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:24:27,705 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:24:34,695 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:24:41,768 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:24:49,656 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+WARNING 2025-11-05 11:24:51,148 log 127787 123691743569600 Not Found: /api/core/alpaca/
+WARNING 2025-11-05 11:24:51,149 basehttp 127787 123691743569600 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-05 11:24:56,929 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:04,178 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:11,898 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:19,048 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:25,842 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:32,898 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:33,336 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:25:40,397 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:48,000 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:25:54,949 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:26:01,845 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 242
+INFO 2025-11-05 11:26:09,966 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:26:16,788 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:26:23,620 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:26:30,597 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:26:37,637 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:26:45,901 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:26:52,775 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:26:59,859 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:06,738 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:13,713 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:20,673 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:25,867 basehttp 127787 123691734128320 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4827
+INFO 2025-11-05 11:27:28,223 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:35,459 basehttp 127787 123691743569600 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:27:35,977 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:42,767 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:49,644 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:27:56,689 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:04,143 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:11,612 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:18,620 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:25,633 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:32,806 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:39,571 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:46,670 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:28:53,551 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:00,646 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:07,750 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:14,581 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:21,544 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:28,541 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:35,630 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:37,318 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:29:42,653 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:49,560 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:29:56,575 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:03,750 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:10,972 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:17,772 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:24,645 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:31,631 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:38,660 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:45,721 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:30:52,597 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:31:00,484 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:31:06,970 basehttp 127787 123691734128320 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:31:12,842 basehttp 127787 123691734128320 "POST /api/core/watchlists/2/add_asset/ HTTP/1.1" 201 569
+INFO 2025-11-05 11:31:13,577 basehttp 127787 123691743569600 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-05 11:31:14,755 basehttp 127787 123691734128320 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-05 11:31:15,597 basehttp 127787 123691751962304 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4827
+INFO 2025-11-05 11:31:15,766 basehttp 127787 123691743569600 "GET /api/core/watchlists/? HTTP/1.1" 200 1288
+INFO 2025-11-05 11:31:18,796 basehttp 127787 123691743569600 "GET /api/core/watchlists/2/ HTTP/1.1" 200 1236
+INFO 2025-11-05 11:31:22,106 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/2456/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:31:23,773 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:31:24,318 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=500 HTTP/1.1" 200 51720
+INFO 2025-11-05 11:31:24,499 basehttp 127787 123691725735616 "OPTIONS /api/paper-trading/trades/?asset=2456&current_price=146.07 HTTP/1.1" 200 0
+INFO 2025-11-05 11:31:25,548 basehttp 127787 123691751962304 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:26,100 basehttp 127787 123691743569600 "GET /api/paper-trading/trades/?asset=2456&current_price=146.07 HTTP/1.1" 200 52
+INFO 2025-11-05 11:31:27,868 basehttp 127787 123691751962304 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:29,937 basehttp 127787 123691751962304 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:31,856 basehttp 127787 123691751962304 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:33,905 basehttp 127787 123691751962304 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:36,309 basehttp 127787 123691751962304 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:39,536 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:31:40,163 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:42,067 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:43,954 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:45,961 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:47,856 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:49,847 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:51,732 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:53,678 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:55,751 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:57,653 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:31:59,682 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:32:00,574 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/2456/candles_v2/?tf=5&limit=500 HTTP/1.1" 200 0
+INFO 2025-11-05 11:32:00,650 basehttp 127787 123691725735616 "OPTIONS /api/paper-trading/trades/?asset=2456 HTTP/1.1" 200 0
+INFO 2025-11-05 11:32:01,702 basehttp 127787 123691743569600 "GET /api/core/assets/2456/candles_v2/?tf=1&limit=1 HTTP/1.1" 200 157
+INFO 2025-11-05 11:32:02,015 basehttp 127787 123691734128320 "GET /api/paper-trading/trades/?asset=2456 HTTP/1.1" 200 52
+INFO 2025-11-05 11:32:02,541 basehttp 127787 123691725735616 "OPTIONS /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 0
+INFO 2025-11-05 11:32:02,737 basehttp 127787 123691751962304 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=500 HTTP/1.1" 200 52000
+INFO 2025-11-05 11:32:04,242 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:06,277 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:08,328 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:10,244 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:12,376 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:14,485 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:16,423 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:18,450 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:20,481 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:22,339 basehttp 127787 123691734128320 "GET /api/core/assets/2456/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 159
+INFO 2025-11-05 11:32:25,639 basehttp 127787 123691734128320 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=500 HTTP/1.1" 200 58575
+INFO 2025-11-05 11:32:27,249 basehttp 127787 123691734128320 "GET /api/paper-trading/trades/?asset=12916&current_price=100686.102 HTTP/1.1" 200 52
+INFO 2025-11-05 11:32:27,909 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:29,911 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:32,949 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:35,011 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:36,926 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:38,917 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:40,973 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:42,935 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:45,813 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:48,974 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:50,942 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:52,944 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:54,898 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:56,974 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:32:58,897 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:00,854 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:02,824 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:04,838 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:07,023 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:08,898 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:10,894 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:13,357 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:17,059 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:19,053 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:21,007 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:22,929 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:25,036 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:26,993 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:29,022 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:31,243 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:35,911 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:37,775 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:39,847 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:41,286 basehttp 127787 123691734128320 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:33:41,820 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:43,790 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:46,106 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:49,869 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:52,069 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:54,029 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:56,101 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:58,009 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:33:59,882 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:01,814 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:03,866 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:05,958 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:07,808 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:09,906 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:11,824 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:14,121 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:17,911 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:19,831 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:21,981 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:23,902 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:26,185 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:29,858 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:34:31,863 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:35:11,906 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:35:43,709 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:36:11,889 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:37:12,482 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:37:46,298 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:38:16,642 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:39:13,856 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:39:48,596 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:40:12,025 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:41:12,003 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:41:50,410 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:42:12,157 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:43:11,906 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:43:52,463 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:44:01,735 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:04,903 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:06,989 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:08,942 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:10,966 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:13,928 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:16,939 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:18,950 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:20,994 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:22,997 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:25,046 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:27,121 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:28,928 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:31,835 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:33,892 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:35,744 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:40,109 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:42,098 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:43,916 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:45,782 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:47,795 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:49,814 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:51,755 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:54,098 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:57,732 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:44:59,751 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:01,750 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:03,801 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:05,767 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:07,782 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:10,122 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:13,869 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:15,774 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:17,753 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:19,766 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:21,788 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:23,784 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:25,971 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:27,773 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:29,749 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
+INFO 2025-11-05 11:45:54,510 basehttp 127787 123691751962304 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-05 11:46:12,215 basehttp 127787 123691751962304 "GET /api/core/assets/12916/candles_v2/?tf=5&limit=1 HTTP/1.1" 200 172
