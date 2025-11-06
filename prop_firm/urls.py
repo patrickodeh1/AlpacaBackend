@@ -2,7 +2,8 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     PropFirmPlanViewSet, PropFirmAccountViewSet,
-    CheckoutViewSet, StripeWebhookView, PayoutViewSet
+    CheckoutViewSet, StripeWebhookView, PayoutViewSet,
+    AdminDashboardAPI,
 )
 
 router = DefaultRouter()
@@ -13,5 +14,6 @@ router.register(r'payouts', PayoutViewSet, basename='payouts')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('admin/dashboard/', AdminDashboardAPI.as_view(), name='propfirm-admin-dashboard'),
     path('webhook/stripe/', StripeWebhookView.as_view(), name='stripe-webhook'),
 ]

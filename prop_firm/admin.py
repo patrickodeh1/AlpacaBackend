@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.template.response import TemplateResponse
+from django.contrib.auth import get_user_model
+from django.http import HttpResponseForbidden
 from .models import (
     PropFirmPlan, PropFirmAccount, RuleViolation,
     Payout, AccountActivity
@@ -171,10 +174,14 @@ class PropFirmAccountAdmin(admin.ModelAdmin):
     def pnl_display(self, obj):
         pnl = obj.current_balance - obj.starting_balance
         color = 'green' if pnl >= 0 else 'red'
-        return format_html(
-            '<span style="color: {};">${:,.2f}</span>',
-            color, pnl
-        )
+        # Format the numeric value first, because format_html escapes
+        # arguments and turns them into SafeString. Applying a numeric
+        # format spec (like ":.2f") to a SafeString raises
+        # "Unknown format code 'f' for object of type 'SafeString'".
+        # To avoid that, pre-format the number into a string and pass
+        # it as a plain replacement.
+        formatted_pnl = f"${pnl:,.2f}"
+        return format_html('<span style="color: {};">{}</span>', color, formatted_pnl)
     pnl_display.short_description = 'P&L'
     
     def balance_info(self, obj):
@@ -291,10 +298,11 @@ class RuleViolationAdmin(admin.ModelAdmin):
     threshold_display.short_description = 'Threshold'
     
     def actual_display(self, obj):
-        return format_html(
-            '<span style="color: red;">${:,.2f}</span>',
-            obj.actual_value
-        )
+        # See note in pnl_display: pre-format numeric values before
+        # passing them to format_html to avoid format spec errors when
+        # Django turns arguments into SafeString.
+        formatted = f"${obj.actual_value:,.2f}"
+        return format_html('<span style="color: red;">{}</span>', formatted)
     actual_display.short_description = 'Actual Value'
     
     def has_add_permission(self, request):
@@ -397,3 +405,47 @@ class AccountActivityAdmin(admin.ModelAdmin):
 admin.site.site_header = "Prop Trading Firm Administration"
 admin.site.site_title = "Prop Firm Admin"
 admin.site.index_title = "Welcome to Prop Trading Firm Administration"
+
+
+# --- Admin dashboard view -------------------------------------------------
+def admin_dashboard(request):
+    """
+    Custom admin dashboard for superusers. Shows quick counts and
+    links to common Prop Firm admin changelists.
+
+    Accessible at /admin/prop-firm-dashboard/ (hooked in project urls).
+    Only superusers may access this view.
+    """
+    if not request.user.is_active or not request.user.is_superuser:
+        return HttpResponseForbidden("You do not have permission to view this page.")
+
+    # Models to include: users + prop_firm models registered here
+    User = get_user_model()
+    models = [
+        (User, 'Users'),
+        (PropFirmAccount, 'Prop Firm Accounts'),
+        (PropFirmPlan, 'Plans'),
+        (RuleViolation, 'Rule Violations'),
+        (Payout, 'Payouts'),
+        (AccountActivity, 'Account Activities'),
+    ]
+
+    items = []
+    for model, label in models:
+        opts = model._meta
+        count = model.objects.count()
+        try:
+            changelist_url = reverse(f"admin:{opts.app_label}_{opts.model_name}_changelist")
+        except Exception:
+            changelist_url = '#'
+        items.append({'label': label, 'count': count, 'url': changelist_url})
+
+    context = {
+        'title': 'Prop Firm Admin Dashboard',
+        'dashboard_items': items,
+        'site_header': admin.site.site_header,
+        'site_title': admin.site.site_title,
+        'request': request,
+    }
+
+    return TemplateResponse(request, 'admin/prop_firm_admin_dashboard.html', context)

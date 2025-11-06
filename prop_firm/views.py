@@ -1,11 +1,13 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.db.models import Q
+from django.contrib.auth import get_user_model
 import logging
 
 from .models import (
@@ -16,6 +18,7 @@ from .serializers import (
     PropFirmPlanSerializer, PropFirmAccountSerializer,
     PropFirmAccountListSerializer, PayoutSerializer,
     PayoutRequestSerializer, CheckoutSessionSerializer,
+    MockPaymentSerializer,
     RuleViolationSerializer, AccountActivitySerializer
 )
 from .services.stripe_service import StripeService, PaymentProcessor
@@ -184,6 +187,38 @@ class PropFirmAccountViewSet(viewsets.ModelViewSet):
         })
 
 
+class AdminDashboardAPI(APIView):
+    """API endpoint for admin dashboard data.
+
+    Returns counts and a small recent-accounts list. Only accessible to
+    admin users (IsAdminUser).
+    """
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        User = get_user_model()
+        data = {
+            'users_count': User.objects.count(),
+            'accounts_count': PropFirmAccount.objects.count(),
+            'plans_count': PropFirmPlan.objects.count(),
+            'payouts_count': Payout.objects.count(),
+            'violations_count': RuleViolation.objects.count(),
+            'recent_accounts': []
+        }
+
+        recent = PropFirmAccount.objects.order_by('-created_at')[:10]
+        for acc in recent:
+            data['recent_accounts'].append({
+                'id': acc.id,
+                'account_number': acc.account_number,
+                'user_email': acc.user.email if acc.user else None,
+                'status': acc.status,
+                'created_at': acc.created_at,
+            })
+
+        return Response({'msg': 'Admin dashboard data', 'data': data})
+
+
 class CheckoutViewSet(viewsets.ViewSet):
     """Handle checkout and payment flows"""
     
@@ -222,6 +257,68 @@ class CheckoutViewSet(viewsets.ViewSet):
                 'msg': 'Failed to create checkout session',
                 'error': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=False, methods=['post'])
+    def mock_pay(self, request):
+        """Development-only mock payment endpoint.
+
+        Accepts plan_id, billing (address etc.) and card details. Creates
+        the pending account, stores a BillingDetail record, and activates
+        the account immediately. This should be removed when integrating
+        with a real payment processor.
+        """
+        serializer = MockPaymentSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        plan = get_object_or_404(PropFirmPlan, id=serializer.validated_data['plan_id'])
+        billing = serializer.validated_data['billing']
+        card = serializer.validated_data['card']
+
+        # Create pending account
+        from .models import PropFirmAccount, AccountActivity, BillingDetail
+
+        account = PropFirmAccount.objects.create(
+            user=request.user,
+            plan=plan,
+            status='PENDING',
+            stage='EVALUATION' if plan.plan_type == 'EVALUATION' else 'FUNDED'
+        )
+
+        # Save billing details (mock-safe: do not store raw PAN/CVV in prod)
+        masked = card.get('cardNumber', '')
+        last4 = ''.join(filter(str.isdigit, masked))[-4:] if masked else ''
+        masked_display = f"**** **** **** {last4}" if last4 else masked
+
+        BillingDetail.objects.create(
+            user=request.user,
+            cardholder_name=card.get('cardholderName', ''),
+            masked_number=masked_display,
+            last4=last4,
+            brand=card.get('brand', ''),
+            exp_month=card.get('expiryMonth', ''),
+            exp_year=card.get('expiryYear', ''),
+            billing_address=billing
+        )
+
+        # For the mock flow we immediately mark payment as successful
+        payment_intent = f"mock_{account.id}_{int(timezone.now().timestamp())}"
+        account.stripe_payment_intent_id = payment_intent
+        account.status = 'ACTIVE'
+        account.activated_at = timezone.now()
+        account.payment_completed_at = timezone.now()
+        account.save()
+
+        # Log activity
+        AccountActivity.objects.create(
+            account=account,
+            activity_type='ACTIVATED',
+            description=f'Mock payment succeeded for ${plan.price}',
+            metadata={'mock': True, 'card_last4': last4},
+            created_by=request.user
+        )
+
+        serializer = PropFirmAccountSerializer(account)
+        return Response({'msg': 'Mock payment successful', 'data': serializer.data})
     
     @action(detail=False, methods=['post'])
     def verify_payment(self, request):

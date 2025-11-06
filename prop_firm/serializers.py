@@ -69,6 +69,8 @@ class PropFirmAccountSerializer(serializers.ModelSerializer):
             'plan', 'plan_name', 'plan_details',
             'starting_balance', 'current_balance', 'high_water_mark',
             'daily_loss', 'total_loss', 'profit_earned',
+            'total_winning_trades', 'total_losing_trades',
+            'gross_profit', 'gross_loss', 'profit_factor',
             'trading_days', 'last_trade_date',
             'created_at', 'activated_at', 'passed_at', 'failed_at', 'closed_at',
             'failure_reason', 'violations', 'recent_activities',
@@ -124,7 +126,8 @@ class PropFirmAccountListSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'account_number', 'status', 'stage',
             'plan_name', 'starting_balance', 'current_balance',
-            'profit_earned', 'trading_days',
+            'profit_earned', 'trading_days', 'profit_factor',
+            'total_winning_trades', 'total_losing_trades',
             'created_at', 'activated_at',
             'total_pnl', 'pnl_percentage'
         ]
@@ -193,6 +196,21 @@ class CheckoutSessionSerializer(serializers.Serializer):
     
     def validate_plan_id(self, value):
         """Validate plan exists and is active"""
+        try:
+            plan = PropFirmPlan.objects.get(id=value, is_active=True)
+        except PropFirmPlan.DoesNotExist:
+            raise serializers.ValidationError("Plan not found or inactive")
+        return value
+
+
+class MockPaymentSerializer(serializers.Serializer):
+    """Serializer for mock payment flow used in development/testing."""
+
+    plan_id = serializers.IntegerField()
+    billing = serializers.JSONField()
+    card = serializers.JSONField()
+
+    def validate_plan_id(self, value):
         try:
             plan = PropFirmPlan.objects.get(id=value, is_active=True)
         except PropFirmPlan.DoesNotExist:

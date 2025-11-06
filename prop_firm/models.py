@@ -113,6 +113,11 @@ class PropFirmAccount(models.Model):
     daily_loss = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     total_loss = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     profit_earned = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    total_winning_trades = models.IntegerField(default=0)
+    total_losing_trades = models.IntegerField(default=0)
+    gross_profit = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    gross_loss = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    profit_factor = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     trading_days = models.IntegerField(default=0)
     last_trade_date = models.DateField(null=True, blank=True)
     
@@ -198,6 +203,7 @@ class PropFirmAccount(models.Model):
     def update_balance(self):
         """Recalculate current balance based on closed trades"""
         from paper_trading.models import PaperTrade
+        from decimal import Decimal
         
         # Get all closed trades for this account
         closed_trades = PaperTrade.objects.filter(
@@ -206,9 +212,31 @@ class PropFirmAccount(models.Model):
             created_at__gte=self.created_at
         )
         
-        total_realized_pl = sum(
-            trade.realized_pl or Decimal('0') 
-            for trade in closed_trades
+        # Reset counters
+        self.total_winning_trades = 0
+        self.total_losing_trades = 0
+        self.gross_profit = Decimal('0')
+        self.gross_loss = Decimal('0')
+        
+        total_realized_pl = Decimal('0')
+        
+        # Process each trade
+        for trade in closed_trades:
+            pl = trade.realized_pl or Decimal('0')
+            total_realized_pl += pl
+            
+            if pl > 0:
+                self.total_winning_trades += 1
+                self.gross_profit += pl
+            elif pl < 0:
+                self.total_losing_trades += 1
+                self.gross_loss += abs(pl)
+        
+        # Calculate profit factor
+        self.profit_factor = (
+            (self.gross_profit / self.gross_loss)
+            if self.gross_loss > 0 and self.gross_profit > 0
+            else Decimal('0')
         )
         
         self.current_balance = self.starting_balance + total_realized_pl
@@ -345,3 +373,31 @@ class AccountActivity(models.Model):
         
     def __str__(self):
         return f"{self.account.account_number} - {self.activity_type}"
+
+
+class BillingDetail(models.Model):
+    """Stored billing details for a user.
+
+    NOTE: This model is intended for the mock payment flow used during
+    development. Do NOT store raw card numbers or CVV in production.
+    Replace this with a PCI-compliant integration (Stripe Customer / PaymentMethod)
+    when moving to real payments.
+    """
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='billing_details')
+    cardholder_name = models.CharField(max_length=255)
+    masked_number = models.CharField(max_length=32, help_text='Masked card number, e.g. **** **** **** 4242')
+    last4 = models.CharField(max_length=4, blank=True)
+    brand = models.CharField(max_length=50, blank=True)
+    exp_month = models.CharField(max_length=2, blank=True)
+    exp_year = models.CharField(max_length=4, blank=True)
+    billing_address = models.JSONField(default=dict, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Billing for {self.user.email} - {self.masked_number}"

@@ -28,6 +28,7 @@ from .serializers import (
 
 # Create your views here.
 
+
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
 
@@ -35,6 +36,7 @@ def get_tokens_for_user(user):
         "refresh": str(refresh),
         "access": str(refresh.access_token),
     }
+
 
 class GoogleLoginView(APIView):
     renderer_classes = [UserRenderer]
@@ -95,6 +97,7 @@ class GoogleLoginView(APIView):
                 {"error": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST
             )
 
+
 class UserRegistrationView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegistrationSerializer
@@ -115,6 +118,7 @@ class UserRegistrationView(generics.CreateAPIView):
             )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserLoginView(APIView):
     renderer_classes = [UserRenderer]
@@ -153,11 +157,12 @@ class UserLoginView(APIView):
                 )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class UserListView(APIView):
-    permission_classes = [IsAuthenticated]
-    renderer_classes = [UserRenderer]
 
-    def get(self, request):
+class UserListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
         # Load all users from the cache
         users = cache.get("all_users")
 
@@ -165,22 +170,23 @@ class UserListView(APIView):
             # Cache miss: fetch from database and cache the result
             users = list(User.objects.all())  # Convert QuerySet to list
             cache.set("all_users", users, timeout=900)  # Cache for 15 minutes
-        
-        # Perform filtering on cached data
+
+        return users
+
+    def filter_queryset(self, queryset):
+        # Perform filtering on cached data (list) instead of using DRF's default filter
         search_term = self.request.query_params.get("search", "").strip().lower()
         if search_term:
-            users = [
-                user 
-                for user in users
+            queryset = [
+                user
+                for user in queryset
                 if search_term in user.name.lower() or search_term in user.email.lower()
             ]
-            
-        # Serialize and return response
-        serializer = UserSerializer(users, many=True)
         return Response({
-            "msg": "Users retrieved successfully",
-            "data": serializer.data
+            'msg': 'Users retrieved successfully',
+            'data': UserSerializer(queryset, many=True).data
         })
+
 
 class UserProfileView(generics.RetrieveAPIView):
     serializer_class = UserProfileSerializer
@@ -190,6 +196,7 @@ class UserProfileView(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
+
 class UserChangePasswordView(generics.UpdateAPIView):
     serializer_class = UserChangePasswordSerializer
     renderer_classes = [UserRenderer]
@@ -197,6 +204,7 @@ class UserChangePasswordView(generics.UpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
 
 class SendPasswordResetEmailView(APIView):
     renderer_classes = [UserRenderer]
@@ -210,6 +218,7 @@ class SendPasswordResetEmailView(APIView):
                 status=status.HTTP_200_OK,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserPasswordResetView(APIView):
     renderer_classes = [UserRenderer]
@@ -225,6 +234,7 @@ class UserPasswordResetView(APIView):
                 {"msg": "Password reset successfully"}, status=status.HTTP_200_OK
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # Keep the old UserChangePassword class for backward compatibility
 @permission_classes([IsAuthenticated])

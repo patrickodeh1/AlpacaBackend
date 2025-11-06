@@ -752,12 +752,19 @@ class WatchListViewSet(viewsets.ModelViewSet):
     """
 
     serializer_class = WatchListSerializer
-    from rest_framework.permissions import IsAdminUser  # local import to avoid top refactor
-    permission_classes = [IsAdminUser]
+    # Allow authenticated users to view/create their own watchlists and the global (user=None) lists.
+    # Only owners or staff may update/delete. We import locally to limit top-of-file changes.
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
     pagination_class = OffsetPagination
 
     def get_queryset(self):
-        # Include both default watchlists and user-specific watchlists
+        # Support a 'global' query param to return only global (user=None) lists.
+        # By default include both default watchlists and user-specific watchlists
+        only_global = self.request.query_params.get('global')
+        if only_global and str(only_global).lower() in ('1', 'true', 'yes'):
+            return WatchList.objects.filter(user=None, is_active=True)
+
         return WatchList.objects.filter(
             Q(user=self.request.user) | Q(user=None),
             is_active=True,
@@ -777,6 +784,49 @@ class WatchListViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_201_CREATED,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        """
+        Only the owner of a watchlist or staff may update it.
+        """
+        instance = get_object_or_404(self.get_queryset(), pk=pk)
+
+        if instance.user != request.user and not request.user.is_staff:
+            return Response({"msg": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = self.get_serializer(instance, data=request.data, partial=False)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg": "Watchlist updated successfully", "data": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self, request, pk=None):
+        """
+        Partial update: only owner or staff allowed.
+        """
+        instance = get_object_or_404(self.get_queryset(), pk=pk)
+
+        if instance.user != request.user and not request.user.is_staff:
+            return Response({"msg": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg": "Watchlist updated successfully", "data": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        """
+        Only the owner or staff may delete a watchlist.
+        """
+        instance = get_object_or_404(self.get_queryset(), pk=pk)
+
+        if instance.user != request.user and not request.user.is_staff:
+            return Response({"msg": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
+
+        instance.is_active = False
+        instance.save()
+        return Response({"msg": "Watchlist deactivated"}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=["post"], url_path="add_asset")
     def add_asset(self, request, pk=None):
@@ -799,6 +849,22 @@ class WatchListViewSet(viewsets.ModelViewSet):
                 {"msg": "Asset not found"},
                 status=status.HTTP_404_NOT_FOUND,
             )
+
+        # Enforce admin/global watchlist policy:
+        # Regular users may only add assets that already appear in an admin/global
+        # watchlist (those with user=None). Superusers/staff bypass this check.
+        if not request.user.is_staff:
+            exists_in_global = WatchListAsset.objects.filter(
+                watchlist__user__isnull=True, asset=asset, is_active=True
+            ).exists()
+            if not exists_in_global:
+                return Response(
+                    {
+                        "msg": "Permission denied",
+                        "detail": "Asset not available to add. Contact an administrator to include this instrument in the global watchlists.",
+                    },
+                    status=status.HTTP_403_FORBIDDEN,
+                )
 
         watchlist_asset, created = WatchListAsset.objects.get_or_create(
             watchlist=watchlist, asset=asset, defaults={"is_active": True}
