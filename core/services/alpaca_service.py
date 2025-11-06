@@ -108,6 +108,42 @@ class AlpacaService:
         url = f"{self.base_url}/v2/watchlists"
         return self._make_request("GET", url)
 
+    def create_paper_account(
+        self,
+        nickname: str,
+        initial_balance: Decimal,
+        contact: dict,
+        identity: dict
+    ) -> dict:
+        """Create a new paper trading account on Alpaca.
+        
+        Args:
+            nickname: Account nickname/label
+            initial_balance: Starting balance for account (1 to 100000)
+            contact: Contact information dictionary (name, email, phone_number)
+            identity: Identity information dictionary (given_name, family_name, date_of_birth, tax_id, etc.)
+            
+        Returns:
+            dict: New account information from Alpaca
+        """
+        url = f"{self.base_url}/v2/accounts"
+        
+        data = {
+            "contact": contact,
+            "identity": identity,
+            "nickname": nickname,
+            "paper": True,
+            "paper_limit": float(initial_balance),
+            "enabled_assets": ["us_equity", "crypto"]
+        }
+        
+        return self._make_request("POST", url, json_data=data)
+
+    def get_account(self, account_id: str) -> dict:
+        """Get account information from Alpaca."""
+        url = f"{self.base_url}/v2/accounts/{account_id}"
+        return self._make_request("GET", url)
+
     def get_historic_bars(
         self,
         symbol: str,

@@ -214,28 +214,18 @@ class TradeValidator:
             errors.append(f"Account is not active for trading (status: {self.account.status})")
             return False, errors
         
-        # Check position size
+        # Check position size against plan limits
         violation = self.rule_engine.check_position_size(quantity, price)
         if violation:
             errors.append(violation['description'])
         
-        # Check if account has open positions that would exceed limits
-        from paper_trading.models import PaperTrade
-        
-        open_positions_value = PaperTrade.objects.filter(
-            user=self.account.user,
-            status='OPEN',
-            created_at__gte=self.account.created_at
-        ).aggregate(
-            total=Sum('entry_price')
-        )['total'] or Decimal('0')
-        
-        new_position_value = quantity * price
-        total_exposure = open_positions_value + new_position_value
-        
-        max_total_exposure = self.account.current_balance * Decimal('2.0')  # 200% leverage max
-        
-        if total_exposure > max_total_exposure:
-            errors.append(f"Total exposure would exceed limit: ${total_exposure:.2f} > ${max_total_exposure:.2f}")
+        # Check Alpaca account buying power
+        if self.account.alpaca_account_id:
+            new_position_value = quantity * price
+            if new_position_value > self.account.alpaca_buying_power:
+                errors.append(
+                    f"Insufficient buying power: Trade value ${new_position_value:.2f} "
+                    f"exceeds available buying power ${self.account.alpaca_buying_power:.2f}"
+                )
         
         return len(errors) == 0, errors

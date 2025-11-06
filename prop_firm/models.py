@@ -1,9 +1,12 @@
+import logging
 from decimal import Decimal
 from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.db.models import Sum
+
+logger = logging.getLogger(__name__)
 
 
 class PropFirmPlan(models.Model):
@@ -96,6 +99,11 @@ class PropFirmAccount(models.Model):
     # Account Identification
     account_number = models.CharField(max_length=20, unique=True, db_index=True)
     
+    # Alpaca Account Details
+    alpaca_account_id = models.CharField(max_length=100, blank=True)
+    alpaca_account_status = models.CharField(max_length=50, blank=True)
+    alpaca_buying_power = models.DecimalField(max_digits=12, decimal_places=2, null=True)
+    
     # Account Status
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     stage = models.CharField(max_length=20, choices=STAGE_CHOICES, default='EVALUATION')
@@ -172,9 +180,40 @@ class PropFirmAccount(models.Model):
     def activate(self):
         """Activate account after successful payment"""
         if self.status == 'PENDING':
-            self.status = 'ACTIVE'
-            self.activated_at = timezone.now()
-            self.save()
+            from core.services.alpaca_service import alpaca_service
+            
+            # Create paper trading account on Alpaca
+            contact = {
+                "email": self.user.email,
+                "phone_number": getattr(self.user, 'phone', ''),
+            }
+            
+            identity = {
+                "given_name": self.user.first_name,
+                "family_name": self.user.last_name,
+            }
+            
+            try:
+                # Create Alpaca paper account with plan's starting balance
+                account = alpaca_service.create_paper_account(
+                    nickname=f"PropFirm {self.account_number}",
+                    initial_balance=self.starting_balance,
+                    contact=contact,
+                    identity=identity
+                )
+                
+                # Store Alpaca account details
+                self.alpaca_account_id = account.get('id')
+                self.alpaca_account_status = account.get('status')
+                self.alpaca_buying_power = Decimal(str(account.get('buying_power', '0')))
+                
+                self.status = 'ACTIVE'
+                self.activated_at = timezone.now()
+                self.save()
+                
+            except Exception as e:
+                logger.error(f"Failed to create Alpaca account: {str(e)}")
+                raise
     
     def check_rules(self):
         """Check if account has violated any rules"""

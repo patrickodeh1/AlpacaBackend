@@ -4,6 +4,7 @@ import logging
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
+from rest_framework.exceptions import ValidationError
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -50,11 +51,14 @@ class PaperTradeViewSet(viewsets.ModelViewSet):
             .order_by('-activated_at')
             .first()
         )
+        logger.debug("PaperTrade.perform_create: user=%s found_account=%s", getattr(self.request.user, 'id', None), getattr(account, 'id', None))
         if account is None:
-            return Response(
-                {"detail": "No active prop firm account found."},
-                status=status.HTTP_400_BAD_REQUEST,
+            # Raise a validation error so the view returns a proper 400
+            logger.info(
+                "PaperTrade.perform_create: no active PropFirmAccount for user %s",
+                getattr(self.request.user, 'id', None),
             )
+            raise ValidationError({"detail": "No active prop firm account found."})
 
         data = serializer.validated_data
         asset = data.get('asset')
@@ -69,12 +73,23 @@ class PaperTradeViewSet(viewsets.ModelViewSet):
             quantity=quantity,
             price=price,
         )
+        logger.debug("PaperTrade.perform_create: can_trade=%s errors=%s", can_trade, errors)
         if not can_trade:
-            return Response(
-                {"detail": "Trade violates rules", "errors": errors},
-                status=status.HTTP_400_BAD_REQUEST,
+            # Raise a validation error with rule errors to stop creation
+            logger.info(
+                "PaperTrade.perform_create: trade rejected by validator for user %s; errors=%s",
+                getattr(self.request.user, 'id', None),
+                errors,
             )
+            raise ValidationError({"detail": "Trade violates rules", "errors": errors})
 
+        logger.info(
+            "PaperTrade.perform_create: saving new trade for user %s asset=%s direction=%s quantity=%s",
+            getattr(self.request.user, 'id', None),
+            getattr(asset, 'id', asset),
+            direction,
+            quantity,
+        )
         serializer.save(user=self.request.user)
 
     @action(detail=True, methods=["post"], url_path="close", url_name="close")
