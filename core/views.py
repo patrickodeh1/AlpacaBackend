@@ -850,21 +850,15 @@ class WatchListViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_404_NOT_FOUND,
             )
 
-        # Enforce admin/global watchlist policy:
-        # Regular users may only add assets that already appear in an admin/global
-        # watchlist (those with user=None). Superusers/staff bypass this check.
-        if not request.user.is_staff:
-            exists_in_global = WatchListAsset.objects.filter(
-                watchlist__user__isnull=True, asset=asset, is_active=True
-            ).exists()
-            if not exists_in_global:
-                return Response(
-                    {
-                        "msg": "Permission denied",
-                        "detail": "Asset not available to add. Contact an administrator to include this instrument in the global watchlists.",
-                    },
-                    status=status.HTTP_403_FORBIDDEN,
-                )
+        # Check if the watchlist belongs to the user
+        if not request.user.is_staff and watchlist.user != request.user:
+            return Response(
+                {
+                    "msg": "Permission denied",
+                    "detail": "You can only add assets to your own watchlists"
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
         watchlist_asset, created = WatchListAsset.objects.get_or_create(
             watchlist=watchlist, asset=asset, defaults={"is_active": True}
