@@ -1,5 +1,6 @@
 from datetime import datetime, time, timedelta
 import pytz
+import time as time_module
 from celery import Task, shared_task
 from celery.utils.log import get_task_logger
 from django.conf import settings
@@ -455,7 +456,7 @@ def fetch_historical_data(self, asset_id: int, priority: str = "normal"):
 
 
 def _fetch_1t_candles(asset, service, start_date, end_date):
-    """Helper to fetch 1-minute candles from Alpaca"""
+    """Helper to fetch 1-minute candles from Alpaca with pagination support"""
     symbol = asset.symbol
     
     # Check if we already have data in this range
@@ -480,23 +481,43 @@ def _fetch_1t_candles(asset, service, start_date, end_date):
         logger.debug(f"✓ {symbol} 1T data up-to-date")
         return
 
-    # Fetch in chunks (newest first for faster chart loading)
+    # Fetch from beginning using pagination
     current_end = end_date
     total_created = 0
+    page_token = None
     
     while current_end > actual_start:
-        chunk_start = max(actual_start, current_end - timedelta(days=10))
+        # For initial fetch, try to get as much as possible (10k limit)
+        # For subsequent pages, use page_token
+        chunk_start = max(actual_start, current_end - timedelta(days=365))  # 1 year chunks
         
         try:
+            params = {
+                "start": chunk_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "end": current_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "sort": "desc",
+                "limit": 10000,  # Max allowed by Alpaca
+            }
+            if page_token:
+                params["page_token"] = page_token
+            
             resp = service.get_historic_bars(
                 symbol=symbol,
-                start=chunk_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                end=current_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                sort="desc",
+                timeframe=const.TF_1T,
+                start=params["start"],
+                end=params["end"],
+                limit=params["limit"],
+                sort=params["sort"],
+                page_token=params.get("page_token"),
                 asset_class=asset.asset_class,
             )
         except Exception as e:
             logger.error(f"❌ API error for {symbol}: {e}")
+            # If pagination fails, try smaller chunks
+            if page_token:
+                page_token = None
+                current_end = chunk_start
+                continue
             current_end = chunk_start
             continue
 
@@ -505,7 +526,8 @@ def _fetch_1t_candles(asset, service, start_date, end_date):
         
         for bar in bars:
             ts = datetime.fromisoformat(bar["t"].replace("Z", "+00:00"))
-            if not _is_market_hours(ts):
+            # Only filter market hours for stocks, not crypto
+            if asset.asset_class != "crypto" and not _is_market_hours(ts):
                 continue
                 
             candles.append(
@@ -526,11 +548,20 @@ def _fetch_1t_candles(asset, service, start_date, end_date):
         if candles:
             Candle.objects.bulk_create(candles, ignore_conflicts=True)
             total_created += len(candles)
-            
-        current_end = chunk_start
+            logger.debug(f"✓ Fetched {len(candles)} candles for {symbol} (total: {total_created})")
+        
+        # Check for pagination
+        page_token = resp.get("next_page_token")
+        if not page_token:
+            # No more pages, move to next time chunk
+            page_token = None
+            current_end = chunk_start
+            if current_end <= actual_start:
+                break
+        # Continue with same time range but next page
 
     if total_created > 0:
-        logger.info(f"✓ Fetched {total_created} 1T candles for {symbol}")
+        logger.info(f"✓ Fetched {total_created} 1T candles for {symbol} from {start_date.date()} to {end_date.date()}")
 
 
 def _resample_all_timeframes(asset, start_date, end_date):
@@ -676,7 +707,7 @@ def _is_market_hours(dt):
 
 
 # Keep existing check_watchlist_candles and helper functions...
-@shared_task(name="check_watchlist_candles")
+@shared_task(name="core.tasks.check_watchlist_candles")
 def check_watchlist_candles():
     """
     Periodic task to check watchlist assets for missing candles.
@@ -838,3 +869,80 @@ def _resample_higher_timeframes(asset, start_date, end_date):
             _resample_timeframe(asset, tf, delta, start_date, end_date)
         except Exception as e:
             logger.error(f"❌ Error resampling {tf}: {e}")
+
+
+@shared_task(name="core.tasks.start_alpaca_stream", base=SingleInstanceTask, bind=True)
+def start_alpaca_stream(self, scope: str = "global"):
+    """
+    Start the long-running Alpaca WebSocket client to ingest live data.
+
+    Uses a cache-based global lock to prevent duplicate runners. Safe to call
+    repeatedly via beat: it will no-op if already active.
+    
+    Note: This task runs in a daemon thread to avoid blocking Celery workers.
+    """
+    # Stronger lock than SingleInstanceTask TTL for long-running process
+    # Use longer timeout since this is a long-running process
+    running_lock_key = f"websocket:runner:{scope}:running"
+    
+    # Check if already running - extend lock if exists
+    existing_lock = cache.get(running_lock_key)
+    if existing_lock:
+        logger.info("🟡 WebSocket runner already active — skipping start")
+        return {"started": False, "reason": "already_running"}
+    
+    # Try to acquire lock with longer timeout
+    if not cache.add(running_lock_key, 1, timeout=24 * 3600):
+        logger.info("🟡 WebSocket runner already active (lock exists) — skipping start")
+        return {"started": False, "reason": "already_running"}
+
+    try:
+        # Lazy import to avoid importing websocket client during Django app init/migrations
+        from .services.websocket.client import WebsocketClient  # type: ignore
+        import threading
+
+        logger.info("🚀 Starting Alpaca WebSocket client (scope=%s)", scope)
+        client = WebsocketClient(sandbox=False)
+        
+        # Run in a daemon thread so it doesn't block the Celery worker
+        def run_client():
+            try:
+                client.run()
+            except Exception as e:
+                logger.exception("❌ WebSocket client crashed: %s", e)
+                # Clear lock on crash so it can restart
+                cache.delete(running_lock_key)
+        
+        thread = threading.Thread(target=run_client, daemon=True)
+        thread.start()
+        
+        # Give it a moment to start, then return
+        time_module.sleep(2)
+        logger.info("✅ WebSocket client started in background thread")
+        return {"started": True, "scope": scope}
+        
+    except ModuleNotFoundError as exc:
+        logger.error("WebSocket dependencies missing: %s", exc)
+        cache.delete(running_lock_key)
+        return {"started": False, "error": str(exc)}
+    except Exception as exc:
+        logger.exception("❌ WebSocket runner crashed: %s", exc)
+        cache.delete(running_lock_key)
+        raise
+
+
+@shared_task(name="core.tasks.cleanup_stuck_syncs")
+def cleanup_stuck_syncs():
+    """
+    Periodic maintenance: detect and reset stuck SyncStatus entries.
+    """
+    try:
+        status = SyncStatus.objects.filter(sync_type="assets").first()
+        if not status:
+            return {"updated": False}
+        if _reset_stuck_sync(status):
+            return {"updated": True}
+        return {"updated": False}
+    except Exception as exc:
+        logger.error("Failed cleanup_stuck_syncs: %s", exc)
+        return {"updated": False, "error": str(exc)}

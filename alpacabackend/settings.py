@@ -252,7 +252,7 @@ LOGGING = {
 
 
 # Prop Firm Specific Settings
-HISTORIC_DATA_LOADING_LIMIT = 30  # Days of historical data to load
+HISTORIC_DATA_LOADING_LIMIT = 730  # Days of historical data to load (2 years - fetch from beginning)
 
 
 # Google OAuth (if needed)

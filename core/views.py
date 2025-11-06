@@ -752,7 +752,8 @@ class WatchListViewSet(viewsets.ModelViewSet):
     """
 
     serializer_class = WatchListSerializer
-    permission_classes = [IsAuthenticated]
+    from rest_framework.permissions import IsAdminUser  # local import to avoid top refactor
+    permission_classes = [IsAdminUser]
     pagination_class = OffsetPagination
 
     def get_queryset(self):

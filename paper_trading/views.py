@@ -9,6 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import PaperTrade
+from prop_firm.models import PropFirmAccount
+from prop_firm.services.rule_engine import TradeValidator
 from .serializers import PaperTradeCloseSerializer, PaperTradeSerializer
 
 logger = logging.getLogger(__name__)
@@ -42,6 +44,37 @@ class PaperTradeViewSet(viewsets.ModelViewSet):
         return ctx
 
     def perform_create(self, serializer):
+        # Validate prop firm trading rules before creating
+        account = (
+            PropFirmAccount.objects.filter(user=self.request.user, status='ACTIVE')
+            .order_by('-activated_at')
+            .first()
+        )
+        if account is None:
+            return Response(
+                {"detail": "No active prop firm account found."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        data = serializer.validated_data
+        asset = data.get('asset')
+        direction = data.get('direction')
+        quantity = data.get('quantity')
+        price = data.get('entry_price')
+
+        validator = TradeValidator(account)
+        can_trade, errors = validator.can_place_trade(
+            asset=asset,
+            direction=direction,
+            quantity=quantity,
+            price=price,
+        )
+        if not can_trade:
+            return Response(
+                {"detail": "Trade violates rules", "errors": errors},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         serializer.save(user=self.request.user)
 
     @action(detail=True, methods=["post"], url_path="close", url_name="close")

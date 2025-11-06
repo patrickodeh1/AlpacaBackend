@@ -122,6 +122,7 @@ class AlpacaService:
         page_token: str | None = None,
         sort: Literal["asc", "desc"] = "asc",
         asset_class: Literal["us_equity", "us_option", "crypto"] = "us_equity",
+        **kwargs,  # Allow additional params
     ) -> dict:
         """Fetch historical bar data."""
         if not (1 <= limit <= 10000):

@@ -13,7 +13,9 @@ from django.db import close_old_connections
 import websocket
 
 from alpacabackend import const
-from alpacabackend.settings.base import APCA_API_KEY, APCA_API_SECRET_KEY
+from django.conf import settings
+APCA_API_KEY = settings.APCA_API_KEY
+APCA_API_SECRET_KEY = settings.APCA_API_SECRET_KEY
 
 from .aggregator import TimeframeAggregator
 from .backfill import BackfillGuard
@@ -96,6 +98,19 @@ class WebsocketClient:
         return (APCA_API_KEY, APCA_API_SECRET_KEY)
 
     def _connect(self):
+        """Create new WebSocket connections. Closes existing ones first."""
+        # Close existing connections if any
+        if self.ws_stocks:
+            try:
+                self.ws_stocks.close()
+            except Exception:
+                pass
+        if self.ws_crypto:
+            try:
+                self.ws_crypto.close()
+            except Exception:
+                pass
+        
         self.api_key, self.secret_key = self._get_api_credentials()
         self.ws_stocks = websocket.WebSocketApp(
             self._get_stocks_url(),
@@ -131,8 +146,34 @@ class WebsocketClient:
     def _run_stocks(self):
         while self.running:
             try:
+                # Check if socket is already open before running
+                if self.ws_stocks and hasattr(self.ws_stocks, 'sock') and self.ws_stocks.sock:
+                    if self.ws_stocks.sock.connected:
+                        logger.debug("Stocks socket already connected, skipping reconnect")
+                        time.sleep(10)
+                        continue
+                
                 logger.info("Connecting to Alpaca Stocks WebSocket …")
                 assert self.ws_stocks is not None
+                
+                # Close existing socket if it exists but isn't connected
+                if self.ws_stocks and hasattr(self.ws_stocks, 'sock') and self.ws_stocks.sock:
+                    try:
+                        self.ws_stocks.close()
+                    except Exception:
+                        pass
+                
+                # Create new stocks socket if needed
+                if not self.ws_stocks or (hasattr(self.ws_stocks, 'sock') and not self.ws_stocks.sock):
+                    self.api_key, self.secret_key = self._get_api_credentials()
+                    self.ws_stocks = websocket.WebSocketApp(
+                        self._get_stocks_url(),
+                        on_open=self.on_open,
+                        on_message=self.on_message_stocks,
+                        on_error=self.on_error,
+                        on_close=self.on_close,
+                    )
+                
                 self.ws_stocks.run_forever(
                     ping_interval=20,  # seconds
                     ping_timeout=10,
@@ -140,6 +181,12 @@ class WebsocketClient:
                 )
             except Exception as exc:  # noqa: BLE001
                 logger.exception("run_stocks blew up: %s", exc)
+                # Ensure socket is closed on error
+                if self.ws_stocks:
+                    try:
+                        self.ws_stocks.close()
+                    except Exception:
+                        pass
 
             if self.running:
                 logger.warning("Stocks socket closed — reconnect in 10 s")
@@ -148,8 +195,34 @@ class WebsocketClient:
     def _run_crypto(self):
         while self.running:
             try:
+                # Check if socket is already open before running
+                if self.ws_crypto and hasattr(self.ws_crypto, 'sock') and self.ws_crypto.sock:
+                    if self.ws_crypto.sock.connected:
+                        logger.debug("Crypto socket already connected, skipping reconnect")
+                        time.sleep(10)
+                        continue
+                
                 logger.info("Connecting to Alpaca Crypto WebSocket …")
                 assert self.ws_crypto is not None
+                
+                # Close existing socket if it exists but isn't connected
+                if self.ws_crypto and hasattr(self.ws_crypto, 'sock') and self.ws_crypto.sock:
+                    try:
+                        self.ws_crypto.close()
+                    except Exception:
+                        pass
+                
+                # Create new crypto socket if needed
+                if not self.ws_crypto or (hasattr(self.ws_crypto, 'sock') and not self.ws_crypto.sock):
+                    self.api_key, self.secret_key = self._get_api_credentials()
+                    self.ws_crypto = websocket.WebSocketApp(
+                        self._get_crypto_url(),
+                        on_open=self.on_open,
+                        on_message=self.on_message_crypto,
+                        on_error=self.on_error,
+                        on_close=self.on_close,
+                    )
+                
                 self.ws_crypto.run_forever(
                     ping_interval=20,  # seconds
                     ping_timeout=10,
@@ -157,6 +230,12 @@ class WebsocketClient:
                 )
             except Exception as exc:  # noqa: BLE001
                 logger.exception("run_crypto blew up: %s", exc)
+                # Ensure socket is closed on error
+                if self.ws_crypto:
+                    try:
+                        self.ws_crypto.close()
+                    except Exception:
+                        pass
 
             if self.running:
                 logger.warning("Crypto socket closed — reconnect in 10 s")
