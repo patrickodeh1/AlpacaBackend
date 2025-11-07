@@ -5,6 +5,7 @@ Django settings for alpacabackend project - Prop Firm Edition
 from pathlib import Path
 import os
 from datetime import timedelta
+from kombu import Connection
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
@@ -200,6 +201,13 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_BROKER_USE_SSL = {
+    "ssl_cert_reqs": "CERT_NONE"
+}
+
+CELERY_RESULT_BACKEND_USE_SSL = {
+    "ssl_cert_reqs": "CERT_NONE"
+}
 
 
 # Cache Configuration
