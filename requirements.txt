@@ -59,3 +59,5 @@ websocket-client==1.7.0
 websockets==11.0.3
 wheel==0.45.1
 whitenoise==6.11.0
+stripe==5.4.0
+python-dotenv==1.0.0

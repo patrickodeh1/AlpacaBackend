@@ -203,20 +203,6 @@ class CheckoutSessionSerializer(serializers.Serializer):
         return value
 
 
-class MockPaymentSerializer(serializers.Serializer):
-    """Serializer for mock payment flow used in development/testing."""
-
-    plan_id = serializers.IntegerField()
-    billing = serializers.JSONField()
-    card = serializers.JSONField()
-
-    def validate_plan_id(self, value):
-        try:
-            plan = PropFirmPlan.objects.get(id=value, is_active=True)
-        except PropFirmPlan.DoesNotExist:
-            raise serializers.ValidationError("Plan not found or inactive")
-        return value
-
 
 class WebhookEventSerializer(serializers.Serializer):
     """Serializer for Stripe webhook events"""

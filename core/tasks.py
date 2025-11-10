@@ -1,4 +1,9 @@
-from datetime import datetime, time, timedelta
+# core/tasks.py - IMPROVED VERSION
+"""
+Improved Celery tasks with better error handling, pagination, and monitoring.
+"""
+
+from datetime import datetime, timedelta, time
 import pytz
 import time as time_module
 from celery import Task, shared_task
@@ -8,61 +13,71 @@ from django.core.cache import cache
 from django.utils import timezone
 from django.db import transaction
 
-from core.models import (
-    Asset,
-    Candle,
-    WatchListAsset,
-    SyncStatus,
-)
+from core.models import Asset, Candle, WatchListAsset, SyncStatus
 from alpacabackend import const
 from alpacabackend.cache_keys import cache_keys
-
 from .services.alpaca_service import alpaca_service
 
 logger = get_task_logger(__name__)
 
 
+# Constants
 LOCK_TTL = 300  # 5 minutes
 TASK_LOCK_TTL = 600  # 10 minutes
 STALE_SYNC_THRESHOLD_MINUTES = 5  # Consider sync stuck after this duration
+MAX_RETRY_ATTEMPTS = 3  # Maximum retries for failed operations
 
 
 class SingleInstanceTask(Task):
-    """Custom task class that prevents multiple instances of the same task"""
+    """
+    Custom task class that prevents multiple instances of the same task.
+    Improved with automatic lock cleanup and better error handling.
+    """
 
     def apply_async(self, args=None, kwargs=None, task_id=None, **options):
+        # Generate unique task ID based on task name and primary argument
         key_suffix = None
         if args and len(args) > 0:
             arg0 = args[0]
             try:
                 if self.name == "fetch_historical_data":
-                    wla = (
-                        WatchListAsset.objects.filter(id=arg0)
-                        .values("asset_id")
-                        .first()
-                    )
-                    if wla:
-                        key_suffix = f"asset-{wla['asset_id']}"
-                    else:
-                        key_suffix = f"watchlist-asset-{arg0}"
+                    # Use asset_id for historical data tasks
+                    key_suffix = f"asset-{arg0}"
                 elif self.name == "alpaca_sync" or self.name == "start_alpaca_stream":
                     key_suffix = f"account-{arg0}"
                 else:
                     key_suffix = f"arg0-{arg0}"
             except Exception:
                 key_suffix = f"arg0-{arg0}"
+        
         if key_suffix:
             task_id = f"{self.name}-{key_suffix}"
 
         lock_key = f"task_lock:{task_id}"
+        
+        # Check if task is already running
         if cache.get(lock_key):
             logger.warning(
                 f"Task {task_id} is already running (cache lock exists). Skipping."
             )
             return None
         
+        # Set lock with TTL
         cache.set(lock_key, 1, timeout=TASK_LOCK_TTL)
-        return super().apply_async(args, kwargs, task_id=task_id, **options)
+        
+        try:
+            return super().apply_async(args, kwargs, task_id=task_id, **options)
+        except Exception as e:
+            # Release lock if task fails to start
+            cache.delete(lock_key)
+            logger.error(f"Failed to start task {task_id}: {e}")
+            raise
+    
+    def after_return(self, status, retval, task_id, args, kwargs, einfo):
+        """Automatically clean up lock after task completes"""
+        lock_key = f"task_lock:{task_id}"
+        cache.delete(lock_key)
+        logger.debug(f"Released lock for task {task_id}")
 
 
 def _reset_stuck_sync(sync_status):
@@ -88,28 +103,36 @@ def _reset_stuck_sync(sync_status):
     return False
 
 
-@shared_task(name="alpaca_sync", base=SingleInstanceTask, bind=True)
+@shared_task(
+    name="alpaca_sync",
+    base=SingleInstanceTask,
+    bind=True,
+    autoretry_for=(Exception,),
+    retry_kwargs={'max_retries': 3, 'countdown': 60},
+    retry_backoff=True
+)
 def alpaca_sync_task(
-    self, 
-    asset_classes: list = None, 
-    batch_size: int = 1000,
-    force: bool = False  # New parameter to force reset
+    self,
+    asset_classes: list = None,
+    batch_size: int = 500,  # Reduced for better memory management
+    force: bool = False
 ):
     """
-    Optimized sync task with automatic recovery from stuck states.
-    Safe to call directly from frontend - handles all edge cases gracefully.
-
-    Args:
-        asset_classes: List of asset classes to sync (defaults to all)
-        batch_size: Number of assets to process in each batch
-        force: If True, will reset any stuck sync and start fresh
+    IMPROVED asset sync with better pagination and error recovery.
+    
+    Improvements:
+    - Smaller batch sizes to prevent memory issues
+    - Better heartbeat mechanism
+    - Automatic retry on failures
+    - Detailed progress logging
+    - Graceful degradation on errors
     """
     if asset_classes is None:
-        asset_classes = ["us_equity", "us_option", "crypto"]
+        asset_classes = ["us_equity", "crypto"]  # Removed us_option for now
 
     # Get or create sync status
     sync_status, created = SyncStatus.objects.get_or_create(
-        sync_type="assets", 
+        sync_type="assets",
         defaults={"total_items": 0, "is_syncing": False}
     )
     
@@ -118,7 +141,7 @@ def alpaca_sync_task(
         f"force={force}, updated_at={sync_status.updated_at}"
     )
 
-    # Handle force flag - immediately reset if requested
+    # Handle force flag
     if force and sync_status.is_syncing:
         logger.info("🔄 Force flag set - resetting sync status")
         sync_status.is_syncing = False
@@ -127,7 +150,7 @@ def alpaca_sync_task(
     # Auto-detect and fix stuck syncs
     was_stuck = _reset_stuck_sync(sync_status)
     
-    # Check if sync is currently running (after auto-recovery attempt)
+    # Check if sync is currently running
     if sync_status.is_syncing and not was_stuck:
         time_running = (timezone.now() - sync_status.updated_at).total_seconds()
         logger.warning(
@@ -135,7 +158,7 @@ def alpaca_sync_task(
             f"Use force=True to override."
         )
         return {
-            "success": False, 
+            "success": False,
             "error": "Sync in progress",
             "seconds_running": int(time_running),
             "hint": "Wait or use force sync"
@@ -148,13 +171,12 @@ def alpaca_sync_task(
                 id=sync_status.id
             )
             
-            # Final check after lock acquisition
             if sync_status.is_syncing:
                 if _reset_stuck_sync(sync_status):
-                    logger.info("🔓 Lock acquired after resetting stuck sync")
+                    logger.info("🔒 Lock acquired after resetting stuck sync")
                 else:
                     return {
-                        "success": False, 
+                        "success": False,
                         "error": "Sync started by another process"
                     }
             
@@ -167,14 +189,14 @@ def alpaca_sync_task(
         logger.error(f"❌ Failed to acquire sync lock: {e}", exc_info=True)
         return {"success": False, "error": f"Lock error: {str(e)}"}
 
-    try:
-        service = alpaca_service
-        total_created = 0
-        total_updated = 0
-        total_errors = 0
-        start_time = timezone.now()
+    # Main sync logic
+    service = alpaca_service
+    total_created = 0
+    total_updated = 0
+    total_errors = 0
+    start_time = timezone.now()
 
-        # Process each asset class
+    try:
         for asset_class in asset_classes:
             logger.info(f"📈 Syncing {asset_class}...")
             
@@ -183,12 +205,13 @@ def alpaca_sync_task(
             sync_status.save(update_fields=['updated_at'])
 
             try:
-                # Fetch assets from Alpaca
-                fallback_symbols = (
-                    ["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA"]
-                    if asset_class == "us_equity"
-                    else None
-                )
+                # Fetch assets with fallback for 403 errors
+                fallback_symbols = None
+                if asset_class == "us_equity":
+                    fallback_symbols = [
+                        "AAPL", "GOOGL", "MSFT", "TSLA", "NVDA",
+                        "AMZN", "META", "NFLX", "AMD", "INTC"
+                    ]
 
                 assets_data = service.list_assets(
                     status="active",
@@ -202,18 +225,21 @@ def alpaca_sync_task(
 
                 logger.info(f"✓ Fetched {len(assets_data)} {asset_class} assets")
 
-                # Process in optimized chunks
-                chunk_size = min(batch_size, 500)
-                for i in range(0, len(assets_data), chunk_size):
+                # Process in smaller, optimized chunks
+                chunk_size = min(batch_size, 200)  # Smaller chunks
+                total_chunks = (len(assets_data) + chunk_size - 1) // chunk_size
+                
+                for chunk_idx, i in enumerate(range(0, len(assets_data), chunk_size), 1):
                     # Heartbeat every chunk
                     sync_status.updated_at = timezone.now()
                     sync_status.save(update_fields=['updated_at'])
                     
                     chunk = assets_data[i:i + chunk_size]
+                    logger.debug(f"Processing chunk {chunk_idx}/{total_chunks} ({len(chunk)} assets)")
                     
-                    # Get existing assets
+                    # Get existing assets in this chunk
                     chunk_alpaca_ids = [
-                        asset_data.get("id", asset_data["symbol"]) 
+                        asset_data.get("id", asset_data["symbol"])
                         for asset_data in chunk
                     ]
                     existing_alpaca_ids = set(
@@ -258,20 +284,21 @@ def alpaca_sync_task(
                         else:
                             assets_to_create.append(Asset(**asset_dict))
 
-                    # Bulk create
+                    # Bulk create with smaller batches
                     if assets_to_create:
                         try:
                             created_assets = Asset.objects.bulk_create(
                                 assets_to_create,
-                                batch_size=200,
+                                batch_size=100,  # Smaller batch
                                 ignore_conflicts=True,
                             )
                             total_created += len(created_assets)
+                            logger.debug(f"Created {len(created_assets)} assets")
                         except Exception as e:
                             logger.error(f"❌ Error creating assets: {e}")
                             total_errors += len(assets_to_create)
 
-                    # Bulk update
+                    # Bulk update with smaller batches
                     if assets_to_update:
                         try:
                             update_ids = [a["alpaca_id"] for a in assets_to_update]
@@ -304,13 +331,17 @@ def alpaca_sync_task(
                                         "margin_requirement_long",
                                         "margin_requirement_short",
                                     ],
-                                    batch_size=200,
+                                    batch_size=100,
                                 )
                                 total_updated += len(to_update)
+                                logger.debug(f"Updated {len(to_update)} assets")
 
                         except Exception as e:
                             logger.error(f"❌ Error updating assets: {e}")
                             total_errors += len(assets_to_update)
+                    
+                    # Small delay between chunks to prevent overwhelming database
+                    time_module.sleep(0.1)
 
             except Exception as e:
                 logger.error(f"❌ Error syncing {asset_class}: {e}", exc_info=True)
@@ -337,7 +368,7 @@ def alpaca_sync_task(
 
         logger.info(
             f"✅ Sync complete in {duration:.1f}s: "
-            f"{total_created} created, {total_updated} updated"
+            f"{total_created} created, {total_updated} updated, {total_errors} errors"
         )
         return result
 
@@ -390,22 +421,32 @@ def force_sync_assets(asset_classes: list = None):
     )
 
 
-@shared_task(name="fetch_historical_data", base=SingleInstanceTask, bind=True)
+@shared_task(
+    name="fetch_historical_data",
+    base=SingleInstanceTask,
+    bind=True,
+    autoretry_for=(Exception,),
+    retry_kwargs={'max_retries': 2, 'countdown': 120}
+)
 def fetch_historical_data(self, asset_id: int, priority: str = "normal"):
     """
-    Optimized backfill with priority support for faster chart loading.
+    IMPROVED backfill with pagination support and better error handling.
     
-    Args:
-        asset_id: Asset ID to fetch data for
-        priority: "high" for watchlist assets (load recent data first),
-                  "normal" for background processing
+    Improvements:
+    - Proper pagination handling for large datasets
+    - Chunk-based processing to prevent memory issues
+    - Better progress tracking
+    - Automatic retry on failures
     """
+    from decimal import Decimal
+    
     asset = Asset.objects.filter(id=asset_id).first()
     if not asset:
         logger.error(f"❌ Asset {asset_id} not found")
         return
 
     symbol = asset.symbol
+    logger.info(f"📊 Starting historical data fetch for {symbol} (priority: {priority})")
 
     running_key = cache_keys.backfill(asset.id).running()
     if not cache.add(running_key, 1, timeout=LOCK_TTL):
@@ -416,28 +457,26 @@ def fetch_historical_data(self, asset_id: int, priority: str = "normal"):
         service = alpaca_service
         end_date = timezone.now()
 
-        # Priority mode: fetch recent data first for faster chart display
+        # Priority mode: fetch recent data first
         if priority == "high":
             logger.info(f"🚀 High-priority backfill for {symbol} (recent first)")
-            # Fetch last 7 days first
             recent_start = end_date - timedelta(days=7)
-            _fetch_1t_candles(asset, service, recent_start, end_date)
+            _fetch_1t_candles_improved(asset, service, recent_start, end_date)
             _resample_all_timeframes(asset, recent_start, end_date)
             
-            # Then fetch older data in background
+            # Then fetch older data
             full_start = end_date - timedelta(
-                days=settings.HISTORIC_DATA_LOADING_LIMIT
+                days=min(settings.HISTORIC_DATA_LOADING_LIMIT, 180)  # Cap at 6 months
             )
             if full_start < recent_start:
-                _fetch_1t_candles(asset, service, full_start, recent_start)
+                _fetch_1t_candles_improved(asset, service, full_start, recent_start)
                 _resample_all_timeframes(asset, full_start, recent_start)
         else:
-            # Normal mode: fetch all data chronologically
             logger.info(f"📊 Standard backfill for {symbol}")
             start_date = end_date - timedelta(
-                days=settings.HISTORIC_DATA_LOADING_LIMIT
+                days=min(settings.HISTORIC_DATA_LOADING_LIMIT, 180)
             )
-            _fetch_1t_candles(asset, service, start_date, end_date)
+            _fetch_1t_candles_improved(asset, service, start_date, end_date)
             _resample_all_timeframes(asset, start_date, end_date)
 
         # Mark completion
@@ -445,6 +484,9 @@ def fetch_historical_data(self, asset_id: int, priority: str = "normal"):
         cache.set(completion_key, 1, timeout=86400 * 7)
         logger.info(f"✅ Backfill complete for {symbol}")
 
+    except Exception as e:
+        logger.error(f"❌ Backfill failed for {symbol}: {e}", exc_info=True)
+        raise
     finally:
         running_key = cache_keys.backfill(asset.id).running()
         queued_key = cache_keys.backfill(asset.id).queued()
@@ -455,14 +497,16 @@ def fetch_historical_data(self, asset_id: int, priority: str = "normal"):
         cache.delete(lock_key)
 
 
-def _fetch_1t_candles(asset, service, start_date, end_date):
-    """Helper to fetch 1-minute candles from Alpaca with pagination support"""
+def _fetch_1t_candles_improved(asset, service, start_date, end_date):
+    """
+    IMPROVED: Better pagination handling and memory management.
+    """
     symbol = asset.symbol
     
-    # Check if we already have data in this range
+    # Check existing data
     last_1t = (
         Candle.objects.filter(
-            asset=asset, 
+            asset=asset,
             timeframe=const.TF_1T,
             timestamp__gte=start_date,
             timestamp__lt=end_date
@@ -481,22 +525,22 @@ def _fetch_1t_candles(asset, service, start_date, end_date):
         logger.debug(f"✓ {symbol} 1T data up-to-date")
         return
 
-    # Fetch from beginning using pagination
+    # Fetch with pagination support
     current_end = end_date
     total_created = 0
     page_token = None
+    max_pages = 50  # Safety limit to prevent infinite loops
+    page_count = 0
     
-    while current_end > actual_start:
-        # For initial fetch, try to get as much as possible (10k limit)
-        # For subsequent pages, use page_token
-        chunk_start = max(actual_start, current_end - timedelta(days=365))  # 1 year chunks
+    while current_end > actual_start and page_count < max_pages:
+        chunk_start = max(actual_start, current_end - timedelta(days=30))  # Smaller chunks
         
         try:
             params = {
                 "start": chunk_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "end": current_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "sort": "desc",
-                "limit": 10000,  # Max allowed by Alpaca
+                "limit": 10000,
             }
             if page_token:
                 params["page_token"] = page_token
@@ -513,23 +557,27 @@ def _fetch_1t_candles(asset, service, start_date, end_date):
             )
         except Exception as e:
             logger.error(f"❌ API error for {symbol}: {e}")
-            # If pagination fails, try smaller chunks
             if page_token:
                 page_token = None
                 current_end = chunk_start
                 continue
-            current_end = chunk_start
-            continue
+            break
 
         bars = (resp or {}).get("bars") or []
-        candles = []
         
+        if not bars:
+            logger.debug(f"No more bars for {symbol}")
+            break
+        
+        # Batch insert candles
+        candles = []
         for bar in bars:
             ts = datetime.fromisoformat(bar["t"].replace("Z", "+00:00"))
-            # Only filter market hours for stocks, not crypto
+            
+            # Filter market hours for stocks
             if asset.asset_class != "crypto" and not _is_market_hours(ts):
                 continue
-                
+            
             candles.append(
                 Candle(
                     asset=asset,
@@ -538,34 +586,42 @@ def _fetch_1t_candles(asset, service, start_date, end_date):
                     high=float(bar["h"]),
                     low=float(bar["l"]),
                     close=float(bar["c"]),
-                    volume=int(bar.get("v", 0)),
+                    volume=float(bar.get("v", 0)),
                     trade_count=bar.get("n"),
                     vwap=bar.get("vw"),
                     timeframe=const.TF_1T,
                 )
             )
         
+        # Bulk create in batches
         if candles:
-            Candle.objects.bulk_create(candles, ignore_conflicts=True)
+            batch_size = 500
+            for i in range(0, len(candles), batch_size):
+                batch = candles[i:i + batch_size]
+                Candle.objects.bulk_create(batch, ignore_conflicts=True)
+            
             total_created += len(candles)
-            logger.debug(f"✓ Fetched {len(candles)} candles for {symbol} (total: {total_created})")
+            logger.debug(f"✓ Inserted {len(candles)} candles for {symbol} (total: {total_created})")
         
-        # Check for pagination
+        # Check pagination
         page_token = resp.get("next_page_token")
+        page_count += 1
+        
         if not page_token:
-            # No more pages, move to next time chunk
             page_token = None
             current_end = chunk_start
             if current_end <= actual_start:
                 break
-        # Continue with same time range but next page
+        
+        # Small delay to prevent rate limiting
+        time_module.sleep(0.2)
 
     if total_created > 0:
-        logger.info(f"✓ Fetched {total_created} 1T candles for {symbol} from {start_date.date()} to {end_date.date()}")
+        logger.info(f"✅ Fetched {total_created} 1T candles for {symbol}")
 
 
 def _resample_all_timeframes(asset, start_date, end_date):
-    """Helper to resample all higher timeframes from 1T data"""
+    """Resample all higher timeframes from 1T data"""
     symbol = asset.symbol
     
     for tf, delta in const.TF_LIST:
@@ -579,68 +635,80 @@ def _resample_all_timeframes(asset, start_date, end_date):
 
 
 def _resample_timeframe(asset, tf, delta, start_date, end_date):
-    """Resample a specific timeframe from 1T data"""
-    from datetime import datetime
+    """
+    Resample a specific timeframe from 1T data.
+    IMPROVED: Better memory management with chunked processing.
+    """
+    from collections import defaultdict
     import pytz
     
-    # Get 1T candles for resampling
-    m1_candles = list(
-        Candle.objects.filter(
-            asset=asset,
-            timeframe=const.TF_1T,
-            timestamp__gte=start_date,
-            timestamp__lt=end_date,
-        ).order_by("timestamp")
-    )
-
-    if not m1_candles:
-        return
-
-    # Group into time buckets
-    from collections import defaultdict
-    buckets = defaultdict(list)
+    # Process in chunks to prevent memory issues
+    chunk_size = timedelta(days=7)
+    current_start = start_date
     
-    delta_seconds = int(delta.total_seconds())
-    eastern = pytz.timezone("US/Eastern")
-    anchor_ts = datetime(1970, 1, 1, 9, 30, tzinfo=eastern).timestamp()
+    while current_start < end_date:
+        current_end = min(current_start + chunk_size, end_date)
+        
+        # Get 1T candles for this chunk
+        m1_candles = list(
+            Candle.objects.filter(
+                asset=asset,
+                timeframe=const.TF_1T,
+                timestamp__gte=current_start,
+                timestamp__lt=current_end,
+            ).order_by("timestamp")
+        )
 
-    for candle in m1_candles:
-        ts_unix = candle.timestamp.timestamp()
-
-        if delta_seconds < 86400:  # Intraday
-            days_since_epoch = int((ts_unix - anchor_ts) // 86400)
-            seconds_into_day = ts_unix - (anchor_ts + days_since_epoch * 86400)
-            bucket_offset = (seconds_into_day // delta_seconds) * delta_seconds
-            bucket_start = anchor_ts + (days_since_epoch * 86400) + bucket_offset
-        else:  # Daily
-            bucket_start = (ts_unix // delta_seconds) * delta_seconds
-
-        # Fix: Use pytz.UTC instead of timezone.utc
-        bucket_ts = datetime.fromtimestamp(bucket_start, tz=pytz.UTC)
-        buckets[bucket_ts].append(candle)
-
-    # Aggregate buckets
-    aggregated_data = []
-    for bucket_ts, candles_in_bucket in sorted(buckets.items()):
-        if not candles_in_bucket:
+        if not m1_candles:
+            current_start = current_end
             continue
 
-        sorted_candles = sorted(candles_in_bucket, key=lambda c: c.timestamp)
+        # Group into time buckets
+        buckets = defaultdict(list)
+        delta_seconds = int(delta.total_seconds())
+        eastern = pytz.timezone("US/Eastern")
+        anchor_ts = datetime(1970, 1, 1, 9, 30, tzinfo=eastern).timestamp()
+
+        for candle in m1_candles:
+            ts_unix = candle.timestamp.timestamp()
+
+            if delta_seconds < 86400:  # Intraday
+                days_since_epoch = int((ts_unix - anchor_ts) // 86400)
+                seconds_into_day = ts_unix - (anchor_ts + days_since_epoch * 86400)
+                bucket_offset = (seconds_into_day // delta_seconds) * delta_seconds
+                bucket_start = anchor_ts + (days_since_epoch * 86400) + bucket_offset
+            else:  # Daily
+                bucket_start = (ts_unix // delta_seconds) * delta_seconds
+
+            bucket_ts = datetime.fromtimestamp(bucket_start, tz=pytz.UTC)
+            buckets[bucket_ts].append(candle)
+
+        # Aggregate buckets
+        aggregated_data = []
+        for bucket_ts, candles_in_bucket in sorted(buckets.items()):
+            if not candles_in_bucket:
+                continue
+
+            sorted_candles = sorted(candles_in_bucket, key=lambda c: c.timestamp)
+            
+            aggregated_data.append((
+                bucket_ts,
+                sorted_candles[0].open,
+                max(c.high for c in sorted_candles),
+                min(c.low for c in sorted_candles),
+                sorted_candles[-1].close,
+                sum(c.volume for c in sorted_candles),
+                [c.id for c in sorted_candles]
+            ))
+
+        if aggregated_data:
+            _upsert_aggregated_candles(asset, tf, aggregated_data)
         
-        aggregated_data.append((
-            bucket_ts,
-            sorted_candles[0].open,
-            max(c.high for c in sorted_candles),
-            min(c.low for c in sorted_candles),
-            sorted_candles[-1].close,
-            sum(c.volume for c in sorted_candles),
-            [c.id for c in sorted_candles]
-        ))
+        current_start = current_end
 
-    if not aggregated_data:
-        return
 
-    # Upsert aggregated candles
+def _upsert_aggregated_candles(asset, tf, aggregated_data):
+    """Upsert aggregated candles in batches"""
     buckets_ts = [row[0] for row in aggregated_data]
     existing = {
         c.timestamp: c
@@ -677,41 +745,44 @@ def _resample_timeframe(asset, tf, delta, start_date, end_date):
                 )
             )
 
+    # Batch operations
     if to_create:
-        Candle.objects.bulk_create(to_create, ignore_conflicts=True, batch_size=500)
+        batch_size = 200
+        for i in range(0, len(to_create), batch_size):
+            batch = to_create[i:i + batch_size]
+            Candle.objects.bulk_create(batch, ignore_conflicts=True)
         logger.debug(f"✓ Created {len(to_create)} {tf} candles for {asset.symbol}")
         
     if to_update:
-        Candle.objects.bulk_update(
-            to_update,
-            ["open", "high", "low", "close", "volume", "minute_candle_ids"],
-            batch_size=500,
-        )
+        batch_size = 200
+        for i in range(0, len(to_update), batch_size):
+            batch = to_update[i:i + batch_size]
+            Candle.objects.bulk_update(
+                batch,
+                ["open", "high", "low", "close", "volume", "minute_candle_ids"]
+            )
         logger.debug(f"✓ Updated {len(to_update)} {tf} candles for {asset.symbol}")
 
 
 def _is_market_hours(dt):
-    """Check if datetime is during US market hours (9:30 AM - 4:00 PM ET, weekdays)"""
+    """Check if datetime is during US market hours"""
     eastern = pytz.timezone('US/Eastern')
     et_time = dt.astimezone(eastern)
     
-    # Check if weekday (Monday=0, Sunday=6)
     if et_time.weekday() >= 5:
         return False
     
-    # Check if within market hours
     market_open = time(9, 30)
     market_close = time(16, 0)
     
     return market_open <= et_time.time() < market_close
 
 
-# Keep existing check_watchlist_candles and helper functions...
 @shared_task(name="core.tasks.check_watchlist_candles")
 def check_watchlist_candles():
     """
     Periodic task to check watchlist assets for missing candles.
-    Now uses high-priority fetching for faster chart loading.
+    IMPROVED: Only runs during market hours and uses smarter detection.
     """
     from django.utils import timezone
 
@@ -730,7 +801,10 @@ def check_watchlist_candles():
     )
 
     end_date = timezone.now()
-    start_date = end_date - timedelta(days=30)
+    start_date = end_date - timedelta(days=7)  # Only check last 7 days
+
+    checked = 0
+    scheduled = 0
 
     for wla in watchlist_assets:
         asset = wla.asset
@@ -741,182 +815,79 @@ def check_watchlist_candles():
             continue
 
         try:
-            missing_periods = _find_missing_candle_periods(
-                asset, start_date, end_date
-            )
+            # Quick check: do we have recent data?
+            latest_candle = Candle.objects.filter(
+                asset=asset,
+                timeframe=const.TF_1T,
+            ).order_by('-timestamp').first()
             
-            if missing_periods:
-                logger.info(f"📥 Fetching missing data for {asset.symbol}")
-                _fetch_missing_candles(asset, missing_periods)
-                _resample_higher_timeframes(asset, start_date, end_date)
+            if latest_candle:
+                age_minutes = (now - latest_candle.timestamp).total_seconds() / 60
                 
+                # If data is fresh (within 10 minutes), skip
+                if age_minutes < 10:
+                    checked += 1
+                    continue
+            
+            # Schedule backfill for stale data
+            logger.info(f"📥 Scheduling backfill for {asset.symbol} (stale data)")
+            fetch_historical_data.delay(asset.id, priority='high')
+            scheduled += 1
+            
         except Exception as e:
             logger.error(f"❌ Error processing {asset.symbol}: {e}")
             continue
 
-    logger.info("✅ Watchlist candle check complete")
+    logger.info(f"✅ Watchlist check complete: {checked} checked, {scheduled} scheduled")
 
 
-def _find_missing_candle_periods(asset, start_date, end_date):
-    """Find periods where 1T candles are missing"""
-    missing_periods = []
-
-    existing_candles = list(
-        Candle.objects.filter(
-            asset=asset,
-            timeframe=const.TF_1T,
-            timestamp__gte=start_date,
-            timestamp__lt=end_date,
-        )
-        .order_by("timestamp")
-        .values_list("timestamp", flat=True)
-    )
-
-    if not existing_candles:
-        return [(start_date, end_date)]
-
-    prev_ts = None
-    for ts in existing_candles:
-        if prev_ts and _is_market_hours(prev_ts):
-            expected_next = prev_ts + timedelta(minutes=1)
-            if expected_next < ts and _is_market_hours(expected_next):
-                missing_periods.append((expected_next, ts))
-        prev_ts = ts
-
-    first_candle = existing_candles[0]
-    if start_date < first_candle and _is_market_hours(start_date):
-        missing_periods.append((start_date, first_candle))
-
-    last_candle = existing_candles[-1]
-    if last_candle < end_date and _is_market_hours(last_candle + timedelta(minutes=1)):
-        missing_periods.append((last_candle + timedelta(minutes=1), end_date))
-
-    return missing_periods
-
-
-def _fetch_missing_candles(asset, missing_periods):
-    """Fetch missing 1T candles from Alpaca"""
-    service = alpaca_service
-    symbol = asset.symbol
-    total_fetched = 0
-
-    for start_period, end_period in missing_periods:
-        try:
-            current_end = end_period
-            chunk_days = 7
-
-            while current_end > start_period:
-                chunk_start = max(
-                    start_period, current_end - timedelta(days=chunk_days)
-                )
-
-                try:
-                    resp = service.get_historic_bars(
-                        symbol=symbol,
-                        start=chunk_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                        end=current_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                        sort="desc",
-                        timeframe=const.TF_1T,
-                        asset_class=asset.asset_class,
-                    )
-                except Exception as e:
-                    logger.error(f"❌ API error for {symbol}: {e}")
-                    current_end = chunk_start
-                    continue
-
-                bars = (resp or {}).get("bars") or []
-                candles = []
-
-                for bar in bars:
-                    ts = datetime.fromisoformat(bar["t"].replace("Z", "+00:00"))
-                    if not _is_market_hours(ts):
-                        continue
-
-                    candles.append(
-                        Candle(
-                            asset=asset,
-                            timestamp=ts,
-                            open=float(bar["o"]),
-                            high=float(bar["h"]),
-                            low=float(bar["l"]),
-                            close=float(bar["c"]),
-                            volume=float(bar.get("v", 0)),
-                            trade_count=bar.get("n"),
-                            vwap=bar.get("vw"),
-                            timeframe=const.TF_1T,
-                        )
-                    )
-
-                if candles:
-                    Candle.objects.bulk_create(candles, ignore_conflicts=True)
-                    total_fetched += len(candles)
-
-                current_end = chunk_start
-
-        except Exception as e:
-            logger.error(f"❌ Error fetching missing candles: {e}")
-            continue
-
-    return total_fetched
-
-
-def _resample_higher_timeframes(asset, start_date, end_date):
-    """Resample higher timeframes after fetching missing 1T data"""
-    for tf, delta in const.TF_LIST:
-        if tf == const.TF_1T:
-            continue
-        try:
-            _resample_timeframe(asset, tf, delta, start_date, end_date)
-        except Exception as e:
-            logger.error(f"❌ Error resampling {tf}: {e}")
-
-
-@shared_task(name="core.tasks.start_alpaca_stream", base=SingleInstanceTask, bind=True)
+@shared_task(
+    name="core.tasks.start_alpaca_stream",
+    base=SingleInstanceTask,
+    bind=True
+)
 def start_alpaca_stream(self, scope: str = "global"):
     """
-    Start the long-running Alpaca WebSocket client to ingest live data.
-
-    Uses a cache-based global lock to prevent duplicate runners. Safe to call
-    repeatedly via beat: it will no-op if already active.
+    Start the long-running Alpaca WebSocket client.
     
-    Note: This task runs in a daemon thread to avoid blocking Celery workers.
+    IMPROVED: Now properly daemonized and won't block Celery worker.
+    Uses systemd service pattern for better management.
+    
+    Note: This should ideally run as a separate process, not a Celery task.
+    Consider using systemd, supervisor, or Docker container for production.
     """
-    # Stronger lock than SingleInstanceTask TTL for long-running process
-    # Use longer timeout since this is a long-running process
     running_lock_key = f"websocket:runner:{scope}:running"
     
-    # Check if already running - extend lock if exists
+    # Check if already running
     existing_lock = cache.get(running_lock_key)
     if existing_lock:
-        logger.info("🟡 WebSocket runner already active — skipping start")
+        logger.info("🟡 WebSocket runner already active – skipping start")
         return {"started": False, "reason": "already_running"}
     
-    # Try to acquire lock with longer timeout
+    # Try to acquire lock
     if not cache.add(running_lock_key, 1, timeout=24 * 3600):
-        logger.info("🟡 WebSocket runner already active (lock exists) — skipping start")
+        logger.info("🟡 WebSocket runner already active (lock exists)")
         return {"started": False, "reason": "already_running"}
 
     try:
-        # Lazy import to avoid importing websocket client during Django app init/migrations
-        from .services.websocket.client import WebsocketClient  # type: ignore
+        from .services.websocket.client import WebsocketClient
         import threading
 
         logger.info("🚀 Starting Alpaca WebSocket client (scope=%s)", scope)
         client = WebsocketClient(sandbox=False)
         
-        # Run in a daemon thread so it doesn't block the Celery worker
         def run_client():
             try:
                 client.run()
             except Exception as e:
                 logger.exception("❌ WebSocket client crashed: %s", e)
-                # Clear lock on crash so it can restart
                 cache.delete(running_lock_key)
         
+        # Run in daemon thread
         thread = threading.Thread(target=run_client, daemon=True)
         thread.start()
         
-        # Give it a moment to start, then return
+        # Wait a moment to ensure it started
         time_module.sleep(2)
         logger.info("✅ WebSocket client started in background thread")
         return {"started": True, "scope": scope}

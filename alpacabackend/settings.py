@@ -89,9 +89,9 @@ DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql',
          'NAME': os.getenv('DB_NAME', 'postgres'),
-         'USER': os.getenv('DB_USER', 'postgres.sqbfyjptalqcqpndimvx'),
+         'USER': os.getenv('DB_USER', 'postgres.jhshmcsgyfkmsluwgktb'),
          'PASSWORD': os.getenv('DB_PASSWORD'),
-         'HOST': os.getenv('DB_HOST', 'aws-1-eu-north-1.pooler.supabase.com'),
+         'HOST': os.getenv('DB_HOST', 'aws-1-eu-west-1.pooler.supabase.com'),
          'PORT': os.getenv('DB_PORT', '5432'),
      }
  }
@@ -172,10 +172,9 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 # Stripe Configuration
-STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
-STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
-
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'your-stripe-secret-key')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY', 'your-stripe-publishable-key')
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', '')
 
 # Alpaca API Configuration
 APCA_API_KEY = config('APCA_API_KEY')

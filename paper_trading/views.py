@@ -1,124 +1,349 @@
-from decimal import Decimal
-import logging
-
-from django.utils import timezone
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, status, viewsets
-from rest_framework.exceptions import ValidationError
+# paper_trading/views.py - INTEGRATED WITH PROP FIRM SIMULATION
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from decimal import Decimal
+import logging
 
 from .models import PaperTrade
+from .serializers import PaperTradeSerializer
+from core.models import Asset
 from prop_firm.models import PropFirmAccount
-from prop_firm.services.rule_engine import TradeValidator
-from .serializers import PaperTradeCloseSerializer, PaperTradeSerializer
+from prop_firm.services.trade_simulation import (
+    TradeSimulationEngine,
+    execute_simulated_trade,
+    close_simulated_trade
+)
 
 logger = logging.getLogger(__name__)
 
 
 class PaperTradeViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for paper trading with prop firm simulation integration
+    """
     serializer_class = PaperTradeSerializer
     permission_classes = [IsAuthenticated]
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ["entry_at", "created_at", "updated_at"]
-    ordering = ["-created_at"]
 
     def get_queryset(self):
-        queryset = PaperTrade.objects.filter(user=self.request.user)
-        asset_id = self.request.query_params.get("asset")
-        status_param = self.request.query_params.get("status")
+        """Filter trades by user"""
+        return PaperTrade.objects.filter(user=self.request.user).order_by('-created_at')
+
+    def list(self, request):
+        """
+        List all trades for the current user.
+        Optionally filter by asset and update unrealized P&L with current price.
+        """
+        queryset = self.get_queryset()
+        
+        # Filter by asset if provided
+        asset_id = request.query_params.get('asset')
         if asset_id:
             queryset = queryset.filter(asset_id=asset_id)
-        if status_param:
-            queryset = queryset.filter(status=status_param)
-        return queryset
-
-    def get_serializer_context(self):
-        ctx = super().get_serializer_context()
-        price = self.request.query_params.get("current_price")
-        if price:
+        
+        # Filter by status if provided
+        trade_status = request.query_params.get('status')
+        if trade_status:
+            queryset = queryset.filter(status=trade_status)
+        
+        # Update unrealized P&L with current price if provided
+        current_price = request.query_params.get('current_price')
+        if current_price:
             try:
-                ctx["current_price"] = Decimal(price)
-            except Exception:
-                logger.warning(f"Invalid current_price parameter: {price}")
-        return ctx
+                current_price_decimal = Decimal(str(current_price))
+                for trade in queryset.filter(status='OPEN'):
+                    # Calculate unrealized P&L
+                    entry_price = Decimal(str(trade.entry_price))
+                    quantity = Decimal(str(trade.quantity))
+                    
+                    if trade.direction == 'LONG':
+                        unrealized_pl = (current_price_decimal - entry_price) * quantity
+                    else:  # SHORT
+                        unrealized_pl = (entry_price - current_price_decimal) * quantity
+                    
+                    trade.unrealized_pl = unrealized_pl
+                    trade.current_value = current_price_decimal * quantity
+            except (ValueError, TypeError) as e:
+                logger.warning(f"Invalid current_price parameter: {e}")
+        
+        serializer = self.get_serializer(queryset, many=True)
+        
+        return Response({
+            'msg': 'Paper trades retrieved successfully',
+            'data': serializer.data
+        })
 
-    def perform_create(self, serializer):
-        # Validate prop firm trading rules before creating
-        account = (
-            PropFirmAccount.objects.filter(user=self.request.user, status='ACTIVE')
-            .order_by('-activated_at')
-            .first()
-        )
-        logger.debug("PaperTrade.perform_create: user=%s found_account=%s", getattr(self.request.user, 'id', None), getattr(account, 'id', None))
-        if account is None:
-            # Raise a validation error so the view returns a proper 400
-            logger.info(
-                "PaperTrade.perform_create: no active PropFirmAccount for user %s",
-                getattr(self.request.user, 'id', None),
+    def create(self, request):
+        """
+        Create a new paper trade with prop firm simulation integration.
+        
+        If user has an active PropFirmAccount, use TradeSimulationEngine.
+        Otherwise, create a standard paper trade.
+        """
+        # Log the incoming data for debugging
+        logger.info(f"Received trade request: {request.data}")
+        
+        # Validate required fields
+        required_fields = ['asset', 'direction', 'quantity', 'entry_price']
+        missing_fields = [field for field in required_fields if field not in request.data]
+        
+        if missing_fields:
+            return Response({
+                'msg': f'Missing required fields: {", ".join(missing_fields)}',
+                'error': 'VALIDATION_ERROR'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            # Parse and validate data
+            asset_id = int(request.data['asset'])
+            direction = str(request.data['direction']).upper()
+            quantity = Decimal(str(request.data['quantity']))
+            entry_price = Decimal(str(request.data['entry_price']))
+            
+            # Validate direction
+            if direction not in ['LONG', 'SHORT']:
+                return Response({
+                    'msg': f'Invalid direction: {direction}. Must be LONG or SHORT',
+                    'error': 'VALIDATION_ERROR'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Validate positive values
+            if quantity <= 0:
+                return Response({
+                    'msg': 'Quantity must be greater than 0',
+                    'error': 'VALIDATION_ERROR'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            if entry_price <= 0:
+                return Response({
+                    'msg': 'Entry price must be greater than 0',
+                    'error': 'VALIDATION_ERROR'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+        except (ValueError, TypeError, KeyError) as e:
+            logger.error(f"Invalid trade data: {e}")
+            return Response({
+                'msg': f'Invalid trade data: {str(e)}',
+                'error': 'VALIDATION_ERROR'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Get asset
+        try:
+            asset = Asset.objects.get(id=asset_id)
+        except Asset.DoesNotExist:
+            return Response({
+                'msg': f'Asset with id {asset_id} not found',
+                'error': 'ASSET_NOT_FOUND'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        # Parse optional fields
+        stop_loss = None
+        take_profit = None
+        notes = request.data.get('notes', '')
+        
+        if request.data.get('stop_loss'):
+            try:
+                stop_loss = Decimal(str(request.data['stop_loss']))
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid stop_loss value: {request.data.get('stop_loss')}")
+        
+        if request.data.get('take_profit'):
+            try:
+                take_profit = Decimal(str(request.data['take_profit']))
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid take_profit value: {request.data.get('take_profit')}")
+        
+        # Check for active prop firm account
+        active_account = PropFirmAccount.objects.filter(
+            user=request.user,
+            status='ACTIVE',
+            stage__in=['EVALUATION', 'FUNDED']
+        ).first()
+        
+        if active_account:
+            # USE PROP FIRM SIMULATION ENGINE
+            logger.info(f"Creating trade for prop firm account: {active_account.account_number}")
+            
+            success, message, trade = execute_simulated_trade(
+                account=active_account,
+                asset=asset,
+                direction=direction,
+                quantity=quantity,
+                order_type='MARKET',
+                stop_loss=stop_loss,
+                take_profit=take_profit,
+                notes=notes
             )
-            raise ValidationError({"detail": "No active prop firm account found."})
+            
+            if not success:
+                logger.warning(f"Trade execution failed: {message}")
+                return Response({
+                    'msg': message,
+                    'error': 'EXECUTION_FAILED'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Update account balance after trade
+            active_account.update_balance()
+            
+            serializer = PaperTradeSerializer(trade)
+            return Response({
+                'msg': 'Trade executed successfully via prop firm simulation',
+                'data': serializer.data,
+                'prop_firm_account': {
+                    'account_number': active_account.account_number,
+                    'current_balance': float(active_account.current_balance),
+                    'status': active_account.status
+                }
+            }, status=status.HTTP_201_CREATED)
+        
+        else:
+            # STANDARD PAPER TRADE (No prop firm account)
+            logger.info(f"Creating standard paper trade for user: {request.user.id}")
+            
+            try:
+                trade = PaperTrade.objects.create(
+                    user=request.user,
+                    asset=asset,
+                    direction=direction,
+                    quantity=str(quantity),
+                    entry_price=str(entry_price),
+                    stop_loss=str(stop_loss) if stop_loss else None,
+                    take_profit=str(take_profit) if take_profit else None,
+                    notes=notes,
+                    status='OPEN'
+                )
+                
+                serializer = PaperTradeSerializer(trade)
+                return Response({
+                    'msg': 'Paper trade created successfully',
+                    'data': serializer.data
+                }, status=status.HTTP_201_CREATED)
+            
+            except Exception as e:
+                logger.error(f"Failed to create paper trade: {e}")
+                return Response({
+                    'msg': f'Failed to create trade: {str(e)}',
+                    'error': 'DATABASE_ERROR'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        data = serializer.validated_data
-        asset = data.get('asset')
-        direction = data.get('direction')
-        quantity = data.get('quantity')
-        price = data.get('entry_price')
-
-        validator = TradeValidator(account)
-        can_trade, errors = validator.can_place_trade(
-            asset=asset,
-            direction=direction,
-            quantity=quantity,
-            price=price,
-        )
-        logger.debug("PaperTrade.perform_create: can_trade=%s errors=%s", can_trade, errors)
-        if not can_trade:
-            # Raise a validation error with rule errors to stop creation
-            logger.info(
-                "PaperTrade.perform_create: trade rejected by validator for user %s; errors=%s",
-                getattr(self.request.user, 'id', None),
-                errors,
+    @action(detail=True, methods=['post'])
+    def close(self, request, pk=None):
+        """
+        Close a paper trade with prop firm simulation integration.
+        """
+        trade = get_object_or_404(self.get_queryset(), pk=pk)
+        
+        if trade.status != 'OPEN':
+            return Response({
+                'msg': f'Trade is not open (status: {trade.status})'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Validate exit price
+        if 'exit_price' not in request.data:
+            return Response({
+                'msg': 'exit_price is required',
+                'error': 'VALIDATION_ERROR'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            exit_price = Decimal(str(request.data['exit_price']))
+            if exit_price <= 0:
+                raise ValueError("Exit price must be positive")
+        except (ValueError, TypeError) as e:
+            return Response({
+                'msg': f'Invalid exit_price: {str(e)}',
+                'error': 'VALIDATION_ERROR'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        exit_notes = request.data.get('notes', '')
+        
+        # Check for active prop firm account
+        active_account = PropFirmAccount.objects.filter(
+            user=request.user,
+            status='ACTIVE'
+        ).first()
+        
+        if active_account:
+            # USE PROP FIRM SIMULATION ENGINE TO CLOSE
+            logger.info(f"Closing trade via prop firm simulation: {trade.id}")
+            
+            success, message = close_simulated_trade(
+                account=active_account,
+                trade=trade,
+                exit_price=exit_price,
+                notes=exit_notes
             )
-            raise ValidationError({"detail": "Trade violates rules", "errors": errors})
+            
+            if not success:
+                return Response({
+                    'msg': message,
+                    'error': 'CLOSE_FAILED'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Refresh trade from DB
+            trade.refresh_from_db()
+            
+            serializer = PaperTradeSerializer(trade)
+            return Response({
+                'msg': 'Trade closed successfully via prop firm simulation',
+                'data': serializer.data,
+                'prop_firm_account': {
+                    'account_number': active_account.account_number,
+                    'current_balance': float(active_account.current_balance),
+                    'profit_earned': float(active_account.profit_earned)
+                }
+            })
+        
+        else:
+            # STANDARD PAPER TRADE CLOSE
+            logger.info(f"Closing standard paper trade: {trade.id}")
+            
+            from django.utils import timezone
+            
+            trade.exit_price = str(exit_price)
+            trade.exit_at = timezone.now()
+            trade.status = 'CLOSED'
+            
+            if exit_notes:
+                trade.notes = f"{trade.notes}\n{exit_notes}" if trade.notes else exit_notes
+            
+            trade.save()
+            
+            serializer = PaperTradeSerializer(trade)
+            return Response({
+                'msg': 'Trade closed successfully',
+                'data': serializer.data
+            })
 
-        logger.info(
-            "PaperTrade.perform_create: saving new trade for user %s asset=%s direction=%s quantity=%s",
-            getattr(self.request.user, 'id', None),
-            getattr(asset, 'id', asset),
-            direction,
-            quantity,
-        )
-        serializer.save(user=self.request.user)
+    @action(detail=True, methods=['post'])
+    def cancel(self, request, pk=None):
+        """Cancel a trade"""
+        trade = get_object_or_404(self.get_queryset(), pk=pk)
+        
+        if trade.status != 'OPEN':
+            return Response({
+                'msg': f'Trade is not open (status: {trade.status})'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        trade.status = 'CANCELLED'
+        notes = request.data.get('notes', '')
+        if notes:
+            trade.notes = f"{trade.notes}\n{notes}" if trade.notes else notes
+        trade.save()
+        
+        serializer = PaperTradeSerializer(trade)
+        return Response({
+            'msg': 'Trade cancelled successfully',
+            'data': serializer.data
+        })
 
-    @action(detail=True, methods=["post"], url_path="close", url_name="close")
-    def close_trade(self, request, pk=None):
-        trade: PaperTrade = self.get_object()
-        if not trade.is_open:
-            return Response(
-                {"detail": "Trade is not open."}, status=status.HTTP_400_BAD_REQUEST
-            )
-        serializer = PaperTradeCloseSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.update(trade, serializer.validated_data)
-        return Response(
-            PaperTradeSerializer(trade, context=self.get_serializer_context()).data
-        )
-
-    @action(detail=True, methods=["post"], url_path="cancel", url_name="cancel")
-    def cancel_trade(self, request, pk=None):
-        trade: PaperTrade = self.get_object()
-        if not trade.is_open:
-            return Response(
-                {"detail": "Only open trades can be cancelled."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        trade.status = PaperTrade.Status.CANCELLED
-        trade.exit_at = timezone.now()
-        if note := request.data.get("notes"):
-            trade.notes = note
-        trade.save(update_fields=["status", "exit_at", "notes", "updated_at"])
-        return Response(
-            PaperTradeSerializer(trade, context=self.get_serializer_context()).data
-        )
+    def destroy(self, request, pk=None):
+        """Delete a trade"""
+        trade = get_object_or_404(self.get_queryset(), pk=pk)
+        trade.delete()
+        
+        return Response({
+            'msg': 'Trade deleted successfully'
+        }, status=status.HTTP_204_NO_CONTENT)

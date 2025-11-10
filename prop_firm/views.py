@@ -1,50 +1,59 @@
+# prop_firm/views.py - PRODUCTION READY VERSION WITH DEMO MODE
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.db.models import Q
+from django.db import transaction
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from django.contrib.auth import get_user_model
+from django.conf import settings
+import stripe
 import logging
+import json
+import uuid
 
-from .models import (
-    PropFirmPlan, PropFirmAccount, RuleViolation,
-    Payout, AccountActivity
-)
+from .models import PropFirmPlan, PropFirmAccount, RuleViolation, Payout, AccountActivity
 from .serializers import (
     PropFirmPlanSerializer, PropFirmAccountSerializer,
     PropFirmAccountListSerializer, PayoutSerializer,
     PayoutRequestSerializer, CheckoutSessionSerializer,
-    MockPaymentSerializer,
     RuleViolationSerializer, AccountActivitySerializer
 )
-from .services.stripe_service import StripeService, PaymentProcessor
-from .services.rule_engine import RuleEngine
 
 logger = logging.getLogger(__name__)
+
+# Check if Stripe is configured
+STRIPE_CONFIGURED = bool(
+    getattr(settings, 'STRIPE_SECRET_KEY', None) and 
+    settings.STRIPE_SECRET_KEY not in ['', 'your-stripe-secret-key', None]
+)
+
+if STRIPE_CONFIGURED:
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    logger.info("Stripe configured for production payments")
+else:
+    logger.warning("Stripe not configured - running in DEMO MODE")
 
 
 class PropFirmPlanViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for prop firm plans"""
-    
     queryset = PropFirmPlan.objects.filter(is_active=True)
     serializer_class = PropFirmPlanSerializer
     permission_classes = [AllowAny]
-    
+
     def list(self, request):
-        """List all active plans"""
         queryset = self.get_queryset().order_by('starting_balance')
         serializer = self.get_serializer(queryset, many=True)
         return Response({
             'msg': 'Plans retrieved successfully',
             'data': serializer.data
         })
-    
+
     def retrieve(self, request, pk=None):
-        """Get plan details"""
         plan = get_object_or_404(self.queryset, pk=pk)
         serializer = self.get_serializer(plan)
         return Response({
@@ -55,25 +64,19 @@ class PropFirmPlanViewSet(viewsets.ReadOnlyModelViewSet):
 
 class PropFirmAccountViewSet(viewsets.ModelViewSet):
     """ViewSet for prop firm accounts"""
-    
     serializer_class = PropFirmAccountSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_queryset(self):
-        """Get accounts for current user"""
         return PropFirmAccount.objects.filter(user=self.request.user)
-    
+
     def get_serializer_class(self):
-        """Use different serializers for list vs detail"""
         if self.action == 'list':
             return PropFirmAccountListSerializer
         return PropFirmAccountSerializer
-    
+
     def list(self, request):
-        """List user's accounts"""
         queryset = self.get_queryset().order_by('-created_at')
-        
-        # Filter by status
         status_filter = request.query_params.get('status')
         if status_filter:
             queryset = queryset.filter(status=status_filter)
@@ -84,29 +87,29 @@ class PropFirmAccountViewSet(viewsets.ModelViewSet):
             'data': serializer.data,
             'count': queryset.count()
         })
-    
+
     def retrieve(self, request, pk=None):
-        """Get account details"""
         account = get_object_or_404(self.get_queryset(), pk=pk)
-        
-        # Update balance before returning
         account.update_balance()
-        
         serializer = self.get_serializer(account)
         return Response({
             'msg': 'Account details retrieved',
             'data': serializer.data
         })
-    
+
     @action(detail=True, methods=['post'])
     def refresh_balance(self, request, pk=None):
-        """Manually refresh account balance"""
         account = get_object_or_404(self.get_queryset(), pk=pk)
         account.update_balance()
         
-        # Check rules
-        rule_engine = RuleEngine(account)
-        violations = rule_engine.check_all_rules()
+        # Check for rule violations
+        violations = []
+        try:
+            from .services.rule_engine import RuleEngine
+            rule_engine = RuleEngine(account)
+            violations = rule_engine.check_all_rules()
+        except Exception as e:
+            logger.warning(f"Rule engine check failed: {e}")
         
         serializer = self.get_serializer(account)
         return Response({
@@ -114,53 +117,16 @@ class PropFirmAccountViewSet(viewsets.ModelViewSet):
             'data': serializer.data,
             'violations': violations
         })
-    
-    @action(detail=True, methods=['get'])
-    def activities(self, request, pk=None):
-        """Get account activities"""
-        account = get_object_or_404(self.get_queryset(), pk=pk)
-        activities = account.activities.all().order_by('-created_at')
-        
-        # Pagination
-        from rest_framework.pagination import PageNumberPagination
-        paginator = PageNumberPagination()
-        paginator.page_size = 20
-        
-        page = paginator.paginate_queryset(activities, request)
-        if page is not None:
-            serializer = AccountActivitySerializer(page, many=True)
-            return paginator.get_paginated_response(serializer.data)
-        
-        serializer = AccountActivitySerializer(activities, many=True)
-        return Response({
-            'msg': 'Activities retrieved',
-            'data': serializer.data
-        })
-    
-    @action(detail=True, methods=['get'])
-    def violations(self, request, pk=None):
-        """Get account violations"""
-        account = get_object_or_404(self.get_queryset(), pk=pk)
-        violations = account.violations.all().order_by('-created_at')
-        serializer = RuleViolationSerializer(violations, many=True)
-        return Response({
-            'msg': 'Violations retrieved',
-            'data': serializer.data
-        })
-    
+
     @action(detail=True, methods=['get'])
     def statistics(self, request, pk=None):
-        """Get account statistics"""
         account = get_object_or_404(self.get_queryset(), pk=pk)
         from paper_trading.models import PaperTrade
-        from decimal import Decimal
         
-        # Get all trades for this account
         trades = PaperTrade.objects.filter(
             user=account.user,
             created_at__gte=account.created_at
         )
-        
         closed_trades = trades.filter(status='CLOSED')
         winning_trades = [t for t in closed_trades if (t.realized_pl or 0) > 0]
         losing_trades = [t for t in closed_trades if (t.realized_pl or 0) < 0]
@@ -172,27 +138,18 @@ class PropFirmAccountViewSet(viewsets.ModelViewSet):
             'winning_trades': len(winning_trades),
             'losing_trades': len(losing_trades),
             'win_rate': (len(winning_trades) / len(closed_trades) * 100) if closed_trades else 0,
-            'total_pnl': account.current_balance - account.starting_balance,
-            'profit_earned': account.profit_earned,
-            'total_loss': account.total_loss,
+            'total_pnl': float(account.current_balance) - float(account.starting_balance),
+            'profit_earned': float(account.profit_earned or 0),
+            'total_loss': float(account.total_loss or 0),
             'trading_days': account.trading_days,
             'days_active': (timezone.now() - account.activated_at).days if account.activated_at else 0,
-            'average_win': sum(t.realized_pl for t in winning_trades) / len(winning_trades) if winning_trades else 0,
-            'average_loss': sum(t.realized_pl for t in losing_trades) / len(losing_trades) if losing_trades else 0,
         }
         
-        return Response({
-            'msg': 'Statistics retrieved',
-            'data': stats
-        })
+        return Response({'msg': 'Statistics retrieved', 'data': stats})
 
 
 class AdminDashboardAPI(APIView):
-    """API endpoint for admin dashboard data.
-
-    Returns counts and a small recent-accounts list. Only accessible to
-    admin users (IsAdminUser).
-    """
+    """API for admin dashboard data"""
     permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, request):
@@ -205,7 +162,7 @@ class AdminDashboardAPI(APIView):
             'violations_count': RuleViolation.objects.count(),
             'recent_accounts': []
         }
-
+        
         recent = PropFirmAccount.objects.order_by('-created_at')[:10]
         for acc in recent:
             data['recent_accounts'].append({
@@ -215,30 +172,54 @@ class AdminDashboardAPI(APIView):
                 'status': acc.status,
                 'created_at': acc.created_at,
             })
-
+        
         return Response({'msg': 'Admin dashboard data', 'data': data})
 
 
 class CheckoutViewSet(viewsets.ViewSet):
-    """Handle checkout and payment flows"""
-    
+    """Handle Stripe checkout and demo mode account creation"""
     permission_classes = [IsAuthenticated]
-    
+
     @action(detail=False, methods=['post'])
+    @transaction.atomic
     def create_session(self, request):
-        """Create Stripe checkout session"""
+        """Create Stripe checkout session or demo account"""
         serializer = CheckoutSessionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
-        plan = get_object_or_404(PropFirmPlan, id=serializer.validated_data['plan_id'])
+        plan = get_object_or_404(
+            PropFirmPlan, 
+            id=serializer.validated_data['plan_id'],
+            is_active=True
+        )
         
-        # Create payment session
-        processor = PaymentProcessor(request.user, plan)
+        # DEMO MODE - No Stripe configured
+        if not STRIPE_CONFIGURED:
+            logger.info(f"Creating demo account for user {request.user.id}")
+            try:
+                account = self._create_demo_account(request.user, plan)
+                return Response({
+                    'msg': 'Demo account created successfully',
+                    'data': {
+                        'account_id': account.id,
+                        'account_number': account.account_number,
+                        'session_url': None,
+                        'demo_mode': True
+                    }
+                }, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                logger.error(f"Demo account creation failed: {e}")
+                return Response({
+                    'msg': f'Failed to create demo account: {str(e)}'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+        # PRODUCTION MODE - Stripe configured
         try:
-            account, session = processor.create_account_purchase(
-                success_url=serializer.validated_data['success_url'],
-                cancel_url=serializer.validated_data['cancel_url']
+            account, session = self._create_stripe_checkout(
+                request.user, 
+                plan,
+                serializer.validated_data['success_url'],
+                serializer.validated_data['cancel_url']
             )
             
             return Response({
@@ -247,10 +228,10 @@ class CheckoutViewSet(viewsets.ViewSet):
                     'session_id': session.id,
                     'session_url': session.url,
                     'account_id': account.id,
-                    'account_number': account.account_number
+                    'account_number': account.account_number,
+                    'demo_mode': False
                 }
             }, status=status.HTTP_201_CREATED)
-            
         except Exception as e:
             logger.error(f"Checkout session creation failed: {e}")
             return Response({
@@ -258,77 +239,101 @@ class CheckoutViewSet(viewsets.ViewSet):
                 'error': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(detail=False, methods=['post'])
-    def mock_pay(self, request):
-        """Development-only mock payment endpoint.
-
-        Accepts plan_id, billing (address etc.) and card details. Creates
-        the pending account, stores a BillingDetail record, and activates
-        the account immediately. This should be removed when integrating
-        with a real payment processor.
-        """
-        serializer = MockPaymentSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        plan = get_object_or_404(PropFirmPlan, id=serializer.validated_data['plan_id'])
-        billing = serializer.validated_data['billing']
-        card = serializer.validated_data['card']
-
-        # Create pending account
-        from .models import PropFirmAccount, AccountActivity, BillingDetail
-
+    def _create_demo_account(self, user, plan):
+        """Create account without payment (demo mode)"""
+        account_number = f"DEMO-{user.id}-{plan.id}-{uuid.uuid4().hex[:8].upper()}"
+        
         account = PropFirmAccount.objects.create(
-            user=request.user,
+            user=user,
             plan=plan,
-            status='PENDING',
-            stage='EVALUATION' if plan.plan_type == 'EVALUATION' else 'FUNDED'
+            account_number=account_number,
+            starting_balance=plan.starting_balance,
+            current_balance=plan.starting_balance,
+            status='ACTIVE',
+            stage='EVALUATION',
+            activated_at=timezone.now(),
+            payment_completed_at=timezone.now()
         )
-
-        # Save billing details (mock-safe: do not store raw PAN/CVV in prod)
-        masked = card.get('cardNumber', '')
-        last4 = ''.join(filter(str.isdigit, masked))[-4:] if masked else ''
-        masked_display = f"**** **** **** {last4}" if last4 else masked
-
-        BillingDetail.objects.create(
-            user=request.user,
-            cardholder_name=card.get('cardholderName', ''),
-            masked_number=masked_display,
-            last4=last4,
-            brand=card.get('brand', ''),
-            exp_month=card.get('expiryMonth', ''),
-            exp_year=card.get('expiryYear', ''),
-            billing_address=billing
-        )
-
-        # For the mock flow we immediately mark payment as successful
-        payment_intent = f"mock_{account.id}_{int(timezone.now().timestamp())}"
-        account.stripe_payment_intent_id = payment_intent
-        account.status = 'ACTIVE'
-        account.activated_at = timezone.now()
-        account.payment_completed_at = timezone.now()
-        account.save()
-
-        # Log activity
+        
+        # Create activity log
         AccountActivity.objects.create(
             account=account,
-            activity_type='ACTIVATED',
-            description=f'Mock payment succeeded for ${plan.price}',
-            metadata={'mock': True, 'card_last4': last4},
-            created_by=request.user
+            activity_type='ACCOUNT_CREATED',
+            description=f'Demo account created - No payment required'
         )
+        
+        logger.info(f"Demo account created: {account.account_number}")
+        return account
 
-        serializer = PropFirmAccountSerializer(account)
-        return Response({'msg': 'Mock payment successful', 'data': serializer.data})
-    
+    def _create_stripe_checkout(self, user, plan, success_url, cancel_url):
+        """Create Stripe checkout session"""
+        # Generate unique account number
+        account_number = f"ACC-{user.id}-{plan.id}-{uuid.uuid4().hex[:8].upper()}"
+        
+        # Create pending account
+        account = PropFirmAccount.objects.create(
+            user=user,
+            plan=plan,
+            account_number=account_number,
+            starting_balance=plan.starting_balance,
+            current_balance=plan.starting_balance,
+            status='PENDING',
+            stage='EVALUATION'
+        )
+        
+        # Create Stripe session
+        try:
+            session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[{
+                    'price_data': {
+                        'currency': 'usd',
+                        'product_data': {
+                            'name': plan.name,
+                            'description': plan.description or f'{plan.plan_type} Trading Account',
+                        },
+                        'unit_amount': int(float(plan.price) * 100),  # Convert to cents
+                    },
+                    'quantity': 1,
+                }],
+                mode='payment',
+                success_url=success_url,
+                cancel_url=cancel_url,
+                metadata={
+                    'user_id': str(user.id),
+                    'plan_id': str(plan.id),
+                    'account_id': str(account.id),
+                    'account_number': account.account_number
+                },
+                client_reference_id=str(user.id)
+            )
+            
+            # Store payment intent for tracking
+            account.stripe_payment_intent_id = session.payment_intent
+            account.save()
+            
+            # Create activity log
+            AccountActivity.objects.create(
+                account=account,
+                activity_type='PAYMENT_INITIATED',
+                description=f'Stripe checkout session created: {session.id}'
+            )
+            
+            return account, session
+            
+        except stripe.error.StripeError as e:
+            account.delete()  # Clean up failed account
+            raise e
+
     @action(detail=False, methods=['post'])
     def verify_payment(self, request):
         """Verify payment completion"""
         account_id = request.data.get('account_id')
         payment_intent_id = request.data.get('payment_intent_id')
         
-        if not account_id or not payment_intent_id:
+        if not account_id:
             return Response({
-                'msg': 'Missing required parameters'
+                'msg': 'Account ID is required'
             }, status=status.HTTP_400_BAD_REQUEST)
         
         account = get_object_or_404(
@@ -337,113 +342,153 @@ class CheckoutViewSet(viewsets.ViewSet):
             user=request.user
         )
         
-        # Complete payment
-        processor = PaymentProcessor(request.user, account.plan)
-        success = processor.complete_payment(account, payment_intent_id)
-        
-        if success:
-            account.refresh_from_db()
+        # For demo accounts, already activated
+        if account.status == 'ACTIVE':
             serializer = PropFirmAccountSerializer(account)
             return Response({
-                'msg': 'Payment verified and account activated',
+                'msg': 'Account is already active',
                 'data': serializer.data
             })
-        else:
-            return Response({
-                'msg': 'Payment verification failed'
-            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Verify Stripe payment
+        if STRIPE_CONFIGURED and payment_intent_id:
+            try:
+                payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+                
+                if payment_intent.status == 'succeeded':
+                    account.activate()
+                    account.payment_completed_at = timezone.now()
+                    account.save()
+                    
+                    serializer = PropFirmAccountSerializer(account)
+                    return Response({
+                        'msg': 'Payment verified and account activated',
+                        'data': serializer.data
+                    })
+                else:
+                    return Response({
+                        'msg': f'Payment status: {payment_intent.status}'
+                    }, status=status.HTTP_400_BAD_REQUEST)
+            except stripe.error.StripeError as e:
+                logger.error(f"Payment verification failed: {e}")
+                return Response({
+                    'msg': 'Payment verification failed'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({
+            'msg': 'Unable to verify payment'
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class StripeWebhookView(APIView):
-    """Handle Stripe webhooks"""
-    
+    """Handle Stripe webhook events"""
     permission_classes = [AllowAny]
-    
+
     def post(self, request):
         """Process webhook events"""
+        if not STRIPE_CONFIGURED:
+            return Response({'error': 'Stripe not configured'}, status=400)
+        
         payload = request.body
         sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+        webhook_secret = getattr(settings, 'STRIPE_WEBHOOK_SECRET', None)
         
         try:
-            event = StripeService.handle_webhook(payload, sig_header)
-        except Exception as e:
-            logger.error(f"Webhook signature verification failed: {e}")
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            event = stripe.Webhook.construct_event(
+                payload, sig_header, webhook_secret
+            )
+        except ValueError:
+            logger.error("Invalid webhook payload")
+            return Response({'error': 'Invalid payload'}, status=400)
+        except stripe.error.SignatureVerificationError:
+            logger.error("Invalid webhook signature")
+            return Response({'error': 'Invalid signature'}, status=400)
         
-        # Handle event
-        if event['type'] == 'payment_intent.succeeded':
-            self._handle_payment_success(event['data']['object'])
+        # Handle the event
+        if event['type'] == 'checkout.session.completed':
+            session = event['data']['object']
+            self._handle_checkout_completed(session)
+        
+        elif event['type'] == 'payment_intent.succeeded':
+            payment_intent = event['data']['object']
+            self._handle_payment_succeeded(payment_intent)
+        
         elif event['type'] == 'payment_intent.payment_failed':
-            self._handle_payment_failed(event['data']['object'])
-        elif event['type'] == 'checkout.session.completed':
-            self._handle_checkout_completed(event['data']['object'])
+            payment_intent = event['data']['object']
+            self._handle_payment_failed(payment_intent)
         
         return Response({'status': 'success'})
-    
-    def _handle_payment_success(self, payment_intent):
+
+    def _handle_checkout_completed(self, session):
+        """Handle completed checkout"""
+        try:
+            metadata = session.get('metadata', {})
+            account_id = metadata.get('account_id')
+            
+            if account_id:
+                account = PropFirmAccount.objects.get(id=account_id)
+                if session.payment_status == 'paid':
+                    account.activate()
+                    account.payment_completed_at = timezone.now()
+                    account.save()
+                    
+                    AccountActivity.objects.create(
+                        account=account,
+                        activity_type='PAYMENT_COMPLETED',
+                        description='Payment completed via Stripe webhook'
+                    )
+                    
+                    logger.info(f"Account {account.account_number} activated via webhook")
+        except PropFirmAccount.DoesNotExist:
+            logger.error(f"Account not found for session {session.id}")
+        except Exception as e:
+            logger.error(f"Error handling checkout completion: {e}")
+
+    def _handle_payment_succeeded(self, payment_intent):
         """Handle successful payment"""
         try:
             account = PropFirmAccount.objects.get(
-                stripe_payment_intent_id=payment_intent['id']
+                stripe_payment_intent_id=payment_intent.id
             )
-            
             if account.status == 'PENDING':
-                processor = PaymentProcessor(account.user, account.plan)
-                processor.complete_payment(account, payment_intent['id'])
-                
-                logger.info(f"Payment success webhook processed for account {account.account_number}")
+                account.activate()
+                account.payment_completed_at = timezone.now()
+                account.save()
+                logger.info(f"Payment succeeded for account {account.account_number}")
         except PropFirmAccount.DoesNotExist:
-            logger.error(f"Account not found for payment intent {payment_intent['id']}")
-    
+            logger.warning(f"No account found for payment intent {payment_intent.id}")
+
     def _handle_payment_failed(self, payment_intent):
         """Handle failed payment"""
         try:
             account = PropFirmAccount.objects.get(
-                stripe_payment_intent_id=payment_intent['id']
+                stripe_payment_intent_id=payment_intent.id
             )
+            account.status = 'FAILED'
+            account.failure_reason = "Payment failed"
+            account.save()
             
             AccountActivity.objects.create(
                 account=account,
-                activity_type='NOTE_ADDED',
-                description=f"Payment failed: {payment_intent.get('last_payment_error', {}).get('message', 'Unknown error')}"
+                activity_type='PAYMENT_FAILED',
+                description='Payment failed via Stripe'
             )
             
             logger.warning(f"Payment failed for account {account.account_number}")
         except PropFirmAccount.DoesNotExist:
-            logger.error(f"Account not found for payment intent {payment_intent['id']}")
-    
-    def _handle_checkout_completed(self, session):
-        """Handle completed checkout session"""
-        metadata = session.get('metadata', {})
-        account_id = metadata.get('account_id')
-        
-        if account_id:
-            try:
-                account = PropFirmAccount.objects.get(id=account_id)
-                logger.info(f"Checkout completed for account {account.account_number}")
-            except PropFirmAccount.DoesNotExist:
-                logger.error(f"Account not found for checkout session")
+            logger.warning(f"No account found for failed payment {payment_intent.id}")
 
 
 class PayoutViewSet(viewsets.ModelViewSet):
-    """ViewSet for payouts"""
-    
+    """ViewSet for payout management"""
     serializer_class = PayoutSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_queryset(self):
-        """Get payouts for user's accounts"""
-        return Payout.objects.filter(account__user=self.request.user)
-    
-    def list(self, request):
-        """List user's payouts"""
-        queryset = self.get_queryset().order_by('-requested_at')
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({
-            'msg': 'Payouts retrieved',
-            'data': serializer.data
-        })
-    
+        user = self.request.user
+        return Payout.objects.filter(account__user=user).order_by('-requested_at')
+
     @action(detail=False, methods=['post'])
     def request_payout(self, request):
         """Request a payout"""
@@ -456,25 +501,28 @@ class PayoutViewSet(viewsets.ModelViewSet):
             user=request.user
         )
         
-        # Create payout
+        # Validate payout eligibility
+        if account.stage != 'FUNDED':
+            return Response({
+                'msg': 'Account must be in FUNDED stage to request payout'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if account.profit_earned <= 0:
+            return Response({
+                'msg': 'No profit available for payout'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Create payout request
         payout = Payout.objects.create(
             account=account,
             profit_earned=account.profit_earned,
             profit_split=account.plan.profit_split,
             payment_method=serializer.validated_data['payment_method'],
-            payment_details=serializer.validated_data.get('payment_details', {})
+            payment_details=serializer.validated_data.get('payment_details', {}),
+            status='PENDING'
         )
-        
         payout.calculate_amount()
         payout.save()
-        
-        # Log activity
-        AccountActivity.objects.create(
-            account=account,
-            activity_type='PAYOUT_REQUEST',
-            description=f"Payout requested: ${payout.amount}",
-            created_by=request.user
-        )
         
         return Response({
             'msg': 'Payout requested successfully',

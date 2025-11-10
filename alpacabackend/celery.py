@@ -39,10 +39,6 @@ app.conf.beat_schedule = {
         'task': 'core.tasks.check_watchlist_candles',
         'schedule': crontab(minute='*/1'),  # Every minute; task skips outside RTH
     },
-    'sync-alpaca-balances': {
-        'task': 'core.tasks_prop_firm.sync_alpaca_account_balances',
-        'schedule': crontab(minute='*/1'),  # Every minute
-    },
 }
 
 # Ensure task names are properly registered

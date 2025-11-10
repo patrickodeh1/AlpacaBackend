@@ -140,3 +140,22 @@ class PaperTradeCloseSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         raise NotImplementedError
+
+class CreatePaperTradeSerializer(serializers.Serializer):
+    """Serializer for creating paper trades"""
+    asset = serializers.IntegerField()
+    direction = serializers.ChoiceField(choices=['LONG', 'SHORT'])
+    quantity = serializers.DecimalField(max_digits=12, decimal_places=4)
+    entry_price = serializers.DecimalField(max_digits=12, decimal_places=2)
+    entry_at = serializers.DateTimeField(required=False, allow_null=True)
+    target_price = serializers.DecimalField(max_digits=12, decimal_places=2, required=False, allow_null=True)
+    stop_loss = serializers.DecimalField(max_digits=12, decimal_places=2, required=False, allow_null=True)
+    take_profit = serializers.DecimalField(max_digits=12, decimal_places=2, required=False, allow_null=True)
+    notes = serializers.CharField(required=False, allow_blank=True)
+
+
+class ClosePaperTradeSerializer(serializers.Serializer):
+    """Serializer for closing paper trades"""
+    exit_price = serializers.DecimalField(max_digits=12, decimal_places=2)
+    exit_at = serializers.DateTimeField(required=False, allow_null=True)
+    notes = serializers.CharField(required=False, allow_blank=True)
