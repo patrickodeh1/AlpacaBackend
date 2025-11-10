@@ -1,6 +1,5 @@
 # prop_firm/views.py - PRODUCTION READY VERSION WITH DEMO MODE
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -15,8 +14,29 @@ import stripe
 import logging
 import json
 import uuid
+from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.permissions import IsAdminUser
+from django.db.models import Sum, Count, Q
+from datetime import timedelta
+
+from .models import PropFirmAccount, RuleViolation, PropFirmPlan, Payout, AccountActivity
+from paper_trading.models import PaperTrade
+from core.models import Asset, WatchList
+from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from .permissions import IsAdminUser
 
 from .models import PropFirmPlan, PropFirmAccount, RuleViolation, Payout, AccountActivity
+from .admin_serializers import (
+    AdminAccountSerializer,
+    AdminRuleViolationSerializer,
+    AdminPlanSerializer,
+    AdminPayoutSerializer,
+    AdminUserSerializer,
+    AdminAssetSerializer,
+    AdminWatchlistSerializer,
+    AdminDashboardSerializer
+)
 from .serializers import (
     PropFirmPlanSerializer, PropFirmAccountSerializer,
     PropFirmAccountListSerializer, PayoutSerializer,
@@ -25,6 +45,7 @@ from .serializers import (
 )
 
 logger = logging.getLogger(__name__)
+User = get_user_model()
 
 # Check if Stripe is configured
 STRIPE_CONFIGURED = bool(
@@ -146,35 +167,6 @@ class PropFirmAccountViewSet(viewsets.ModelViewSet):
         }
         
         return Response({'msg': 'Statistics retrieved', 'data': stats})
-
-
-class AdminDashboardAPI(APIView):
-    """API for admin dashboard data"""
-    permission_classes = [IsAuthenticated, IsAdminUser]
-
-    def get(self, request):
-        User = get_user_model()
-        data = {
-            'users_count': User.objects.count(),
-            'accounts_count': PropFirmAccount.objects.count(),
-            'plans_count': PropFirmPlan.objects.count(),
-            'payouts_count': Payout.objects.count(),
-            'violations_count': RuleViolation.objects.count(),
-            'recent_accounts': []
-        }
-        
-        recent = PropFirmAccount.objects.order_by('-created_at')[:10]
-        for acc in recent:
-            data['recent_accounts'].append({
-                'id': acc.id,
-                'account_number': acc.account_number,
-                'user_email': acc.user.email if acc.user else None,
-                'status': acc.status,
-                'created_at': acc.created_at,
-            })
-        
-        return Response({'msg': 'Admin dashboard data', 'data': data})
-
 
 class CheckoutViewSet(viewsets.ViewSet):
     """Handle Stripe checkout and demo mode account creation"""
@@ -528,3 +520,216 @@ class PayoutViewSet(viewsets.ModelViewSet):
             'msg': 'Payout requested successfully',
             'data': PayoutSerializer(payout).data
         }, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def admin_dashboard_overview(request):
+    """Get admin dashboard overview statistics"""
+    
+    # Basic counts
+    users_count = User.objects.count()
+    accounts_count = PropFirmAccount.objects.count()
+    plans_count = PropFirmPlan.objects.filter(is_active=True).count()
+    payouts_count = Payout.objects.count()
+    
+    # Active accounts
+    active_accounts = PropFirmAccount.objects.filter(status='ACTIVE').count()
+    
+    # Total balance across all accounts
+    total_balance = PropFirmAccount.objects.aggregate(
+        total=Sum('current_balance')
+    )['total'] or 0
+    
+    # Recent accounts (last 10)
+    recent_accounts = PropFirmAccount.objects.select_related(
+        'user', 'plan'
+    ).order_by('-created_at')[:10]
+    
+    recent_accounts_data = [{
+        'id': acc.id,
+        'account_number': acc.account_number,
+        'user_email': acc.user.email,
+        'status': acc.status,
+        'current_balance': str(acc.current_balance),
+        'created_at': acc.created_at.isoformat(),
+    } for acc in recent_accounts]
+    
+    # Recent violations (last 10)
+    recent_violations = RuleViolation.objects.select_related(
+        'account__user'
+    ).order_by('-created_at')[:10]
+    
+    recent_violations_data = [{
+        'id': viol.id,
+        'account_number': viol.account.account_number,
+        'violation_type': viol.violation_type,
+        'description': viol.description,
+        'created_at': viol.created_at.isoformat(),
+    } for viol in recent_violations]
+    
+    # Revenue statistics
+    thirty_days_ago = timezone.now() - timedelta(days=30)
+    revenue_stats = {
+        'total_revenue': PropFirmAccount.objects.filter(
+            payment_completed_at__isnull=False
+        ).aggregate(total=Sum('plan__price'))['total'] or 0,
+        'monthly_revenue': PropFirmAccount.objects.filter(
+            payment_completed_at__gte=thirty_days_ago
+        ).aggregate(total=Sum('plan__price'))['total'] or 0,
+        'pending_payouts': Payout.objects.filter(
+            status='PENDING'
+        ).aggregate(total=Sum('amount'))['total'] or 0,
+    }
+    
+    data = {
+        'users_count': users_count,
+        'accounts_count': accounts_count,
+        'plans_count': plans_count,
+        'payouts_count': payouts_count,
+        'active_accounts': active_accounts,
+        'total_balance': str(total_balance),
+        'recent_accounts': recent_accounts_data,
+        'recent_violations': recent_violations_data,
+        'revenue_stats': revenue_stats,
+    }
+    
+    serializer = AdminDashboardSerializer(data)
+    return Response(serializer.data)
+
+
+class AdminAccountViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing prop firm accounts"""
+    queryset = PropFirmAccount.objects.select_related('user', 'plan').all()
+    serializer_class = AdminAccountSerializer
+    permission_classes = [IsAdminUser]
+    filterset_fields = ['status', 'stage', 'user']
+    search_fields = ['account_number', 'user__email', 'user__name']
+    ordering_fields = ['created_at', 'current_balance', 'profit_earned']
+    ordering = ['-created_at']
+    
+    @action(detail=True, methods=['post'])
+    def update_balance(self, request, pk=None):
+        """Manually trigger balance recalculation"""
+        account = self.get_object()
+        account.update_balance()
+        serializer = self.get_serializer(account)
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'])
+    def activate(self, request, pk=None):
+        """Manually activate an account"""
+        account = self.get_object()
+        account.activate()
+        serializer = self.get_serializer(account)
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'])
+    def add_note(self, request, pk=None):
+        """Add admin note to account"""
+        account = self.get_object()
+        note = request.data.get('note', '')
+        
+        if note:
+            account.admin_notes = f"{account.admin_notes}\n{timezone.now()}: {note}" if account.admin_notes else f"{timezone.now()}: {note}"
+            account.save()
+            
+            # Create activity log
+            AccountActivity.objects.create(
+                account=account,
+                activity_type='NOTE_ADDED',
+                description=note,
+                created_by=request.user
+            )
+        
+        serializer = self.get_serializer(account)
+        return Response(serializer.data)
+
+
+class AdminRuleViolationViewSet(viewsets.ReadOnlyModelViewSet):
+    """Admin viewset for viewing rule violations"""
+    queryset = RuleViolation.objects.select_related(
+        'account__user', 'related_trade__asset'
+    ).all()
+    serializer_class = AdminRuleViolationSerializer
+    permission_classes = [IsAdminUser]
+    filterset_fields = ['violation_type', 'account']
+    search_fields = ['account__account_number', 'account__user__email']
+    ordering = ['-created_at']
+
+
+class AdminPlanViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing plans"""
+    queryset = PropFirmPlan.objects.all()
+    serializer_class = AdminPlanSerializer
+    permission_classes = [IsAdminUser]
+    filterset_fields = ['plan_type', 'is_active']
+    ordering = ['starting_balance']
+
+
+class AdminPayoutViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing payouts"""
+    queryset = Payout.objects.select_related('account__user').all()
+    serializer_class = AdminPayoutSerializer
+    permission_classes = [IsAdminUser]
+    filterset_fields = ['status', 'account']
+    ordering = ['-requested_at']
+    
+    @action(detail=True, methods=['post'])
+    def approve(self, request, pk=None):
+        """Approve a payout"""
+        payout = self.get_object()
+        
+        if payout.status != 'PENDING':
+            return Response(
+                {'error': 'Only pending payouts can be approved'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        payout.status = 'PROCESSING'
+        payout.processed_at = timezone.now()
+        payout.save()
+        
+        serializer = self.get_serializer(payout)
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'])
+    def complete(self, request, pk=None):
+        """Mark payout as completed"""
+        payout = self.get_object()
+        
+        payout.status = 'COMPLETED'
+        payout.completed_at = timezone.now()
+        payout.save()
+        
+        serializer = self.get_serializer(payout)
+        return Response(serializer.data)
+
+
+class AdminUserViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing users"""
+    queryset = User.objects.all()
+    serializer_class = AdminUserSerializer
+    permission_classes = [IsAdminUser]
+    filterset_fields = ['is_admin', 'is_verified', 'auth_provider']
+    search_fields = ['email', 'name']
+    ordering = ['-created_at']
+
+
+class AdminAssetViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing assets"""
+    queryset = Asset.objects.all()
+    serializer_class = AdminAssetSerializer
+    permission_classes = [IsAdminUser]
+    filterset_fields = ['asset_class', 'exchange', 'status', 'tradable']
+    search_fields = ['symbol', 'name']
+    ordering = ['symbol']
+
+
+class AdminWatchlistViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing watchlists"""
+    queryset = WatchList.objects.select_related('user').all()
+    serializer_class = AdminWatchlistSerializer
+    permission_classes = [IsAdminUser]
+    filterset_fields = ['user', 'is_active', 'is_default']
+    search_fields = ['name', 'user__email']
+    ordering = ['-created_at']

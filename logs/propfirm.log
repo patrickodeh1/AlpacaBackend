@@ -16677,3 +16677,1042 @@ WARNING 2025-11-10 05:55:29,685 basehttp 96950 124802731853504 "GET /api/core/wa
 INFO 2025-11-10 05:55:30,986 basehttp 96950 124802740246208 "GET /api/paper-trading/trades/? HTTP/1.1" 200 607
 INFO 2025-11-10 05:55:31,519 basehttp 96950 124802838820544 "GET /api/core/watchlists/? HTTP/1.1" 200 1323
 INFO 2025-11-10 05:55:37,741 basehttp 96950 124802838820544 "GET /api/paper-trading/trades/? HTTP/1.1" 200 607
+INFO 2025-11-10 06:03:43,271 autoreload 118697 137351948710016 Watching for file changes with StatReloader
+INFO 2025-11-10 06:03:44,701 views 118697 137351948710016 Stripe configured for production payments
+INFO 2025-11-10 06:04:03,707 basehttp 118697 137351570388672 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:04:04,063 basehttp 118697 137351553603264 "OPTIONS /api/account/login/ HTTP/1.1" 200 166
+WARNING 2025-11-10 06:04:07,139 log 118697 137351553603264 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:04:07,140 basehttp 118697 137351553603264 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 06:04:08,021 log 118697 137351553603264 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:04:08,022 basehttp 118697 137351553603264 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 06:04:18,764 basehttp 118697 137351570388672 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 06:04:19,160 log 118697 137351553603264 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:04:19,163 basehttp 118697 137351553603264 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 06:04:19,175 basehttp 118697 137351570388672 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:04:19,283 basehttp 118697 137351553603264 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 06:04:19,630 basehttp 118697 137351570388672 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:04:19,638 basehttp 118697 137351570388672 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:04:21,376 basehttp 118697 137351553603264 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:04:21,475 log 118697 137351561995968 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:04:21,483 basehttp 118697 137351561995968 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:04:22,460 basehttp 118697 137351570388672 "OPTIONS /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:04:24,618 basehttp 118697 137351561995968 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:04:45,968 basehttp 118697 137351570388672 "OPTIONS /api/core/watchlists/? HTTP/1.1" 200 0
+INFO 2025-11-10 06:04:48,059 basehttp 118697 137351561995968 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:04:57,842 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:04:57,984 log 118697 137351553603264 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:04:57,985 basehttp 118697 137351553603264 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:04:58,781 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:05:00,961 basehttp 118697 137351561995968 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:05:16,376 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:05:16,501 log 118697 137351553603264 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:05:16,502 basehttp 118697 137351553603264 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:05:17,418 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:05:29,877 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:05:30,210 log 118697 137351553603264 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:05:30,212 basehttp 118697 137351553603264 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:05:30,869 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:05:44,324 basehttp 118697 137351561995968 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:05:49,780 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:05:50,014 log 118697 137351570388672 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:05:50,015 basehttp 118697 137351570388672 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:05:51,015 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:05:55,484 basehttp 118697 137351561995968 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:06:03,480 basehttp 118697 137351561995968 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:07:55,895 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:08:18,475 log 118697 137351561995968 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:08:18,477 basehttp 118697 137351561995968 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:08:26,172 basehttp 118697 137351561995968 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:09:13,821 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:09:13,971 log 118697 137351570388672 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:09:13,972 basehttp 118697 137351570388672 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:09:14,788 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:09:31,796 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:09:32,095 log 118697 137351570388672 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:09:47,658 basehttp 118697 137351570388672 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:09:49,181 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:09:54,703 basehttp 118697 137351561995968 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:09:57,271 basehttp 118697 137351570388672 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:11:52,322 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:13:55,691 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:15:56,558 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:17:59,043 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:20:00,199 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:22:03,013 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:24:05,423 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:25:09,858 basehttp 118697 137351561995968 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:26:05,805 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:28:08,236 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:30:08,681 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:32:11,503 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:34:11,981 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:34:29,399 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:34:29,947 log 118697 137351553603264 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:34:29,949 basehttp 118697 137351553603264 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:34:30,608 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:34:52,957 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:34:53,094 log 118697 137351553603264 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:34:53,096 basehttp 118697 137351553603264 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:34:54,083 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:35:00,455 basehttp 118697 137351570388672 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:36:34,244 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:36:34,504 log 118697 137351553603264 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:36:34,510 basehttp 118697 137351553603264 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:36:35,679 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:36:45,224 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:36:45,377 log 118697 137351553603264 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:36:45,446 basehttp 118697 137351553603264 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:36:47,226 basehttp 118697 137351570388672 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:36:48,639 basehttp 118697 137351561995968 "OPTIONS /api/prop-firm/plans/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:36:48,639 basehttp 118697 137351545210560 "OPTIONS /api/prop-firm/accounts/? HTTP/1.1" 200 0
+INFO 2025-11-10 06:36:50,145 basehttp 118697 137351570388672 "GET /api/prop-firm/plans/ HTTP/1.1" 200 391
+INFO 2025-11-10 06:36:50,259 basehttp 118697 137351553603264 "GET /api/prop-firm/accounts/? HTTP/1.1" 200 457
+INFO 2025-11-10 06:36:50,425 basehttp 118697 137351545210560 "OPTIONS /api/core/watchlist/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:36:50,506 basehttp 118697 137351545210560 "OPTIONS /api/paper-trading/trades/? HTTP/1.1" 200 0
+WARNING 2025-11-10 06:36:51,224 log 118697 137351553603264 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 06:36:51,225 basehttp 118697 137351553603264 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+WARNING 2025-11-10 06:36:51,280 log 118697 137351553603264 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 06:36:51,282 basehttp 118697 137351553603264 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+INFO 2025-11-10 06:36:52,365 basehttp 118697 137351570388672 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:36:52,646 basehttp 118697 137351526328000 "GET /api/paper-trading/trades/? HTTP/1.1" 200 1061
+INFO 2025-11-10 06:36:58,757 basehttp 118697 137351526328000 "GET /api/paper-trading/trades/? HTTP/1.1" 200 1061
+INFO 2025-11-10 06:37:04,827 basehttp 118697 137351526328000 "GET /api/paper-trading/trades/? HTTP/1.1" 200 1061
+INFO 2025-11-10 06:37:08,728 basehttp 118697 137351526328000 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:43:20,654 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:43:20,938 log 118697 137351526328000 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:43:20,939 basehttp 118697 137351526328000 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:43:22,009 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:43:40,822 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:43:40,968 log 118697 137351526328000 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:43:40,971 basehttp 118697 137351526328000 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:43:41,957 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:44:52,588 basehttp 118697 137351561995968 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:44:54,198 basehttp 118697 137351545210560 "OPTIONS /api/core/watchlists/1/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:44:56,038 basehttp 118697 137351561995968 "GET /api/core/watchlists/1/ HTTP/1.1" 200 708
+INFO 2025-11-10 06:46:13,444 basehttp 118697 137351545210560 "OPTIONS /api/core/assets/stats/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:46:13,448 basehttp 118697 137351545210560 "OPTIONS /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 0
+INFO 2025-11-10 06:46:13,479 basehttp 118697 137351545210560 "OPTIONS /api/core/alpaca/sync_status/ HTTP/1.1" 200 0
+INFO 2025-11-10 06:46:15,452 basehttp 118697 137351534720704 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-10 06:46:15,453 basehttp 118697 137351526328000 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4834
+INFO 2025-11-10 06:46:15,766 basehttp 118697 137351561995968 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-10 06:46:17,488 basehttp 118697 137351175075520 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:46:48,697 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:48:52,110 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:50:25,350 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:50:25,758 log 118697 137351561995968 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:50:25,759 basehttp 118697 137351561995968 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:50:27,373 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:50:30,077 basehttp 118697 137351175075520 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:50:32,227 basehttp 118697 137351175075520 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-10 06:50:32,492 basehttp 118697 137351561995968 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4834
+INFO 2025-11-10 06:50:32,492 basehttp 118697 137351526328000 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-10 06:52:28,234 basehttp 118697 137351561995968 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:52:49,675 log 118697 137351526328000 Not Found: /api/core/alpaca/
+INFO 2025-11-10 06:52:51,463 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:52:51,720 log 118697 137351526328000 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:52:51,721 basehttp 118697 137351526328000 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:52:52,509 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:52:54,643 basehttp 118697 137351175075520 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:53:12,941 basehttp 118697 137351175075520 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+WARNING 2025-11-10 06:53:23,383 log 118697 137351175075520 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:53:23,383 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 06:53:24,027 log 118697 137351175075520 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:53:24,028 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 06:53:36,409 basehttp 118697 137351175075520 "OPTIONS /api/account/login/ HTTP/1.1" 200 166
+WARNING 2025-11-10 06:53:51,200 log 118697 137351175075520 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:53:51,201 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 06:53:51,617 log 118697 137351175075520 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:53:51,619 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 06:53:58,905 basehttp 118697 137351561995968 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 06:53:58,971 log 118697 137351175075520 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:53:58,973 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 06:53:59,090 basehttp 118697 137351175075520 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 06:54:00,811 basehttp 118697 137351175075520 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:54:01,016 log 118697 137351526328000 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:54:01,018 basehttp 118697 137351526328000 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:54:04,250 basehttp 118697 137351526328000 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 414
+INFO 2025-11-10 06:54:08,589 basehttp 118697 137351526328000 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 06:55:21,515 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 06:55:22,001 log 118697 137351175075520 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:55:22,007 basehttp 118697 137351175075520 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:55:23,085 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 06:55:25,933 basehttp 118697 137351526328000 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+WARNING 2025-11-10 06:55:52,466 log 118697 137351526328000 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:55:52,467 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 06:55:52,884 log 118697 137351526328000 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:55:52,885 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 06:56:09,411 log 118697 137351561995968 Bad Request: /api/account/login/
+WARNING 2025-11-10 06:56:09,420 basehttp 118697 137351561995968 "POST /api/account/login/ HTTP/1.1" 400 52
+WARNING 2025-11-10 06:56:09,490 log 118697 137351526328000 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:56:09,493 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 06:56:21,451 basehttp 118697 137351561995968 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 06:56:22,074 log 118697 137351526328000 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 06:56:22,075 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 06:56:22,203 basehttp 118697 137351526328000 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 06:56:23,820 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 136
+WARNING 2025-11-10 06:56:23,953 log 118697 137351175075520 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:56:23,957 basehttp 118697 137351175075520 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:56:26,020 basehttp 118697 137351175075520 "GET /api/prop-firm/plans/ HTTP/1.1" 200 391
+INFO 2025-11-10 06:56:26,146 basehttp 118697 137351526328000 "GET /api/prop-firm/accounts/? HTTP/1.1" 200 438
+WARNING 2025-11-10 06:56:26,503 log 118697 137351526328000 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 06:56:26,505 basehttp 118697 137351526328000 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+WARNING 2025-11-10 06:56:26,821 log 118697 137351545210560 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 06:56:26,823 basehttp 118697 137351545210560 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+INFO 2025-11-10 06:56:28,178 basehttp 118697 137351526328000 "GET /api/paper-trading/trades/? HTTP/1.1" 200 607
+INFO 2025-11-10 06:56:28,439 basehttp 118697 137351175075520 "GET /api/core/watchlists/? HTTP/1.1" 200 1323
+INFO 2025-11-10 06:56:36,446 basehttp 118697 137351175075520 "GET /api/core/assets/stats/ HTTP/1.1" 200 569
+INFO 2025-11-10 06:56:36,994 basehttp 118697 137351545210560 "GET /api/core/alpaca/sync_status/ HTTP/1.1" 200 243
+INFO 2025-11-10 06:56:37,061 basehttp 118697 137351526328000 "GET /api/core/assets/?limit=10&offset=0&ordering=symbol HTTP/1.1" 200 4834
+INFO 2025-11-10 06:57:55,658 basehttp 118697 137351545210560 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 06:58:53,771 basehttp 118697 137351545210560 "GET /api/account/profile/ HTTP/1.1" 200 136
+WARNING 2025-11-10 06:58:54,575 log 118697 137351561995968 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 06:58:54,576 basehttp 118697 137351561995968 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 06:58:57,791 basehttp 118697 137351545210560 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 06:59:08,789 basehttp 118697 137351545210560 "GET /api/core/watchlists/? HTTP/1.1" 200 1323
+INFO 2025-11-10 07:00:16,711 basehttp 118697 137351545210560 "OPTIONS /api/core/watchlists/ HTTP/1.1" 200 0
+INFO 2025-11-10 07:00:18,679 basehttp 118697 137351534720704 "POST /api/core/watchlists/ HTTP/1.1" 201 96
+INFO 2025-11-10 07:00:20,879 basehttp 118697 137351534720704 "GET /api/core/watchlists/? HTTP/1.1" 200 1493
+INFO 2025-11-10 07:00:21,243 basehttp 118697 137351545210560 "OPTIONS /api/core/watchlists/2/ HTTP/1.1" 200 0
+INFO 2025-11-10 07:00:22,956 basehttp 118697 137351534720704 "GET /api/core/watchlists/2/ HTTP/1.1" 200 1271
+INFO 2025-11-10 07:00:23,980 basehttp 118697 137351545210560 "OPTIONS /api/core/watchlists/3/ HTTP/1.1" 200 0
+INFO 2025-11-10 07:00:25,583 basehttp 118697 137351534720704 "GET /api/core/watchlists/3/ HTTP/1.1" 200 169
+INFO 2025-11-10 07:00:31,030 basehttp 118697 137351534720704 "DELETE /api/core/watchlists/3/ HTTP/1.1" 200 31
+WARNING 2025-11-10 07:00:32,161 log 118697 137351534720704 Not Found: /api/core/watchlists/3/
+WARNING 2025-11-10 07:00:32,161 basehttp 118697 137351534720704 "GET /api/core/watchlists/3/ HTTP/1.1" 404 23
+INFO 2025-11-10 07:00:32,993 basehttp 118697 137351526328000 "GET /api/core/watchlists/? HTTP/1.1" 200 1323
+INFO 2025-11-10 07:00:58,199 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:03:00,693 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:05:01,239 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:06:33,616 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 136
+WARNING 2025-11-10 07:06:33,893 log 118697 137351534720704 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:06:33,894 basehttp 118697 137351534720704 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:06:34,948 basehttp 118697 137351526328000 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:14:37,327 autoreload 118697 137351948710016 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/admin_serializers.py changed, reloading.
+INFO 2025-11-10 07:15:03,285 autoreload 128973 129230943154304 Watching for file changes with StatReloader
+INFO 2025-11-10 07:15:09,057 views 128973 129230943154304 Stripe configured for production payments
+INFO 2025-11-10 07:18:34,030 autoreload 128973 129230943154304 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/views.py changed, reloading.
+INFO 2025-11-10 07:18:35,754 autoreload 129447 127538197749888 Watching for file changes with StatReloader
+INFO 2025-11-10 07:18:37,533 views 129447 127538197749888 Stripe configured for production payments
+INFO 2025-11-10 07:18:37,543 views 129447 127538120619712 Stripe configured for production payments
+INFO 2025-11-10 07:19:35,653 autoreload 129447 127538197749888 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/views.py changed, reloading.
+INFO 2025-11-10 07:19:37,742 autoreload 129586 131787482615936 Watching for file changes with StatReloader
+INFO 2025-11-10 07:19:42,642 views 129586 131787482615936 Stripe configured for production payments
+INFO 2025-11-10 07:19:49,272 views 129586 131787405653696 Stripe configured for production payments
+INFO 2025-11-10 07:19:56,513 autoreload 129586 131787482615936 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/views.py changed, reloading.
+INFO 2025-11-10 07:20:04,944 autoreload 129678 129318156034176 Watching for file changes with StatReloader
+INFO 2025-11-10 07:20:07,644 views 129678 129318156034176 Stripe configured for production payments
+INFO 2025-11-10 07:20:07,667 views 129678 129318080476864 Stripe configured for production payments
+INFO 2025-11-10 07:21:35,212 autoreload 129678 129318156034176 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/views.py changed, reloading.
+INFO 2025-11-10 07:21:52,747 autoreload 129886 140520650657920 Watching for file changes with StatReloader
+INFO 2025-11-10 07:21:55,484 views 129886 140520650657920 Stripe configured for production payments
+INFO 2025-11-10 07:21:55,524 views 129886 140520573630144 Stripe configured for production payments
+INFO 2025-11-10 07:22:11,142 autoreload 129886 140520650657920 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/views.py changed, reloading.
+INFO 2025-11-10 07:22:15,269 autoreload 129966 127556809793664 Watching for file changes with StatReloader
+INFO 2025-11-10 07:22:17,010 views 129966 127556809793664 Stripe configured for production payments
+INFO 2025-11-10 07:25:19,672 autoreload 129966 127556809793664 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/urls.py changed, reloading.
+INFO 2025-11-10 07:25:21,113 autoreload 130294 127390091907200 Watching for file changes with StatReloader
+INFO 2025-11-10 07:25:22,323 views 130294 127390091907200 Stripe configured for production payments
+INFO 2025-11-10 07:29:06,448 autoreload 130294 127390091907200 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/urls.py changed, reloading.
+INFO 2025-11-10 07:29:07,727 autoreload 130686 123166299115648 Watching for file changes with StatReloader
+INFO 2025-11-10 07:29:08,593 views 130686 123166299115648 Stripe configured for production payments
+INFO 2025-11-10 07:31:06,393 autoreload 130686 123166299115648 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/urls.py changed, reloading.
+INFO 2025-11-10 07:31:08,255 autoreload 130926 124039466909824 Watching for file changes with StatReloader
+INFO 2025-11-10 07:31:09,776 views 130926 124039466909824 Stripe configured for production payments
+WARNING 2025-11-10 07:35:09,175 log 130926 124039078078144 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:35:09,182 basehttp 130926 124039078078144 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:35:09,517 basehttp 130926 124039086470848 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:35:10,730 basehttp 130926 124039086470848 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:40:42,197 basehttp 130926 124039069685440 "GET /api/account/profile/ HTTP/1.1" 200 136
+WARNING 2025-11-10 07:40:42,279 log 130926 124039078078144 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:40:42,281 basehttp 130926 124039078078144 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:40:43,395 basehttp 130926 124039069685440 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:42:51,861 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 200 136
+WARNING 2025-11-10 07:42:52,370 log 130926 124039086470848 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:42:52,371 basehttp 130926 124039086470848 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:42:53,030 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 200 136
+INFO 2025-11-10 07:42:55,831 basehttp 130926 124039078078144 "GET /api/core/watchlists/? HTTP/1.1" 200 1323
+WARNING 2025-11-10 07:42:59,035 log 130926 124039078078144 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 07:42:59,035 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 07:42:59,573 log 130926 124039078078144 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 07:42:59,574 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 07:43:10,281 basehttp 130926 124039069685440 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 07:43:10,360 log 130926 124039078078144 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 07:43:10,362 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 07:43:10,588 basehttp 130926 124039078078144 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 07:43:12,674 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:43:13,024 log 130926 124039086470848 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:43:13,028 basehttp 130926 124039086470848 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:43:20,304 basehttp 130926 124039086470848 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 570
+INFO 2025-11-10 07:43:27,605 basehttp 130926 124039069685440 "OPTIONS /api/account/users/ HTTP/1.1" 200 0
+INFO 2025-11-10 07:43:28,945 basehttp 130926 124039086470848 "GET /api/account/users/ HTTP/1.1" 200 235
+INFO 2025-11-10 07:43:29,100 basehttp 130926 124039069685440 "OPTIONS /api/core/alpaca/alpaca_status/ HTTP/1.1" 200 0
+INFO 2025-11-10 07:43:31,005 basehttp 130926 124039086470848 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 07:43:34,044 basehttp 130926 124039078078144 "GET /api/core/alpaca/alpaca_status/ HTTP/1.1" 200 58
+INFO 2025-11-10 07:43:53,450 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:43:53,568 log 130926 124039086470848 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:43:53,569 basehttp 130926 124039086470848 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:43:54,537 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:46:03,716 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:46:03,785 log 130926 124039086470848 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:46:03,786 basehttp 130926 124039086470848 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:46:05,788 basehttp 130926 124039078078144 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:53:17,549 autoreload 133706 133523295973504 Watching for file changes with StatReloader
+INFO 2025-11-10 07:53:19,332 views 133706 133523295973504 Stripe configured for production payments
+WARNING 2025-11-10 07:53:46,353 log 133706 133522915325632 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:53:46,357 basehttp 133706 133522915325632 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:53:47,288 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:53:48,738 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:53:52,323 basehttp 133706 133522906932928 "GET /api/prop-firm/plans/ HTTP/1.1" 200 391
+INFO 2025-11-10 07:53:52,678 basehttp 133706 133522915325632 "GET /api/prop-firm/accounts/? HTTP/1.1" 200 457
+WARNING 2025-11-10 07:53:53,474 log 133706 133522915325632 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 07:53:53,474 basehttp 133706 133522915325632 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+WARNING 2025-11-10 07:53:53,529 log 133706 133522915325632 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 07:53:53,537 basehttp 133706 133522915325632 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+INFO 2025-11-10 07:53:54,386 basehttp 133706 133522898540224 "GET /api/paper-trading/trades/? HTTP/1.1" 200 1061
+INFO 2025-11-10 07:53:54,684 basehttp 133706 133522906932928 "GET /api/core/watchlists/? HTTP/1.1" 200 760
+INFO 2025-11-10 07:54:00,618 basehttp 133706 133522906932928 "GET /api/paper-trading/trades/? HTTP/1.1" 200 1061
+INFO 2025-11-10 07:54:02,077 basehttp 133706 133522898540224 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 570
+INFO 2025-11-10 07:54:20,078 basehttp 133706 133522898540224 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:54:20,207 log 133706 133522906932928 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:54:20,208 basehttp 133706 133522906932928 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:54:21,239 basehttp 133706 133522898540224 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:54:45,036 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:54:45,159 log 133706 133522906932928 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:54:45,161 basehttp 133706 133522906932928 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:54:46,113 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:54:57,924 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:54:58,061 log 133706 133522906932928 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:54:58,063 basehttp 133706 133522906932928 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:54:59,051 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:55:18,526 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:55:18,659 log 133706 133522906932928 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:55:18,661 basehttp 133706 133522906932928 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:55:19,553 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:55:51,538 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:55:55,067 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:55:55,191 log 133706 133522681493184 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:55:55,194 basehttp 133706 133522681493184 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:55:56,159 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:56:26,535 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 07:56:26,694 log 133706 133522681493184 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 07:56:26,695 basehttp 133706 133522681493184 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 07:56:27,554 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 07:56:39,364 basehttp 133706 133522906932928 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 570
+INFO 2025-11-10 07:57:52,693 basehttp 133706 133522906932928 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 09:05:34,736 basehttp 133706 133522681493184 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+WARNING 2025-11-10 09:05:37,206 log 133706 133522915325632 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:05:37,885 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 401 193
+INFO 2025-11-10 09:05:39,635 basehttp 133706 133522681493184 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:05:40,650 basehttp 133706 133522915325632 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+ERROR 2025-11-10 09:07:10,981 log 133706 133522915325632 Internal Server Error: /api/account/profile/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "aws-1-eu-west-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 324, in perform_authentication
+    request.user
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/authentication.py", line 130, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 643, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1926, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: could not translate host name "aws-1-eu-west-1.pooler.supabase.com" to address: Temporary failure in name resolution
+
+ERROR 2025-11-10 09:07:11,500 basehttp 133706 133522915325632 "GET /api/account/profile/ HTTP/1.1" 500 31383
+INFO 2025-11-10 09:14:38,555 autoreload 133706 133523295973504 /home/soarer/freelance/alpaca/AlpacaBackend/prop_firm/views.py changed, reloading.
+INFO 2025-11-10 09:14:44,276 autoreload 135455 126275454201984 Watching for file changes with StatReloader
+INFO 2025-11-10 09:14:45,800 views 135455 126275454201984 Stripe configured for production payments
+WARNING 2025-11-10 09:16:46,607 log 135455 126275073251008 Not Found: /api/docs/
+WARNING 2025-11-10 09:16:46,610 basehttp 135455 126275073251008 "GET /api/docs/ HTTP/1.1" 404 2977
+WARNING 2025-11-10 09:16:48,017 log 135455 126275073251008 Not Found: /favicon.ico
+WARNING 2025-11-10 09:16:48,021 basehttp 135455 126275073251008 "GET /favicon.ico HTTP/1.1" 404 2983
+INFO 2025-11-10 09:17:10,587 basehttp 135455 126275073251008 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:17:11,191 basehttp 135455 126274982897344 "OPTIONS /api/account/login/ HTTP/1.1" 200 166
+WARNING 2025-11-10 09:17:18,658 log 135455 126274982897344 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:17:18,659 basehttp 135455 126274982897344 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 09:17:21,688 log 135455 126275073251008 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:17:21,689 basehttp 135455 126275073251008 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 09:17:41,868 basehttp 135455 126274991290048 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 09:17:41,891 log 135455 126275073251008 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:17:41,893 basehttp 135455 126275073251008 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 09:17:41,915 basehttp 135455 126274991290048 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:17:41,970 basehttp 135455 126275073251008 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 09:17:42,095 basehttp 135455 126274991290048 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:17:42,134 basehttp 135455 126274991290048 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:17:43,340 basehttp 135455 126275073251008 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 09:17:43,430 log 135455 126274982897344 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:17:43,434 basehttp 135455 126274982897344 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:17:43,818 basehttp 135455 126274991290048 "OPTIONS /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:17:46,887 basehttp 135455 126274982897344 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 570
+INFO 2025-11-10 09:19:44,814 basehttp 135455 126274974504640 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 09:19:44,904 log 135455 126275073251008 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:19:44,904 basehttp 135455 126275073251008 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:19:45,798 basehttp 135455 126274974504640 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 09:19:49,171 basehttp 135455 126274974504640 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 570
+INFO 2025-11-10 09:31:35,289 autoreload 137381 129862954119296 Watching for file changes with StatReloader
+INFO 2025-11-10 09:31:36,444 views 137381 129862954119296 Stripe configured for production payments
+WARNING 2025-11-10 09:31:49,168 log 137381 129862576633536 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:31:49,169 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 09:31:51,486 log 137381 129862576633536 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:31:51,487 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 09:32:03,356 basehttp 137381 129862576633536 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:32:07,176 basehttp 137381 129862576633536 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 09:32:07,568 log 137381 129862488549056 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:32:07,583 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 09:32:07,632 basehttp 137381 129862576633536 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:32:07,688 basehttp 137381 129862488549056 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 09:32:07,831 basehttp 137381 129862496941760 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:32:07,832 basehttp 137381 129862576633536 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:32:09,044 basehttp 137381 129862480156352 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 09:32:09,168 log 137381 129862488549056 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:32:09,169 basehttp 137381 129862488549056 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:42:12,284 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 09:42:12,426 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:42:12,428 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:42:13,709 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 09:45:29,176 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 09:45:29,362 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:45:29,363 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:45:30,429 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 09:46:55,010 basehttp 137381 129862576633536 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:46:55,317 basehttp 137381 129862480156352 "OPTIONS /api/account/login/ HTTP/1.1" 200 166
+WARNING 2025-11-10 09:47:16,053 log 137381 129862488549056 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:47:16,055 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 09:47:17,787 log 137381 129862488549056 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:47:17,788 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 09:47:28,956 basehttp 137381 129862480156352 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 09:47:29,081 log 137381 129862488549056 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 09:47:29,115 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 09:47:29,205 basehttp 137381 129862480156352 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:47:29,302 basehttp 137381 129862488549056 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 09:47:29,547 basehttp 137381 129862480156352 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+INFO 2025-11-10 09:47:29,551 basehttp 137381 129862576633536 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+WARNING 2025-11-10 09:47:31,397 log 137381 129862496941760 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:47:31,411 basehttp 137381 129862496941760 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:47:31,412 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 09:50:30,917 basehttp 137381 129862496941760 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 09:50:30,984 log 137381 129862488549056 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:50:30,985 basehttp 137381 129862488549056 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:50:32,176 basehttp 137381 129862496941760 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 09:56:59,812 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 09:56:59,883 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 09:56:59,885 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 09:57:01,396 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:08:26,986 log 137381 129862576633536 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:08:26,996 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 10:09:03,030 log 137381 129862576633536 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:09:03,032 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 10:09:11,288 log 137381 129862576633536 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:09:11,293 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 10:09:13,455 basehttp 137381 129862496941760 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:17,910 basehttp 137381 129862496941760 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 10:09:18,034 log 137381 129862576633536 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:09:18,035 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 10:09:18,080 basehttp 137381 129862496941760 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:18,136 basehttp 137381 129862576633536 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 10:09:18,303 basehttp 137381 129862496941760 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:18,320 basehttp 137381 129862480156352 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:19,426 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 200 136
+WARNING 2025-11-10 10:09:19,534 log 137381 129862488549056 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:09:19,538 basehttp 137381 129862488549056 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:09:21,018 basehttp 137381 129862480156352 "OPTIONS /api/prop-firm/plans/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:21,018 basehttp 137381 129862496941760 "OPTIONS /api/prop-firm/accounts/? HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:22,375 basehttp 137381 129862576633536 "GET /api/prop-firm/plans/ HTTP/1.1" 200 391
+INFO 2025-11-10 10:09:22,421 basehttp 137381 129862488549056 "GET /api/prop-firm/accounts/? HTTP/1.1" 200 438
+INFO 2025-11-10 10:09:22,509 basehttp 137381 129862496941760 "OPTIONS /api/core/watchlist/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:22,536 basehttp 137381 129862496941760 "OPTIONS /api/core/watchlists/? HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:22,537 basehttp 137381 129862480156352 "OPTIONS /api/paper-trading/trades/? HTTP/1.1" 200 0
+WARNING 2025-11-10 10:09:22,714 log 137381 129862488549056 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 10:09:22,715 basehttp 137381 129862488549056 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+WARNING 2025-11-10 10:09:22,904 log 137381 129862471763648 Not Found: /api/core/watchlist/
+WARNING 2025-11-10 10:09:22,905 basehttp 137381 129862471763648 "GET /api/core/watchlist/ HTTP/1.1" 404 14723
+INFO 2025-11-10 10:09:23,978 basehttp 137381 129862576633536 "GET /api/paper-trading/trades/? HTTP/1.1" 200 607
+INFO 2025-11-10 10:09:24,568 basehttp 137381 129862488549056 "GET /api/core/watchlists/? HTTP/1.1" 200 1323
+WARNING 2025-11-10 10:09:37,282 log 137381 129862488549056 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:09:37,302 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 401 59
+WARNING 2025-11-10 10:09:37,728 log 137381 129862488549056 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:09:37,730 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 10:09:45,479 basehttp 137381 129862496941760 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 10:09:45,562 log 137381 129862488549056 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:09:45,567 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 10:09:45,665 basehttp 137381 129862488549056 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 10:09:47,331 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:09:47,505 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:09:47,506 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:09:47,643 basehttp 137381 129862496941760 "OPTIONS /api/prop-firm/admin/users/? HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:47,643 basehttp 137381 129862480156352 "OPTIONS /api/prop-firm/admin/accounts/? HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:47,667 basehttp 137381 129862496941760 "OPTIONS /api/prop-firm/admin/payouts/? HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:47,667 basehttp 137381 129862480156352 "OPTIONS /api/prop-firm/admin/plans/? HTTP/1.1" 200 0
+INFO 2025-11-10 10:09:49,005 basehttp 137381 129862463370944 "GET /api/prop-firm/admin/payouts/? HTTP/1.1" 200 52
+INFO 2025-11-10 10:09:49,433 basehttp 137381 129862471763648 "GET /api/prop-firm/admin/plans/? HTTP/1.1" 200 497
+INFO 2025-11-10 10:09:49,458 basehttp 137381 129862488549056 "GET /api/prop-firm/admin/accounts/? HTTP/1.1" 200 1402
+ERROR 2025-11-10 10:09:49,834 log 137381 129862576633536 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:09:49,907 basehttp 137381 129862576633536 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+INFO 2025-11-10 10:10:48,013 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:10:48,151 log 137381 129862471763648 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:10:48,152 basehttp 137381 129862471763648 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:10:49,544 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:11:21,482 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:11:21,612 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:11:21,614 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:11:22,480 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:11:39,477 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:12:50,647 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+ERROR 2025-11-10 10:12:56,174 log 137381 129862471763648 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:12:56,194 basehttp 137381 129862471763648 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+INFO 2025-11-10 10:13:02,463 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:13:02,605 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:13:02,606 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:13:03,530 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+ERROR 2025-11-10 10:13:03,737 log 137381 129862488549056 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+WARNING 2025-11-10 10:13:04,655 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:13:04,656 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:13:04,784 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:13:06,351 basehttp 137381 129862471763648 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:13:08,492 basehttp 137381 129862480156352 "GET /api/prop-firm/admin/payouts/? HTTP/1.1" 200 52
+ERROR 2025-11-10 10:13:09,087 log 137381 129862471763648 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:13:09,093 basehttp 137381 129862471763648 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+INFO 2025-11-10 10:13:09,174 basehttp 137381 129862576633536 "GET /api/prop-firm/admin/accounts/? HTTP/1.1" 200 1402
+INFO 2025-11-10 10:13:09,182 basehttp 137381 129862488549056 "GET /api/prop-firm/admin/plans/? HTTP/1.1" 200 497
+ERROR 2025-11-10 10:13:32,365 log 137381 129862488549056 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:13:32,367 basehttp 137381 129862488549056 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+INFO 2025-11-10 10:13:34,430 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:13:34,611 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:13:34,612 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:13:35,554 basehttp 137381 129862488549056 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:13:40,003 basehttp 137381 129862576633536 "GET /api/prop-firm/admin/accounts/? HTTP/1.1" 200 1402
+INFO 2025-11-10 10:13:40,004 basehttp 137381 129862471763648 "GET /api/prop-firm/admin/plans/? HTTP/1.1" 200 497
+ERROR 2025-11-10 10:13:40,131 log 137381 129862488549056 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:13:40,161 basehttp 137381 129862488549056 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+INFO 2025-11-10 10:13:40,685 basehttp 137381 129862480156352 "GET /api/prop-firm/admin/payouts/? HTTP/1.1" 200 52
+INFO 2025-11-10 10:13:59,698 basehttp 137381 129862480156352 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:13:59,827 log 137381 129862488549056 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:13:59,828 basehttp 137381 129862488549056 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:14:00,783 basehttp 137381 129862480156352 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:14:02,474 basehttp 137381 129862471763648 "GET /api/prop-firm/admin/payouts/? HTTP/1.1" 200 52
+INFO 2025-11-10 10:14:02,967 basehttp 137381 129862488549056 "GET /api/prop-firm/admin/accounts/? HTTP/1.1" 200 1402
+INFO 2025-11-10 10:14:02,968 basehttp 137381 129862576633536 "GET /api/prop-firm/admin/plans/? HTTP/1.1" 200 497
+ERROR 2025-11-10 10:14:02,980 log 137381 129862480156352 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:14:02,989 basehttp 137381 129862480156352 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+ERROR 2025-11-10 10:14:32,557 log 137381 129862480156352 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:14:32,559 basehttp 137381 129862480156352 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+INFO 2025-11-10 10:14:34,498 basehttp 137381 129862480156352 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:14:34,637 log 137381 129862576633536 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:14:34,638 basehttp 137381 129862576633536 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:14:35,544 basehttp 137381 129862480156352 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:14:37,424 basehttp 137381 129862471763648 "GET /api/prop-firm/admin/payouts/? HTTP/1.1" 200 52
+INFO 2025-11-10 10:14:37,703 basehttp 137381 129862488549056 "GET /api/prop-firm/admin/plans/? HTTP/1.1" 200 497
+ERROR 2025-11-10 10:14:37,808 log 137381 129862480156352 Internal Server Error: /api/prop-firm/admin/users/
+Traceback (most recent call last):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/rest_framework/generics.py", line 150, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 68, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 20, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/rest_framework/backends.py", line 51, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 62, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soarer/freelance/alpaca/AlpacaBackend/venv/lib/python3.12/site-packages/django_filters/filterset.py", line 349, in get_filters
+    raise TypeError(
+TypeError: 'Meta.fields' must not contain non-model field names: is_verified
+ERROR 2025-11-10 10:14:37,821 basehttp 137381 129862480156352 "GET /api/prop-firm/admin/users/? HTTP/1.1" 500 26040
+INFO 2025-11-10 10:14:37,894 basehttp 137381 129862576633536 "GET /api/prop-firm/admin/accounts/? HTTP/1.1" 200 1402
+INFO 2025-11-10 10:14:47,493 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:14:47,623 log 137381 129862480156352 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:14:47,624 basehttp 137381 129862480156352 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:14:48,547 basehttp 137381 129862576633536 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:24:44,084 autoreload 142822 140528958357632 Watching for file changes with StatReloader
+INFO 2025-11-10 10:25:14,447 views 142822 140528958357632 Stripe configured for production payments
+INFO 2025-11-10 10:25:23,150 basehttp 142822 140528578459328 "OPTIONS /api/account/login/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:25:28,441 basehttp 142822 140528578459328 "POST /api/account/login/ HTTP/1.1" 200 524
+WARNING 2025-11-10 10:25:28,897 log 142822 140528561673920 Unauthorized: /api/account/profile/
+WARNING 2025-11-10 10:25:28,899 basehttp 142822 140528561673920 "GET /api/account/profile/ HTTP/1.1" 401 59
+INFO 2025-11-10 10:25:28,917 basehttp 142822 140528578459328 "OPTIONS /api/account/refresh_token/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:25:28,978 basehttp 142822 140528561673920 "POST /api/account/refresh_token/ HTTP/1.1" 200 483
+INFO 2025-11-10 10:25:29,170 basehttp 142822 140528578459328 "OPTIONS /api/account/profile/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:25:29,177 basehttp 142822 140528570066624 "OPTIONS /api/core/alpaca/ HTTP/1.1" 200 0
+WARNING 2025-11-10 10:25:30,462 log 142822 140528553281216 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:25:30,468 basehttp 142822 140528553281216 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:25:30,478 basehttp 142822 140528561673920 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:25:31,210 basehttp 142822 140528570066624 "OPTIONS /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 0
+INFO 2025-11-10 10:25:33,736 basehttp 142822 140528561673920 "GET /api/prop-firm/admin/dashboard/ HTTP/1.1" 200 570
+INFO 2025-11-10 10:26:54,193 basehttp 142822 140528561673920 "GET /api/account/profile/ HTTP/1.1" 200 135
+WARNING 2025-11-10 10:26:54,318 log 142822 140528553281216 Not Found: /api/core/alpaca/
+WARNING 2025-11-10 10:26:54,319 basehttp 142822 140528553281216 "GET /api/core/alpaca/ HTTP/1.1" 404 27
+INFO 2025-11-10 10:26:55,242 basehttp 142822 140528561673920 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:26:56,451 basehttp 142822 140528561673920 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:28:58,277 basehttp 142822 140528561673920 "GET /api/account/profile/ HTTP/1.1" 200 135
+INFO 2025-11-10 10:28:59,301 basehttp 142822 140528561673920 "GET /api/account/profile/ HTTP/1.1" 200 135
