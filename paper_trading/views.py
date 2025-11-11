@@ -31,6 +31,96 @@ class PaperTradeViewSet(viewsets.ModelViewSet):
         """Filter trades by user"""
         return PaperTrade.objects.filter(user=self.request.user).order_by('-created_at')
 
+
+    @action(detail=True, methods=['patch'], url_path='update')
+    def update_trade(self, request, pk=None):
+        """
+        Update stop loss and take profit for an open trade.
+        Only allows updating SL/TP, not other fields.
+        """
+        try:
+            trade = self.get_object()
+            
+            # Only allow updates to OPEN trades
+            if trade.status != 'OPEN':
+                return Response(
+                    {"msg": "Can only update open trades"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Get update fields
+            stop_loss = request.data.get('stop_loss')
+            take_profit = request.data.get('take_profit')
+            
+            # Update stop loss if provided
+            if stop_loss is not None:
+                if stop_loss == '' or stop_loss == 'null':
+                    trade.stop_loss = None
+                else:
+                    try:
+                        sl_value = Decimal(str(stop_loss))
+                        
+                        # Validate stop loss makes sense for trade direction
+                        if trade.direction == 'LONG' and sl_value >= trade.entry_price:
+                            return Response(
+                                {"msg": "Stop loss must be below entry price for long positions"},
+                                status=status.HTTP_400_BAD_REQUEST
+                            )
+                        elif trade.direction == 'SHORT' and sl_value <= trade.entry_price:
+                            return Response(
+                                {"msg": "Stop loss must be above entry price for short positions"},
+                                status=status.HTTP_400_BAD_REQUEST
+                            )
+                        
+                        trade.stop_loss = sl_value
+                    except (ValueError, TypeError):
+                        return Response(
+                            {"msg": "Invalid stop loss value"},
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+            
+            # Update take profit if provided
+            if take_profit is not None:
+                if take_profit == '' or take_profit == 'null':
+                    trade.take_profit = None
+                else:
+                    try:
+                        tp_value = Decimal(str(take_profit))
+                        
+                        # Validate take profit makes sense for trade direction
+                        if trade.direction == 'LONG' and tp_value <= trade.entry_price:
+                            return Response(
+                                {"msg": "Take profit must be above entry price for long positions"},
+                                status=status.HTTP_400_BAD_REQUEST
+                            )
+                        elif trade.direction == 'SHORT' and tp_value >= trade.entry_price:
+                            return Response(
+                                {"msg": "Take profit must be below entry price for short positions"},
+                                status=status.HTTP_400_BAD_REQUEST
+                            )
+                        
+                        trade.take_profit = tp_value
+                    except (ValueError, TypeError):
+                        return Response(
+                            {"msg": "Invalid take profit value"},
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+            
+            trade.save()
+            
+            serializer = self.get_serializer(trade)
+            return Response(
+                {"msg": "Trade updated successfully", "data": serializer.data},
+                status=status.HTTP_200_OK
+            )
+            
+        except Exception as e:
+            logger.error(f"Error updating trade: {e}", exc_info=True)
+            return Response(
+                {"msg": "Error updating trade", "error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
     def list(self, request):
         """
         List all trades for the current user.
@@ -233,90 +323,78 @@ class PaperTradeViewSet(viewsets.ModelViewSet):
         """
         Close a paper trade with prop firm simulation integration.
         """
-        trade = get_object_or_404(self.get_queryset(), pk=pk)
-        
-        if trade.status != 'OPEN':
-            return Response({
-                'msg': f'Trade is not open (status: {trade.status})'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Validate exit price
-        if 'exit_price' not in request.data:
-            return Response({
-                'msg': 'exit_price is required',
-                'error': 'VALIDATION_ERROR'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
         try:
-            exit_price = Decimal(str(request.data['exit_price']))
-            if exit_price <= 0:
-                raise ValueError("Exit price must be positive")
-        except (ValueError, TypeError) as e:
-            return Response({
-                'msg': f'Invalid exit_price: {str(e)}',
-                'error': 'VALIDATION_ERROR'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
-        exit_notes = request.data.get('notes', '')
-        
-        # Check for active prop firm account
-        active_account = PropFirmAccount.objects.filter(
-            user=request.user,
-            status='ACTIVE'
-        ).first()
-        
-        if active_account:
-            # USE PROP FIRM SIMULATION ENGINE TO CLOSE
-            logger.info(f"Closing trade via prop firm simulation: {trade.id}")
+            trade = self.get_object()
             
-            success, message = close_simulated_trade(
-                account=active_account,
-                trade=trade,
-                exit_price=exit_price,
-                notes=exit_notes
-            )
+            # Only allow closing OPEN trades
+            if trade.status != 'OPEN':
+                return Response(
+                    {"msg": "Trade is already closed"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
             
-            if not success:
-                return Response({
-                    'msg': message,
-                    'error': 'CLOSE_FAILED'
-                }, status=status.HTTP_400_BAD_REQUEST)
+            # Get exit price from request
+            exit_price = request.data.get('exit_price')
+            if not exit_price:
+                return Response(
+                    {"msg": "Exit price is required"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
             
-            # Refresh trade from DB
-            trade.refresh_from_db()
+            try:
+                exit_price = Decimal(str(exit_price))
+            except (ValueError, TypeError):
+                return Response(
+                    {"msg": "Invalid exit price"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
             
-            serializer = PaperTradeSerializer(trade)
-            return Response({
-                'msg': 'Trade closed successfully via prop firm simulation',
-                'data': serializer.data,
-                'prop_firm_account': {
-                    'account_number': active_account.account_number,
-                    'current_balance': float(active_account.current_balance),
-                    'profit_earned': float(active_account.profit_earned)
-                }
-            })
-        
-        else:
-            # STANDARD PAPER TRADE CLOSE
-            logger.info(f"Closing standard paper trade: {trade.id}")
+            # Calculate realized P/L
+            entry_price = trade.entry_price
+            quantity = trade.quantity
             
-            from django.utils import timezone
+            if trade.direction == 'LONG':
+                realized_pl = (exit_price - entry_price) * quantity
+            else:  # SHORT
+                realized_pl = (entry_price - exit_price) * quantity
             
-            trade.exit_price = str(exit_price)
-            trade.exit_at = timezone.now()
+            # Update trade
+            trade.exit_price = exit_price
+            trade.exit_time = timezone.now()
+            trade.realized_pl = realized_pl
             trade.status = 'CLOSED'
-            
-            if exit_notes:
-                trade.notes = f"{trade.notes}\n{exit_notes}" if trade.notes else exit_notes
-            
             trade.save()
             
-            serializer = PaperTradeSerializer(trade)
-            return Response({
-                'msg': 'Trade closed successfully',
-                'data': serializer.data
-            })
-
+            # Update account balance
+            account = trade.account
+            account.current_balance = Decimal(str(account.current_balance)) + realized_pl
+            account.profit_earned = Decimal(str(account.profit_earned)) + realized_pl
+            
+            # Update trade counters
+            if realized_pl >= 0:
+                account.total_winning_trades += 1
+            else:
+                account.total_losing_trades += 1
+            
+            account.save()
+            
+            serializer = self.get_serializer(trade)
+            return Response(
+                {
+                    "msg": "Trade closed successfully",
+                    "data": serializer.data,
+                    "realized_pl": float(realized_pl),
+                    "new_balance": float(account.current_balance)
+                },
+                status=status.HTTP_200_OK
+            )
+            
+        except Exception as e:
+            logger.error(f"Error closing trade: {e}", exc_info=True)
+            return Response(
+                {"msg": "Error closing trade", "error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
     @action(detail=True, methods=['post'])
     def cancel(self, request, pk=None):
         """Cancel a trade"""
@@ -347,3 +425,4 @@ class PaperTradeViewSet(viewsets.ModelViewSet):
         return Response({
             'msg': 'Trade deleted successfully'
         }, status=status.HTTP_204_NO_CONTENT)
+
