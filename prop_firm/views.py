@@ -1,5 +1,5 @@
 # prop_firm/views.py - PRODUCTION READY VERSION WITH DEMO MODE
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -27,16 +27,21 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .permissions import IsAdminUser
 
 from .models import PropFirmPlan, PropFirmAccount, RuleViolation, Payout, AccountActivity
+from rest_framework.decorators import action
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination
+
 from .admin_serializers import (
-    AdminAccountSerializer,
-    AdminRuleViolationSerializer,
-    AdminPlanSerializer,
+    AdminUserSerializer, AdminUserDetailSerializer,
+    AdminAccountSerializer, AdminAccountDetailSerializer,
+    AdminPlanSerializer, AdminPlanDetailSerializer,
     AdminPayoutSerializer,
-    AdminUserSerializer,
-    AdminAssetSerializer,
-    AdminWatchlistSerializer,
-    AdminDashboardSerializer
+    AdminTradeSerializer,
+    AdminWatchlistSerializer, AdminWatchlistDetailSerializer,
+    AdminAssetSerializer, AdminDashboardSerializer,
+    AdminRuleViolationSerializer,
 )
+
 from .serializers import (
     PropFirmPlanSerializer, PropFirmAccountSerializer,
     PropFirmAccountListSerializer, PayoutSerializer,
@@ -597,15 +602,89 @@ def admin_dashboard_overview(request):
     return Response(serializer.data)
 
 
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+class AdminUserViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing users with full CRUD"""
+    queryset = User.objects.all()
+    permission_classes = [IsAdminUser]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['is_admin', 'is_verified', 'auth_provider']
+    search_fields = ['email', 'name']
+    ordering_fields = ['created_at', 'last_login', 'email']
+    ordering = ['-created_at']
+    pagination_class = StandardResultsSetPagination
+    
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return AdminUserDetailSerializer
+        return AdminUserSerializer
+    
+    def update(self, request, *args, **kwargs):
+        """Update user details"""
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'])
+    def toggle_admin(self, request, pk=None):
+        """Toggle admin status"""
+        user = self.get_object()
+        user.is_admin = not user.is_admin
+        user.save()
+        serializer = self.get_serializer(user)
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'])
+    def toggle_verified(self, request, pk=None):
+        """Toggle verified status"""
+        user = self.get_object()
+        user.is_verified = not user.is_verified
+        user.save()
+        serializer = self.get_serializer(user)
+        return Response(serializer.data)
+
+
 class AdminAccountViewSet(viewsets.ModelViewSet):
     """Admin viewset for managing prop firm accounts"""
     queryset = PropFirmAccount.objects.select_related('user', 'plan').all()
-    serializer_class = AdminAccountSerializer
     permission_classes = [IsAdminUser]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['status', 'stage', 'user']
     search_fields = ['account_number', 'user__email', 'user__name']
     ordering_fields = ['created_at', 'current_balance', 'profit_earned']
     ordering = ['-created_at']
+    pagination_class = StandardResultsSetPagination
+    
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return AdminAccountDetailSerializer
+        return AdminAccountSerializer
+    
+    def update(self, request, *args, **kwargs):
+        """Update account details"""
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        
+        # Log the update
+        AccountActivity.objects.create(
+            account=instance,
+            activity_type='STATUS_CHANGE',
+            description=f'Account updated by admin: {request.user.email}',
+            created_by=request.user
+        )
+        
+        return Response(serializer.data)
     
     @action(detail=True, methods=['post'])
     def update_balance(self, request, pk=None):
@@ -633,7 +712,6 @@ class AdminAccountViewSet(viewsets.ModelViewSet):
             account.admin_notes = f"{account.admin_notes}\n{timezone.now()}: {note}" if account.admin_notes else f"{timezone.now()}: {note}"
             account.save()
             
-            # Create activity log
             AccountActivity.objects.create(
                 account=account,
                 activity_type='NOTE_ADDED',
@@ -643,27 +721,58 @@ class AdminAccountViewSet(viewsets.ModelViewSet):
         
         serializer = self.get_serializer(account)
         return Response(serializer.data)
-
-
-class AdminRuleViolationViewSet(viewsets.ReadOnlyModelViewSet):
-    """Admin viewset for viewing rule violations"""
-    queryset = RuleViolation.objects.select_related(
-        'account__user', 'related_trade__asset'
-    ).all()
-    serializer_class = AdminRuleViolationSerializer
-    permission_classes = [IsAdminUser]
-    filterset_fields = ['violation_type', 'account']
-    search_fields = ['account__account_number', 'account__user__email']
-    ordering = ['-created_at']
+    
+    @action(detail=True, methods=['post'])
+    def change_status(self, request, pk=None):
+        """Change account status"""
+        account = self.get_object()
+        new_status = request.data.get('status')
+        
+        if new_status in dict(PropFirmAccount.STATUS_CHOICES):
+            old_status = account.status
+            account.status = new_status
+            account.save()
+            
+            AccountActivity.objects.create(
+                account=account,
+                activity_type='STATUS_CHANGE',
+                description=f'Status changed from {old_status} to {new_status} by {request.user.email}',
+                created_by=request.user
+            )
+            
+            serializer = self.get_serializer(account)
+            return Response(serializer.data)
+        
+        return Response(
+            {'error': 'Invalid status'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 class AdminPlanViewSet(viewsets.ModelViewSet):
     """Admin viewset for managing plans"""
     queryset = PropFirmPlan.objects.all()
-    serializer_class = AdminPlanSerializer
     permission_classes = [IsAdminUser]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['plan_type', 'is_active']
+    search_fields = ['name', 'description']
+    ordering_fields = ['starting_balance', 'price', 'created_at']
     ordering = ['starting_balance']
+    pagination_class = StandardResultsSetPagination
+    
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return AdminPlanDetailSerializer
+        return AdminPlanSerializer
+    
+    @action(detail=True, methods=['post'])
+    def toggle_active(self, request, pk=None):
+        """Toggle plan active status"""
+        plan = self.get_object()
+        plan.is_active = not plan.is_active
+        plan.save()
+        serializer = self.get_serializer(plan)
+        return Response(serializer.data)
 
 
 class AdminPayoutViewSet(viewsets.ModelViewSet):
@@ -671,8 +780,12 @@ class AdminPayoutViewSet(viewsets.ModelViewSet):
     queryset = Payout.objects.select_related('account__user').all()
     serializer_class = AdminPayoutSerializer
     permission_classes = [IsAdminUser]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['status', 'account']
+    search_fields = ['account__account_number', 'account__user__email']
+    ordering_fields = ['requested_at', 'amount']
     ordering = ['-requested_at']
+    pagination_class = StandardResultsSetPagination
     
     @action(detail=True, methods=['post'])
     def approve(self, request, pk=None):
@@ -703,16 +816,71 @@ class AdminPayoutViewSet(viewsets.ModelViewSet):
         
         serializer = self.get_serializer(payout)
         return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'])
+    def reject(self, request, pk=None):
+        """Reject a payout"""
+        payout = self.get_object()
+        reason = request.data.get('reason', 'Rejected by admin')
+        
+        payout.status = 'FAILED'
+        payout.notes = f"{payout.notes}\nRejected: {reason}" if payout.notes else f"Rejected: {reason}"
+        payout.save()
+        
+        serializer = self.get_serializer(payout)
+        return Response(serializer.data)
 
 
-class AdminUserViewSet(viewsets.ModelViewSet):
-    """Admin viewset for managing users"""
-    queryset = User.objects.all()
-    serializer_class = AdminUserSerializer
+class AdminTradeViewSet(viewsets.ModelViewSet):
+    """Admin viewset for viewing trade history"""
+    queryset = PaperTrade.objects.select_related('user', 'asset').all()
+    serializer_class = AdminTradeSerializer
     permission_classes = [IsAdminUser]
-    filterset_fields = ['is_admin', 'is_verified', 'auth_provider']
-    search_fields = ['email', 'name']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['status', 'direction', 'user', 'asset']
+    search_fields = ['user__email', 'asset__symbol']
+    ordering_fields = ['created_at', 'entry_price', 'exit_price']
     ordering = ['-created_at']
+    pagination_class = StandardResultsSetPagination
+    
+    @action(detail=False, methods=['get'])
+    def statistics(self, request):
+        """Get overall trade statistics"""
+        total_trades = self.queryset.count()
+        open_trades = self.queryset.filter(status='OPEN').count()
+        closed_trades = self.queryset.filter(status='CLOSED').count()
+        
+        return Response({
+            'total_trades': total_trades,
+            'open_trades': open_trades,
+            'closed_trades': closed_trades,
+        })
+
+
+class AdminWatchlistViewSet(viewsets.ModelViewSet):
+    """Admin viewset for managing watchlists"""
+    queryset = WatchList.objects.select_related('user').all()
+    permission_classes = [IsAdminUser]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['user', 'is_active', 'is_default']
+    search_fields = ['name', 'user__email']
+    ordering_fields = ['created_at', 'name']
+    ordering = ['-created_at']
+    pagination_class = StandardResultsSetPagination
+    
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return AdminWatchlistDetailSerializer
+        return AdminWatchlistSerializer
+    
+    @action(detail=True, methods=['post'])
+    def toggle_active(self, request, pk=None):
+        """Toggle watchlist active status"""
+        watchlist = self.get_object()
+        watchlist.is_active = not watchlist.is_active
+        watchlist.save()
+        serializer = self.get_serializer(watchlist)
+        return Response(serializer.data)
 
 
 class AdminAssetViewSet(viewsets.ModelViewSet):
@@ -720,16 +888,33 @@ class AdminAssetViewSet(viewsets.ModelViewSet):
     queryset = Asset.objects.all()
     serializer_class = AdminAssetSerializer
     permission_classes = [IsAdminUser]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['asset_class', 'exchange', 'status', 'tradable']
     search_fields = ['symbol', 'name']
+    ordering_fields = ['symbol', 'created_at']
     ordering = ['symbol']
+    pagination_class = StandardResultsSetPagination
+    
+    @action(detail=True, methods=['post'])
+    def toggle_tradable(self, request, pk=None):
+        """Toggle asset tradable status"""
+        asset = self.get_object()
+        asset.tradable = not asset.tradable
+        asset.save()
+        serializer = self.get_serializer(asset)
+        return Response(serializer.data)
 
 
-class AdminWatchlistViewSet(viewsets.ModelViewSet):
-    """Admin viewset for managing watchlists"""
-    queryset = WatchList.objects.select_related('user').all()
-    serializer_class = AdminWatchlistSerializer
+class AdminRuleViolationViewSet(viewsets.ReadOnlyModelViewSet):
+    """Admin viewset for viewing rule violations"""
+    queryset = RuleViolation.objects.select_related(
+        'account__user', 'related_trade__asset'
+    ).all()
+    serializer_class = AdminRuleViolationSerializer
     permission_classes = [IsAdminUser]
-    filterset_fields = ['user', 'is_active', 'is_default']
-    search_fields = ['name', 'user__email']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['violation_type', 'account']
+    search_fields = ['account__account_number', 'account__user__email']
+    ordering_fields = ['created_at']
     ordering = ['-created_at']
+    pagination_class = StandardResultsSetPagination

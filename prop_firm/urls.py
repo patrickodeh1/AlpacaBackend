@@ -17,6 +17,7 @@ from .views import (
     AdminUserViewSet,
     AdminAssetViewSet,
     AdminWatchlistViewSet,
+    AdminTradeViewSet,  # NEW - Add this import
     admin_dashboard_overview,
 )
 
@@ -36,6 +37,7 @@ admin_router.register(r'payouts', AdminPayoutViewSet, basename='admin-payouts')
 admin_router.register(r'users', AdminUserViewSet, basename='admin-users')
 admin_router.register(r'assets', AdminAssetViewSet, basename='admin-assets')
 admin_router.register(r'watchlists', AdminWatchlistViewSet, basename='admin-watchlists')
+admin_router.register(r'trades', AdminTradeViewSet, basename='admin-trades')  # NEW
 
 urlpatterns = [
     # Webhook endpoint (must be before router includes)

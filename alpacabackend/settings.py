@@ -5,7 +5,6 @@ Django settings for alpacabackend project - Prop Firm Edition
 from pathlib import Path
 import os
 from datetime import timedelta
-from kombu import Connection
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
